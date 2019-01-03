@@ -2,10 +2,11 @@
   "name": "autoag",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/JingkangZhang/autoAG/",
+  "homepage": "./",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "react": "^16.7.0",
+    "react-bootstrap": "^0.32.4",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.2"
   },
