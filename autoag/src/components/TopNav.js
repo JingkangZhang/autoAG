@@ -9,7 +9,8 @@ import {
   NavLink,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem,
+  UncontrolledTooltip} from 'reactstrap';
 
 class TopNav extends React.Component {
   constructor(props) {
@@ -27,13 +28,21 @@ class TopNav extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">autoAG</NavbarBrand>
+        <Navbar color="light" light expand="sm">
+          <NavbarBrand id="autoAGBrand">autoAG</NavbarBrand>
+          <UncontrolledTooltip placement="right" trigger="hover"
+            target="autoAGBrand" delay="{show:0, hide:0}" arrowClassName="CalTooltipArrow" className="CalTooltip">
+            Much Love For Cal!
+          </UncontrolledTooltip>
+
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink>Save Session</NavLink>
+                <NavLink>Import</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink><span>Save Session</span></NavLink>
               </NavItem>
               <NavItem>
                 <NavLink>Export</NavLink>

@@ -13,7 +13,70 @@ code {
     monospace;
 }
 
-/* Row {
-  background-color: red;
-  color: red;
+.navbar {
+  padding: 0;
+  margin-bottom: 8px;
+}
+.NavCol {
+  padding: 0;
+}
+
+#autoAGBrand {
+  margin-left: 10px;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+.navbar .nav-item .nav-link {
+  color:rgba(0, 0, 0, 0.6);
+  /* margin:20px; */
+
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.navbar .nav-item .nav-link:hover {
+  border: 1px solid #222;
+  border-radius: 4px;
+  padding: 7px;
+  background-color: rgba(0,0,0,0.2);
+  color:rgba(0, 0, 0, 0.7);
+}
+
+.bg-light {
+  background-color: rgba(0,0,0,0.05) !important;
+}
+
+.navbar-light .navbar-brand {
+  padding: 8px;
+  font-size: 1.15rem;
+  border-radius: 10px;
+}
+
+.navbar-light .navbar-brand:hover {
+  color: #FDB515 !important;
+  background-color: #003262;
+}
+
+.CalTooltip > .tooltip-inner{
+  color: #003262;
+  background-color: #FDB515;
+  font-weight:700;
+}
+
+/* .bs-tooltip-right .arrow::before {
+  border-right-color: #FDB515;
 } */
+
+.CalTooltip > .arrow::before {
+  border-right-color: #FDB515;
+}

@@ -15,13 +15,13 @@ class App extends React.Component {
     return (
       <Container fluid="true">
         <Row >
-          <Col>
+          <Col className="NavCol">
             <TopNav />
           </Col>
         </Row>
         <Row>
-          <Col > <InputField /> </Col>
-          <Col > <OutputField /> </Col>
+          <Col sm="7"> <InputField /> </Col>
+          <Col sm="5"> <OutputField /> </Col>
         </Row>
       </Container>
     );
