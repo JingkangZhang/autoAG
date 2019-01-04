@@ -4,11 +4,13 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
+    "bootstrap": "^4.2.1",
     "gh-pages": "^2.0.1",
     "react": "^16.7.0",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.7.0",
-    "react-scripts": "2.1.2"
+    "react-scripts": "2.1.2",
+    "reactstrap": "^7.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
