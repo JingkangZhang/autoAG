@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-
+import {
+  Form, Label, CustomInput, FormGroup, Input
+} from 'reactstrap';
 class InputField extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +13,14 @@ class InputField extends React.Component {
 
   render() {
     return (
-      <textarea></textarea>
+      <Form>
+      <FormGroup check>
+        <Label check>
+          <Input type="checkbox" />{' '}
+          Points enabled
+        </Label>
+      </FormGroup>
+      </Form>
     )
   }
 }

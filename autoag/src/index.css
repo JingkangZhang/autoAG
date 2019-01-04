@@ -21,6 +21,10 @@ code {
   padding: 0;
 }
 
+#importButton {
+  margin-top: 10px;
+}
+
 #autoAGBrand {
   margin-left: 10px;
   -webkit-touch-callout: none; /* iOS Safari */
@@ -44,7 +48,7 @@ code {
                                   supported by Chrome and Opera */
 }
 
-.navbar .nav-item .nav-link:hover {
+.navbar .nav-item .nav-link:not(.githubNav):hover {
   border: 1px solid #222;
   border-radius: 4px;
   padding: 7px;
