@@ -52,6 +52,7 @@ class TopNav extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="sm">
+
           <NavbarBrand id="autoAGBrand">autoAG</NavbarBrand>
           <UncontrolledTooltip placement="right" trigger="hover"
             target="autoAGBrand" delay="{show:0, hide:0}" arrowClassName="CalTooltipArrow" className="CalTooltip">
