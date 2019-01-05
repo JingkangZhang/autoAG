@@ -62,7 +62,7 @@ class TopNav extends React.Component {
           <Collapse isOpen={this.state.navIsOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink onClick={this.toggleHelp}>Help and Usages</NavLink>
+                <NavLink onClick={this.toggleHelp}>Help and Usage</NavLink>
               </NavItem>
               <Modal isOpen={this.state.helpOpen} toggle={this.toggleHelp}>
                 <ModalHeader toggle={this.toggleHelp}>Modal title</ModalHeader>
@@ -70,20 +70,23 @@ class TopNav extends React.Component {
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-                  <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                  <Button color="secondary" onClick={this.toggleHelp}>Close</Button>
                 </ModalFooter>
               </Modal>
               <NavItem>
-                <NavLink id="importToggler">Import</NavLink>
+                <NavLink onClick={this.toggleImportPopover}>Import</NavLink>
               </NavItem>
-              <Popover placement="bottom" isOpen={this.state.importPopoverOpen} target="importToggler" toggle={this.toggleImportPopover}>
-                <PopoverHeader>Select .autoag file to import</PopoverHeader>
-                <PopoverBody>
+
+              <Modal isOpen={this.state.importPopoverOpen} toggle={this.toggleImportPopover}>
+                <ModalHeader toggle={this.toggleImportPopover}>Select .autoag file to import</ModalHeader>
+                <ModalBody>
                   <Input type="file" name="file" id="exampleFile" />
-                  <Button outline color="secondary" size="sm" id="importButton">import</Button>{' '}
-                </PopoverBody>
-              </Popover>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="secondary" onClick={this.toggleImportPopover}>Cancel</Button>{' '}
+                  <Button color="primary" onClick={this.toggleImportPopover}>Do Something</Button>
+                </ModalFooter>
+              </Modal>
 
               <NavItem>
                 <NavLink><span>Save Session</span></NavLink>
