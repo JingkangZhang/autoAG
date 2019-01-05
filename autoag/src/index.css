@@ -74,10 +74,12 @@ code {
   /* convert tools https://cloudconvert.com/anything-to-ico
   https://yoksel.github.io/url-encoder/ */
   background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' preserveAspectRatio='xMidYMid meet' viewBox='0 0 640 640' width='27' height='27'%3E%3Cdefs%3E%3Cpath d='M640 320C640 496.61 496.61 640 320 640C143.39 640 0 496.61 0 320C0 143.39 143.39 0 320 0C496.61 0 640 143.39 640 320Z' id='f4FyuntQJS'%3E%3C/path%3E%3Cpath d='M448.36 256.72L576.72 513.45L319.99 513.45L63.28 513.45L191.63 256.72L319.99 0L448.36 256.72Z' id='h7HJDs2kc'%3E%3C/path%3E%3Cpath d='M500.06 181.61L285.54 585.03L214.91 547.48L429.42 144.05L500.06 181.61Z' id='f20Z1Foewl'%3E%3C/path%3E%3C/defs%3E%3Cg%3E%3Cg%3E%3Cg%3E%3Cuse xlink:href='%23f4FyuntQJS' opacity='1' fill='%23333333' fill-opacity='1'%3E%3C/use%3E%3C/g%3E%3Cg%3E%3Cuse xlink:href='%23h7HJDs2kc' opacity='1' fill='%23fefcfc' fill-opacity='1'%3E%3C/use%3E%3C/g%3E%3Cg%3E%3Cuse xlink:href='%23f20Z1Foewl' opacity='1' fill='%23333333' fill-opacity='1'%3E%3C/use%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+
   width: 27px;
   height: 27px;
   float: left;
   margin: 0 8px 0 0;
+  /* position: absolute; */
 }
 .navbar-light .navbar-brand:hover {
   color: #FDB515 !important;
@@ -86,8 +88,7 @@ code {
 
 .navbar-light .navbar-brand:hover::before {
   /* blue-yellow icon 27X27 */
-  background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='27px' height='27px' viewBox='0 0 32 32' enable-background='new 0 0 32 32' xml:space='preserve'%3E%3Cimage id='image0' width='32' height='32' x='0' y='0' href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJN%0AAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABa1BMVEUAAAD9tRX8tRX8tBX/%0AuhL9tRX9tRX9tRX9tRX9tRX/thTOnSPPnSP9tRX9tRX9tRX9tRX9tRX9tRX9tRX9tRX9tRX9tRX9%0AtRX9tRX9tRX9tRX9tRX9tRX9tRX9tRX9tRX9tRX9tRX/uBP/vRC1jyv/uBP/txT9tRX9tRX6tBZk%0AZkRlZkT/txTImiUVPFxmZkMAMGNmZ0MWPVwAMWIAMmL6sxYZPlvRniP/thQvSlTipx3ImSUDM2GV%0AfzU6T1Hpqxv+thUGNWCihjFFVU3vrhn4sxb7tBYKN1+ujC2XgDTHmSVQW0r0sBj+tRXXoSAgQllk%0AZUQPOV66kip1bj5cYkb3shfOnSMbQFoAMWPEmCZoaEJpaELElyYUPFwcQFpcYUZ2bz65kiojRFfX%0AoiDzsBiDdjqtjC3GmCYVO1wAL2MAL2QsSFXgph7trRpCU04ALmSFdzmFdzqDdju3kSr/thXjpx2M%0Aejj+thT///9jDiAQAAAAKHRSTlMAAAAAAAQqbK3Z8/7+bQM3l9/7GonqNcH+wkHYNgLp3qzziRrB%0ANtgpUznt9gAAAAFiS0dEeNbb5EYAAAAHdElNRQfjAQQUGQEZLu9JAAAB30lEQVQ4y12T90PTQBTH%0A7zFagtiWttBIKTTMFwkl0AB1o7KxKihYtoOpTBf/Pu9yI+P7093L9z53eYMxKWhNJNuM9gcd7Ubb%0Aw0QrsKgglc50ZhHtx2M2YrYzk45YAHL5LiQ545XKuMNXXfkcQPC9u2DyKNoTrjtp+0vzUbdyAPQU%0A/RgBpqrVKYFALPYIB0Cv/M4BnudO2HJb7PUdkCtgAPC8AIGFHBmglMcwgCOmVSRfAgbpvgiAEDOz%0ANRnqSwNLZWIAz33yVBkwk2KJfgV4JgDe8xfqDYj9CZbMxgEvX81pQzbJynHA6zcBALHMjDjg7TwB%0AFhZl2GBW9Be8pWUOWFmVGIuZMcDauzrW3n/4KNNpSoPOwfoGP/rJVek05RUa8Hmzjs7Wl4aqiCUe%0AqQGVbTpo77i6Iob4TQ3YpXPO3n5VF7XsJ0oBGgdbDtY3D7lbIChRPNUK0PjKr/u2XhVFtf1UU7E0%0A4PuPGtaP1oTbR1CxqNwK4B1TDp2TJbHhCF5uKA2cnp27pJ+/Lmo4d3l17Qqdn50OUMOwpsGhm1uu%0A33/oBX///b9VuhkabKKebG4ZHnF83Ymkao0MtzRH2z4q1fbhwQkpNDih0QsUGb3Q8MpGiw+vGP9R%0AGn/LNK3o+N8DfI6ZFwAepYIAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTktMDEtMDVUMDM6MjU6MDEt%0AMDc6MDCX344aAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE5LTAxLTA1VDAzOjI1OjAxLTA3OjAw5oI2%0ApgAAAABJRU5ErkJggg==' /%3E%3C/svg%3E");
-
+  background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' preserveAspectRatio='xMidYMid meet' viewBox='0 0 640 640' width='27' height='27'%3E%3Cdefs%3E%3Cpath d='M640 320C640 496.61 496.61 640 320 640C143.39 640 0 496.61 0 320C0 143.39 143.39 0 320 0C496.61 0 640 143.39 640 320Z' id='l45chBmaUT'%3E%3C/path%3E%3Cpath d='M446.07 257.32L572.13 509.45L319.99 509.45L67.87 509.45L193.92 257.32L319.99 5.19L446.07 257.32Z' id='d7WEpVkyh2'%3E%3C/path%3E%3Cpath d='M488.56 218.09L303.42 566.28L221.54 522.74L406.68 174.55L488.56 218.09Z' id='g37NDM6JOt'%3E%3C/path%3E%3C/defs%3E%3Cg%3E%3Cg%3E%3Cg%3E%3Cuse xlink:href='%23l45chBmaUT' opacity='1' fill='%23fdb515' fill-opacity='1'%3E%3C/use%3E%3C/g%3E%3Cg%3E%3Cuse xlink:href='%23d7WEpVkyh2' opacity='1' fill='%23003262' fill-opacity='1'%3E%3C/use%3E%3C/g%3E%3Cg%3E%3Cuse xlink:href='%23g37NDM6JOt' opacity='1' fill='%23fdb515' fill-opacity='1'%3E%3C/use%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import TopNav from './components/TopNav'
@@ -9,12 +9,17 @@ import {
   Container, Row, Col,
 } from 'reactstrap';
 
+// if (process.env.NODE_ENV !== 'production') {
+  // const {whyDidYouUpdate} = require('why-did-you-update');
+  // whyDidYouUpdate(React);
+// }
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAddTest = this.handleAddTest.bind(this);
+    this.handleTestType = this.handleTestType.bind(this);
     this.state = {
       formState:{
         pointsEnabled: false,
@@ -27,15 +32,17 @@ class App extends React.Component {
   }
 
   handleInputChange(e) {
-    if (e.target.name == "addTestButton") {
+    if (e.target.name === "addTestButton") {
       this.handleAddTest(e);
       return;
+    } else if (e.target.name === "testType") {
+      this.handleTestType(e);
+      return;
     }
+    //TODO: fix if else, get more specific cases 
     var newFormState = this.state.formState;
-    // console.log(e.target.name);
-    newFormState[e.target.name] = e.target.type == "checkbox" ?
+    newFormState[e.target.name] = e.target.type === "checkbox" ?
       e.target.checked : e.target.input;
-    console.log(newFormState);
     this.setState({formState: newFormState});
   }
 
@@ -44,7 +51,15 @@ class App extends React.Component {
     newFormState["tests"].push(INITIAL_TEST);
     this.setState({formState: newFormState});
   }
+
+  handleTestType(e) {
+    var newFormState = this.state.formState;
+    newFormState["tests"][e.target.dataset.testid] = e.target.value;
+    this.setState({formState: newFormState});
+  }
+
   render() {
+    // const topNav = <TopNav />;
     return (
       <Container fluid="true">
         <Row >

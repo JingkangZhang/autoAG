@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import githubMark from '../GitHub-Mark-64px.png'
 import {
   Collapse,
@@ -18,7 +18,7 @@ import {
   Modal, ModalBody, ModalFooter, ModalHeader
   } from 'reactstrap';
 
-class TopNav extends React.Component {
+class TopNav extends React.PureComponent {
   constructor(props) {
     super(props);
     this.toggleNav = this.toggleNav.bind(this);
