@@ -13,10 +13,13 @@ code {
     monospace;
 }
 
+.forPlaceHolder::placeholder { color: #BBB }
+
 .navbar {
   padding: 0;
   margin-bottom: 8px;
 }
+
 .NavCol {
   padding: 0;
 }

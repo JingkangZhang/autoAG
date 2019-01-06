@@ -20,6 +20,9 @@ class App extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAddTest = this.handleAddTest.bind(this);
     this.handleTestType = this.handleTestType.bind(this);
+    this.handlePointsEnabled = this.handlePointsEnabled.bind(this);
+    this.handleFullScore = this.handleFullScore.bind(this);
+    this.handleFunctionName = this.handleFunctionName.bind(this);
     this.state = {
       formState:{
         pointsEnabled: false,
@@ -32,17 +35,34 @@ class App extends React.Component {
   }
 
   handleInputChange(e) {
-    if (e.target.name === "addTestButton") {
-      this.handleAddTest(e);
-      return;
-    } else if (e.target.name === "testType") {
-      this.handleTestType(e);
-      return;
+    switch(e.target.name) {
+      case "pointsEnabled":
+        this.handlePointsEnabled(e);
+        break;
+      case "addTestButton":
+        this.handleAddTest(e);
+        break;
+      case "testType":
+        this.handleTestType(e);
+        break;
+      case "fullScore":
+        this.handleFullScore(e);
+        break;
+      case "functionName":
+        this.handleFunctionName(e);
+        break;
+      default:
+
     }
-    //TODO: fix if else, get more specific cases 
+    //TODO: fix if else, get more specific cases
     var newFormState = this.state.formState;
     newFormState[e.target.name] = e.target.type === "checkbox" ?
       e.target.checked : e.target.input;
+    this.setState({formState: newFormState});
+  }
+  handlePointsEnabled(e) {
+    var newFormState = this.state.formState;
+    newFormState["pointsEnabled"] = e.target.checked;
     this.setState({formState: newFormState});
   }
 
@@ -54,10 +74,21 @@ class App extends React.Component {
 
   handleTestType(e) {
     var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid] = e.target.value;
+    newFormState["tests"][e.target.dataset.testid].testType = e.target.value;
     this.setState({formState: newFormState});
   }
 
+  handleFullScore(e) {
+    var newFormState = this.state.formState;
+    newFormState["tests"][e.target.dataset.testid].fullScore = e.target.value;
+    this.setState({formState: newFormState});
+  }
+
+  handleFunctionName(e) {
+    var newFormState = this.state.formState;
+    newFormState["tests"][e.target.dataset.testid].functionName = e.target.value;
+    this.setState({formState: newFormState});
+  }
   render() {
     // const topNav = <TopNav />;
     return (
@@ -83,13 +114,13 @@ class App extends React.Component {
 
 const INITIAL_TEST = {
   testType: "simple",
-  functionName: null,
-  testName: null,
-  testArgument: null,
-  description: null,
+  functionName: "Fibonacci",
+  testName: "",
+  testArgument: "",
+  description: "",
   testCases: [["0, 0", "0"]],
   testForDisallowedUse: [],
-  fullScore: null,
+  fullScore: "",
   partialCredits: "none",
   skeletonCode: ""
 }

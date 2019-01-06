@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {
-  Form, Label, CustomInput, FormGroup, Input, Button
+  Form, Label, FormGroup, Input, Button
 } from 'reactstrap';
-
+import FormTestCase from "./FormTestCase.js"
 //props:{formState:{pointsEnabled: Bool, tests:[{},{}]}, formHandler:Function}
 class InputField extends React.Component {
   render() {
@@ -39,53 +39,4 @@ class FormPointsEnabled extends React.Component {
   }
 }
 
-{
-  // props:{
-  //   testData:{
-  //     testType: "simple",
-  //     functionName: null,
-  //     testName: null,
-  //     testArgument: null,
-  //     description: null,
-  //     testCases: [["0, 0", "0"]],
-  //     testForDisallowedUse: [],
-  //     fullScore: null,
-  //     partialCredits: "none",
-  //     skeletonCode: ""
-  //   },
-  //   testIndex: Int,
-  //   pointsEnabled: Bool,
-  //   formHandler: Function
-  // }
-}
-class FormTestCase extends React.Component {
-  render() {
-    return (
-      <div>
-        <FormTestCaseTestType formHandler={this.props.formHandler}
-          testIndex={this.props.testIndex}
-          testType={this.props.testData.testType} />
-      </div>
-
-    )
-  }
-}
-
-//props:{formHandler:Function, testIndex:Int, testType:String}
-class FormTestCaseTestType extends React.Component {
-  render() {
-    return (
-      <FormGroup>
-        <Label for="testType">Test Type:</Label>
-        <Input type="select" name="testType"
-            onChange={this.props.formHandler}
-            data-testid={this.props.testIndex}
-            value={this.props.testType} >
-          <option value="simple">simple function</option>
-          <option value="unit">unit test</option>
-        </Input>
-      </FormGroup>
-    )
-  }
-}
 export default InputField
