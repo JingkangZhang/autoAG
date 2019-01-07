@@ -78,7 +78,7 @@ class FormFullScore extends React.Component {
           className="forPlaceHolder"
           placeholder="1"
           onChange={this.props.formHandler}
-          data-testId={this.props.testIndex}
+          data-testid={this.props.testIndex}
           value={scoreString} />
       </FormGroup>
     )
@@ -92,7 +92,7 @@ class FormTestCaseTestType extends React.Component {
         <Label for="testType">Test Type:</Label>
         <Input type="select" name="testType"
             onChange={this.props.formHandler}
-            data-testId={this.props.testIndex}
+            data-testid={this.props.testIndex}
             value={this.props.testType} >
           <option value="simple">simple function</option>
           <option value="unit">unit test</option>
@@ -122,7 +122,7 @@ class FormFunctionName extends React.Component {
           className="forPlaceHolder"
           placeholder="Fibonacci"
           onChange={this.props.formHandler}
-          data-testId={this.props.testIndex}
+          data-testid={this.props.testIndex}
           value={functionName} />
       </FormGroup>
     )
@@ -151,7 +151,7 @@ class FormFunctionParams extends React.Component {
           className="forPlaceHolder"
           placeholder="arg1, arg2"
           onChange={this.props.formHandler}
-          data-testId={this.props.testIndex}
+          data-testid={this.props.testIndex}
           value={functionParams} />
       </FormGroup>
     )
@@ -167,7 +167,7 @@ class FormDescription extends React.Component {
           onChange={this.props.formHandler}
           // onFocus={e => e.target.select()}
           className="forPlaceHolder"
-          data-testId={this.props.testIndex}
+          data-testid={this.props.testIndex}
           placeholder="Return the Nth fibonacci number."
           value={this.props.description} />
         </FormGroup>
@@ -193,7 +193,7 @@ class FormTestCases extends React.Component {
       <ListGroup>
         {testCases}
         <Button name="addTestCase"
-                data-testId={this.props.testIndex}
+                data-testid={this.props.testIndex}
                 onClick={this.props.formHandler}
                 color="secondary"
                 size="sm">Add Test Case</Button>
@@ -218,7 +218,7 @@ class FormTestCaseInner extends React.Component {
                        className="forPlaceHolder"
                        name="testCaseInput"
                        data-testid={this.props.testIndex}
-                       data-testCaseId={this.props.testCaseIndex}
+                       data-testcaseid={this.props.testCaseIndex}
                        onChange={this.props.formHandler}
                        value={this.props.testCaseData[0]}/>
                 <InputGroupAddon addonType="append">
@@ -236,7 +236,7 @@ class FormTestCaseInner extends React.Component {
                      className="forPlaceHolder"
                      name="testCaseOutput"
                      data-testid={this.props.testIndex}
-                     data-testCaseid={this.props.testCaseIndex}
+                     data-testcaseid={this.props.testCaseIndex}
                      onChange={this.props.formHandler}
                      value={this.props.testCaseData[1]}/>
             </Col>

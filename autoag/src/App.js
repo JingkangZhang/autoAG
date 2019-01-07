@@ -18,20 +18,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleAddTest = this.handleAddTest.bind(this);
-    this.handleTestType = this.handleTestType.bind(this);
-    this.handlePointsEnabled = this.handlePointsEnabled.bind(this);
-    this.handleFullScore = this.handleFullScore.bind(this);
-    this.handleFunctionName = this.handleFunctionName.bind(this);
-    this.handleFunctionParams = this.handleFunctionParams.bind(this);
-    this.handleDescription = this.handleDescription.bind(this);
-    this.handleAddTestCase = this.handleAddTestCase.bind(this);
-    this.handleTestCaseInput = this.handleTestCaseInput.bind(this);
+
     this.state = {
       formState:{
         pointsEnabled: false,
         tests: [
-          Object.assign({}, INITIAL_TEST)
+          createInitialTestData()
         ]
       },
       formHandler: this.handleInputChange
@@ -39,104 +31,51 @@ class App extends React.Component {
   }
 
   handleInputChange(e) {
+    var newFormState = this.state.formState;
     switch(e.target.name) {
       case "pointsEnabled":
-        this.handlePointsEnabled(e);
+        newFormState["pointsEnabled"] = e.target.checked;
         break;
-      case "addTestButton":
-        this.handleAddTest(e);
+      case "addTest":
+        newFormState["tests"].push(createInitialTestData());
         break;
       case "testType":
-        this.handleTestType(e);
+        newFormState["tests"][e.target.dataset.testid]
+            .testType = e.target.value;
         break;
       case "fullScore":
-        this.handleFullScore(e);
+        newFormState["tests"][e.target.dataset.testid]
+            .fullScore = e.target.value;
         break;
       case "functionName":
-        this.handleFunctionName(e);
+        newFormState["tests"][e.target.dataset.testid]
+            .functionName = e.target.value;
         break;
       case "functionParams":
-        this.handleFunctionParams(e);
+        newFormState["tests"][e.target.dataset.testid]
+            .functionParams = e.target.value;
         break;
       case "formDescription":
-        this.handleDescription(e);
+        newFormState["tests"][e.target.dataset.testid]
+            .description = e.target.value;
         break;
       case "addTestCase":
-        this.handleAddTestCase(e);
+        newFormState["tests"][e.target.dataset.testid]
+            .testCases.push(["",""]);
         break;
       case "testCaseInput":
-        this.handleTestCaseInput(e);
+        newFormState["tests"][e.target.dataset.testid]
+            .testCases[e.target.dataset.testcaseid][0] = e.target.value;
         break;
-
+      case "testCaseOutput":
+        newFormState["tests"][e.target.dataset.testid]
+            .testCases[e.target.dataset.testcaseid][1] = e.target.value;
+        break;
       default:
-
     }
-    //TODO: fix if else, get more specific cases
-    var newFormState = this.state.formState;
-    newFormState[e.target.name] = e.target.type === "checkbox" ?
-      e.target.checked : e.target.input;
-    this.setState({formState: newFormState});
-  }
-  handlePointsEnabled(e) {
-    var newFormState = this.state.formState;
-    newFormState["pointsEnabled"] = e.target.checked;
     this.setState({formState: newFormState});
   }
 
-  handleAddTest(e) {
-    var newFormState = this.state.formState;
-    newFormState["tests"].push(Object.assign({}, INITIAL_TEST));
-    this.setState({formState: newFormState});
-  }
-
-  handleTestType(e) {
-    var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid]
-        .testType = e.target.value;
-    this.setState({formState: newFormState});
-  }
-
-  handleFullScore(e) {
-    var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid]
-        .fullScore = e.target.value;
-    this.setState({formState: newFormState});
-  }
-
-  handleFunctionName(e) {
-    var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid]
-        .functionName = e.target.value;
-    this.setState({formState: newFormState});
-  }
-
-  handleFunctionParams(e) {
-    var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid]
-        .functionParams = e.target.value;
-    this.setState({formState: newFormState});
-  }
-
-  handleDescription(e) {
-    var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid]
-        .description = e.target.value;
-    this.setState({formState: newFormState});
-  }
-
-  handleAddTestCase(e) {
-    var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid]
-        .testCases.push(Object.assign([], ["",""]));
-    this.setState({formState: newFormState});
-  }
-
-  handleTestCaseInput(e) {
-    var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid]
-        .testCases[e.target.dataset.testcaseid][0] = e.target.value;
-    this.setState({formState: newFormState});
-  }
   render() {
     // const topNav = <TopNav />;
     return (
@@ -159,18 +98,20 @@ class App extends React.Component {
     );
   }
 }
-
-const INITIAL_TEST = {
-  testType: "simple",
-  functionName: "Fibonacci",
-  testName: "",
-  functionParams: "arg1, arg2",
-  description: "",
-  testCases: [["", ""]],
-  testForDisallowedUse: [],
-  fullScore: "1",
-  partialCredits: "none",
-  skeletonCode: ""
+function createInitialTestData() {
+  return {
+    testType: "simple",
+    functionName: "Fibonacci",
+    testName: "",
+    functionParams: "arg1, arg2",
+    description: "",
+    testCases: [["", ""]],
+    testForDisallowedUse: [],
+    fullScore: "1",
+    partialCredits: "none",
+    skeletonCode: ""
+  };
 }
+
 
 export default App;
