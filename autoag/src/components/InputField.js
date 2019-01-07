@@ -10,7 +10,8 @@ class InputField extends React.Component {
     for (var i = 0; i < this.props.formState.tests.length; i++) {
       testList.push(
         <FormTestCase testData={this.props.formState.tests[i]} testIndex={i}
-          pointsEnabled={this.props.formState.pointsEnabled} formHandler={this.props.formHandler}/>
+          pointsEnabled={this.props.formState.pointsEnabled}
+          formHandler={this.props.formHandler}/>
       )
     }
     return (

@@ -23,11 +23,13 @@ class App extends React.Component {
     this.handlePointsEnabled = this.handlePointsEnabled.bind(this);
     this.handleFullScore = this.handleFullScore.bind(this);
     this.handleFunctionName = this.handleFunctionName.bind(this);
+    this.handleFunctionParams = this.handleFunctionParams.bind(this);
+    this.handleDescription = this.handleDescription.bind(this);
     this.state = {
       formState:{
         pointsEnabled: false,
         tests: [
-          INITIAL_TEST
+          Object.assign({}, INITIAL_TEST)
         ]
       },
       formHandler: this.handleInputChange
@@ -51,6 +53,12 @@ class App extends React.Component {
       case "functionName":
         this.handleFunctionName(e);
         break;
+      case "functionParams":
+        this.handleFunctionParams(e);
+        break
+      case "formDescription":
+        this.handleDescription(e);
+        break
       default:
 
     }
@@ -68,7 +76,7 @@ class App extends React.Component {
 
   handleAddTest(e) {
     var newFormState = this.state.formState;
-    newFormState["tests"].push(INITIAL_TEST);
+    newFormState["tests"].push(Object.assign({}, INITIAL_TEST));
     this.setState({formState: newFormState});
   }
 
@@ -87,6 +95,18 @@ class App extends React.Component {
   handleFunctionName(e) {
     var newFormState = this.state.formState;
     newFormState["tests"][e.target.dataset.testid].functionName = e.target.value;
+    this.setState({formState: newFormState});
+  }
+
+  handleFunctionParams(e) {
+    var newFormState = this.state.formState;
+    newFormState["tests"][e.target.dataset.testid].functionParams = e.target.value;
+    this.setState({formState: newFormState});
+  }
+
+  handleDescription(e) {
+    var newFormState = this.state.formState;
+    newFormState["tests"][e.target.dataset.testid].description = e.target.value;
     this.setState({formState: newFormState});
   }
   render() {
@@ -116,11 +136,11 @@ const INITIAL_TEST = {
   testType: "simple",
   functionName: "Fibonacci",
   testName: "",
-  testArgument: "",
+  functionParams: "arg1, arg2",
   description: "",
-  testCases: [["0, 0", "0"]],
+  testCases: [["", ""]],
   testForDisallowedUse: [],
-  fullScore: "",
+  fullScore: "1",
   partialCredits: "none",
   skeletonCode: ""
 }

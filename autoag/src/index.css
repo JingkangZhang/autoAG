@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-.forPlaceHolder::placeholder { color: #BBB }
+.forPlaceHolder::placeholder { color: #BBB; }
 
 .navbar {
   padding: 0;
