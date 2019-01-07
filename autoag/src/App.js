@@ -25,6 +25,8 @@ class App extends React.Component {
     this.handleFunctionName = this.handleFunctionName.bind(this);
     this.handleFunctionParams = this.handleFunctionParams.bind(this);
     this.handleDescription = this.handleDescription.bind(this);
+    this.handleAddTestCase = this.handleAddTestCase.bind(this);
+    this.handleTestCaseInput = this.handleTestCaseInput.bind(this);
     this.state = {
       formState:{
         pointsEnabled: false,
@@ -55,10 +57,17 @@ class App extends React.Component {
         break;
       case "functionParams":
         this.handleFunctionParams(e);
-        break
+        break;
       case "formDescription":
         this.handleDescription(e);
-        break
+        break;
+      case "addTestCase":
+        this.handleAddTestCase(e);
+        break;
+      case "testCaseInput":
+        this.handleTestCaseInput(e);
+        break;
+
       default:
 
     }
@@ -82,31 +91,50 @@ class App extends React.Component {
 
   handleTestType(e) {
     var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid].testType = e.target.value;
+    newFormState["tests"][e.target.dataset.testid]
+        .testType = e.target.value;
     this.setState({formState: newFormState});
   }
 
   handleFullScore(e) {
     var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid].fullScore = e.target.value;
+    newFormState["tests"][e.target.dataset.testid]
+        .fullScore = e.target.value;
     this.setState({formState: newFormState});
   }
 
   handleFunctionName(e) {
     var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid].functionName = e.target.value;
+    newFormState["tests"][e.target.dataset.testid]
+        .functionName = e.target.value;
     this.setState({formState: newFormState});
   }
 
   handleFunctionParams(e) {
     var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid].functionParams = e.target.value;
+    newFormState["tests"][e.target.dataset.testid]
+        .functionParams = e.target.value;
     this.setState({formState: newFormState});
   }
 
   handleDescription(e) {
     var newFormState = this.state.formState;
-    newFormState["tests"][e.target.dataset.testid].description = e.target.value;
+    newFormState["tests"][e.target.dataset.testid]
+        .description = e.target.value;
+    this.setState({formState: newFormState});
+  }
+
+  handleAddTestCase(e) {
+    var newFormState = this.state.formState;
+    newFormState["tests"][e.target.dataset.testid]
+        .testCases.push(Object.assign([], ["",""]));
+    this.setState({formState: newFormState});
+  }
+
+  handleTestCaseInput(e) {
+    var newFormState = this.state.formState;
+    newFormState["tests"][e.target.dataset.testid]
+        .testCases[e.target.dataset.testcaseid][0] = e.target.value;
     this.setState({formState: newFormState});
   }
   render() {

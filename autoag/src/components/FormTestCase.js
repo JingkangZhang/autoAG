@@ -3,6 +3,7 @@ import {
   FormGroup, Input, Button, Label, Alert,
   ListGroup, ListGroupItem,InputGroupText,InputGroupAddon,InputGroup,
   Container, Row, Col,
+  Badge
 } from 'reactstrap';
 
 {
@@ -77,7 +78,7 @@ class FormFullScore extends React.Component {
           className="forPlaceHolder"
           placeholder="1"
           onChange={this.props.formHandler}
-          data-testid={this.props.testIndex}
+          data-testId={this.props.testIndex}
           value={scoreString} />
       </FormGroup>
     )
@@ -91,7 +92,7 @@ class FormTestCaseTestType extends React.Component {
         <Label for="testType">Test Type:</Label>
         <Input type="select" name="testType"
             onChange={this.props.formHandler}
-            data-testid={this.props.testIndex}
+            data-testId={this.props.testIndex}
             value={this.props.testType} >
           <option value="simple">simple function</option>
           <option value="unit">unit test</option>
@@ -121,7 +122,7 @@ class FormFunctionName extends React.Component {
           className="forPlaceHolder"
           placeholder="Fibonacci"
           onChange={this.props.formHandler}
-          data-testid={this.props.testIndex}
+          data-testId={this.props.testIndex}
           value={functionName} />
       </FormGroup>
     )
@@ -135,10 +136,10 @@ class FormFunctionParams extends React.Component {
     var functionParams = this.props.functionParams;
     alert="";
     if (!functionParams.match(
-        /^\s*((\*)?(\*)?[a-zA-Z_][a-zA-Z0-9_]*(\=.+?)?\s*,?\s*)*$/)) {
+        /^\s*((\*)?(\*)?[a-zA-Z_][a-zA-Z0-9_]*(\=.+?)?\s*,\s*)*((\*)?(\*)?[a-zA-Z_][a-zA-Z0-9_]*(\=.+?)?\s*,?\s*)?$/)) {
       alert =
         <Alert color="warning">
-          Please enter a valid Python function parameter list. e.g., "arg1, arg2=None, *args, **kwargs".
+          Please enter a valid Python function parameter list.<br /> e.g., "arg1, arg2=None, *args, **kwargs".
         </Alert>
     }
     return (
@@ -150,7 +151,7 @@ class FormFunctionParams extends React.Component {
           className="forPlaceHolder"
           placeholder="arg1, arg2"
           onChange={this.props.formHandler}
-          data-testid={this.props.testIndex}
+          data-testId={this.props.testIndex}
           value={functionParams} />
       </FormGroup>
     )
@@ -166,7 +167,7 @@ class FormDescription extends React.Component {
           onChange={this.props.formHandler}
           // onFocus={e => e.target.select()}
           className="forPlaceHolder"
-          data-testid={this.props.testIndex}
+          data-testId={this.props.testIndex}
           placeholder="Return the Nth fibonacci number."
           value={this.props.description} />
         </FormGroup>
@@ -182,6 +183,7 @@ class FormTestCases extends React.Component {
       testCases.push(
         <FormTestCaseInner testCaseData={this.props.testCases[i]}
           testCaseIndex={i}
+          testIndex={this.props.testIndex}
           functionName={this.props.functionName}
           functionParams={this.props.functionParams}
           formHandler={this.props.formHandler}/>
@@ -190,28 +192,56 @@ class FormTestCases extends React.Component {
     return (
       <ListGroup>
         {testCases}
-        <Button name="addTestCaseButton" onClick={this.props.formHandler}
-          color="secondary" size="sm">Add Test Case</Button>
+        <Button name="addTestCase"
+                data-testId={this.props.testIndex}
+                onClick={this.props.formHandler}
+                color="secondary"
+                size="sm">Add Test Case</Button>
       </ListGroup>
     )
   }
 }
-//props:{testCaseData:["",""], testCaseIndex:Int, functionName:scoreString,
+//props:{testCaseData:["",""], testIndex:Int, testCaseIndex:Int, functionName:scoreString,
 //        functionParams:String, formHandler:Function}
 class FormTestCaseInner extends React.Component {
   render() {
     return(
       <ListGroupItem>
-        <InputGroup>
-          <InputGroupAddon addonType="prepend">
-            <InputGroupText>{this.props.functionName+"("}</InputGroupText>
-          </InputGroupAddon>
-          <Input placeholder={this.props.functionParams}
-                  className="forPlaceHolder"/>
-          <InputGroupAddon addonType="append">
-            <InputGroupText>)</InputGroupText>
-          </InputGroupAddon>
-        </InputGroup>
+        <Container fluid="true">
+          <Row>
+            <Col sm="7">
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>{this.props.functionName+" ("}</InputGroupText>
+                </InputGroupAddon>
+                <Input placeholder={this.props.functionParams}
+                       className="forPlaceHolder"
+                       name="testCaseInput"
+                       data-testid={this.props.testIndex}
+                       data-testCaseId={this.props.testCaseIndex}
+                       onChange={this.props.formHandler}
+                       value={this.props.testCaseData[0]}/>
+                <InputGroupAddon addonType="append">
+                  <InputGroupText>)</InputGroupText>
+                </InputGroupAddon>
+              </InputGroup>
+            </Col>
+            <Col sm="1">
+              <svg id="rightArrowSVG" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 408 408">
+                <polygon id="rightArrowPath" points="204,102 204,0 408,204 204,408 204,306 0,306 0,102   "/>
+              </svg>
+            </Col>
+            <Col sm="4">
+              <Input placeholder="expected output"
+                     className="forPlaceHolder"
+                     name="testCaseOutput"
+                     data-testid={this.props.testIndex}
+                     data-testCaseid={this.props.testCaseIndex}
+                     onChange={this.props.formHandler}
+                     value={this.props.testCaseData[1]}/>
+            </Col>
+          </Row>
+        </Container>
       </ListGroupItem>
     )
   }
