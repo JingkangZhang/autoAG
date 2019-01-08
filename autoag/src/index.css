@@ -114,3 +114,6 @@ code {
 .CalTooltip > .arrow::before {
   border-right-color: #FDB515;
 }
+label {
+  color:black;
+}

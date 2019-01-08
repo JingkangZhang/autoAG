@@ -62,7 +62,7 @@ class FormTestCase extends React.Component {
 class FormFullScore extends React.Component {
   render() {
     var scoreString = this.props.fullScore;
-    alert="";
+    var alert="";
     if (scoreString==="" || isNaN(scoreString)) {
       alert =
         <Alert color="warning">
@@ -105,7 +105,7 @@ class FormTestCaseTestType extends React.Component {
 class FormFunctionName extends React.Component {
   render() {
     var functionName = this.props.functionName;
-    alert="";
+    var alert="";
     if (!functionName.match(/^[a-zA-Z_][a-zA-Z0-9_]*$/)) {
       alert =
         <Alert color="warning">
@@ -134,7 +134,7 @@ class FormFunctionParams extends React.Component {
   render() {
     var functionName = this.props.functionName;
     var functionParams = this.props.functionParams;
-    alert="";
+    var alert="";
     if (!functionParams.match(
         /^\s*((\*)?(\*)?[a-zA-Z_][a-zA-Z0-9_]*(\s*\=\s*[^ ]+?)?\s*,\s*)*((\*)?(\*)?[a-zA-Z_][a-zA-Z0-9_]*(\s*\=\s*[^ ]+?)?\s*,?\s*)?$/)) {
       alert =
@@ -205,7 +205,7 @@ class FormTestCases extends React.Component {
 //        functionParams:String, formHandler:Function}
 class FormTestCaseInner extends React.Component {
   render() {
-    alert="";
+    var alert="";
     var validationResult = isValidArgList(this.props.functionParams,
       this.props.testCaseData[0]);
     if (!validationResult.result) {
