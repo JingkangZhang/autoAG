@@ -5,7 +5,7 @@ import {
   Container, Row, Col,
   Badge
 } from 'reactstrap';
-
+import {isValidArgList} from "./testArgs.js";
 {
   // props:{
   //   testData:{
@@ -136,7 +136,7 @@ class FormFunctionParams extends React.Component {
     var functionParams = this.props.functionParams;
     alert="";
     if (!functionParams.match(
-        /^\s*((\*)?(\*)?[a-zA-Z_][a-zA-Z0-9_]*(\=.+?)?\s*,\s*)*((\*)?(\*)?[a-zA-Z_][a-zA-Z0-9_]*(\=.+?)?\s*,?\s*)?$/)) {
+        /^\s*((\*)?(\*)?[a-zA-Z_][a-zA-Z0-9_]*(\s*\=\s*[^ ]+?)?\s*,\s*)*((\*)?(\*)?[a-zA-Z_][a-zA-Z0-9_]*(\s*\=\s*[^ ]+?)?\s*,?\s*)?$/)) {
       alert =
         <Alert color="warning">
           Please enter a valid Python function parameter list.<br /> e.g., "arg1, arg2=None, *args, **kwargs".
@@ -205,9 +205,44 @@ class FormTestCases extends React.Component {
 //        functionParams:String, formHandler:Function}
 class FormTestCaseInner extends React.Component {
   render() {
+    alert="";
+    var validationResult = isValidArgList(this.props.functionParams,
+      this.props.testCaseData[0]);
+    if (!validationResult.result) {
+      if (validationResult.error) {
+        alert =
+          <Alert color="warning">
+            You have an unmatched symbol error in your No.{validationResult.count} argument.
+          </Alert>
+      } else {
+        if (validationResult.starPresents === true) {
+          alert =
+            <Alert color="warning">
+              You are supposed to pass in at least {validationResult.numRegular} arguments. Found {validationResult.realCount}.
+            </Alert>
+        } else {
+          if (validationResult.numEqSigns === 0) {
+            alert =
+              <Alert color="warning">
+                You are supposed to pass in {validationResult.numRegular} arguments. Found {validationResult.realCount}.
+              </Alert>
+          } else {
+            alert =
+              <Alert color="warning">
+                You are supposed to pass in {validationResult.numRegular} required arguments, {validationResult.numEqSigns} optional arguments. Found {validationResult.realCount}.
+              </Alert>
+          }
+        }
+      }
+    }
+    var shouldDisableInput = validationResult.starPresents === false &&
+        validationResult.numEqSigns === 0 && validationResult.numRegular === 0;
     return(
       <ListGroupItem>
         <Container fluid="true">
+          <Row>
+            {alert}
+          </Row>
           <Row>
             <Col sm="7">
               <InputGroup>
