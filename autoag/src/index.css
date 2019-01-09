@@ -39,7 +39,7 @@ code {
                                   supported by Chrome and Opera */
 }
 .navbar .nav-item .nav-link {
-  color:rgba(0, 0, 0, 0.6);
+  /* color:rgba(0, 0, 0, 0.6); */
   /* margin:20px; */
 
   -webkit-touch-callout: none; /* iOS Safari */
@@ -52,11 +52,11 @@ code {
 }
 
 .navbar .nav-item .nav-link:not(.githubNav):hover {
-  border: 1px solid #222;
+  border: 1px solid #7AC78C;
   border-radius: 4px;
   padding: 7px;
-  background-color: rgba(0,0,0,0.2);
-  color:rgba(0, 0, 0, 0.7);
+  background-color: #E5F4E9;
+  color:rgba(0, 0, 0, 0.8);
 }
 
 .bg-light {
@@ -116,4 +116,59 @@ code {
 }
 label {
   color:black;
+}
+.testHeader {
+  width:100%;
+  display:block;
+  text-align: left;
+  padding-left: 20px !important;
+  border-top-left-radius: 25px;
+}
+/* .testHeader:focus {
+  outline: none !important;
+} */
+.btn:focus,.btn:active:focus,.btn.active:focus,
+.btn.focus,.btn:active.focus,.btn.active.focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.topNav {
+  border-top: 3px solid #409A56;
+  border-bottom: 1px solid #F1F1F1;
+  background-color: #F8F8F8 !important;
+}
+.btn-secondary {
+  color: #409A56;
+  padding: 2px;
+  background-color: #E5F4E9;
+  border: 2px solid #E5F4E9;
+}
+
+
+.btn-secondary:hover {
+  color: #409A56;
+  background-color: #E5F4E9;
+  border: 2px solid #7AC78C;
+}
+.btn-secondary:active,
+.btn-secondary:target,
+.btn-secondary.active {
+  color: #409A56 !important;
+  background-color: #E5F4E9 !important;
+  border: 2px solid #7AC78C !important;
+}
+
+.formTestCase {
+
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.testCaseBody {
+  padding: 15px;
+  border-left: 4px solid #E5F4E9;
+  /* padding-top: 0; */
+}
+form {
+  margin-left: 15px;
 }

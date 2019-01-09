@@ -3,7 +3,8 @@ import {
   FormGroup, Input, Button, Label, Alert,
   ListGroup, ListGroupItem,InputGroupText,InputGroupAddon,InputGroup,
   Container, Row, Col,
-  Badge
+  Badge,
+  Collapse
 } from 'reactstrap';
 import {isValidArgList} from "./testArgs.js";
 {
@@ -26,37 +27,60 @@ import {isValidArgList} from "./testArgs.js";
   // }
 }
 class FormTestCase extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.state = {
+      collapse: false
+    };
+  }
+  handleToggle(e) {
+    this.setState({ collapse: !this.state.collapse });
+  }
   render() {
     return (
-      <div>
-        {this.props.pointsEnabled &&
-          <FormFullScore formHandler={this.props.formHandler}
-            testIndex={this.props.testIndex}
-            fullScore={this.props.testData.fullScore}/>
+      <div className={this.props.className}>
+      <Button className="testHeader" onClick={this.handleToggle}>
+        {this.props.testData.testName==="" ?
+          this.props.testData.functionName
+          :
+          this.props.testData.testName
         }
-        <FormTestCaseTestType formHandler={this.props.formHandler}
-          testIndex={this.props.testIndex}
-          testType={this.props.testData.testType} />
-        <FormFunctionName formHandler={this.props.formHandler}
-          testIndex={this.props.testIndex}
-          functionName={this.props.testData.functionName} />
-        <FormFunctionParams formHandler={this.props.formHandler}
-          testIndex={this.props.testIndex}
-          functionName={this.props.testData.functionName}
-          functionParams={this.props.testData.functionParams} />
-        <FormDescription formHandler={this.props.formHandler}
-          testIndex={this.props.testIndex}
-          description={this.props.testData.description} />
-        <FormTestCases formHandler={this.props.formHandler}
-          testIndex={this.props.testIndex}
-          functionName={this.props.testData.functionName}
-          functionParams={this.props.testData.functionParams}
-          testCases={this.props.testData.testCases} />
+      </Button>
+      <Collapse  isOpen={!this.state.collapse}>
+        <div className="testCaseBody">
+          {this.props.pointsEnabled &&
+            <FormFullScore formHandler={this.props.formHandler}
+              testIndex={this.props.testIndex}
+              fullScore={this.props.testData.fullScore}/>
+          }
+          <FormTestCaseTestType formHandler={this.props.formHandler}
+            testIndex={this.props.testIndex}
+            testType={this.props.testData.testType} />
+          <FormFunctionName formHandler={this.props.formHandler}
+            testIndex={this.props.testIndex}
+            functionName={this.props.testData.functionName} />
+          <FormFunctionParams formHandler={this.props.formHandler}
+            testIndex={this.props.testIndex}
+            functionName={this.props.testData.functionName}
+            functionParams={this.props.testData.functionParams} />
+          <FormDescription formHandler={this.props.formHandler}
+            testIndex={this.props.testIndex}
+            description={this.props.testData.description} />
+          <FormTestCases formHandler={this.props.formHandler}
+            testIndex={this.props.testIndex}
+            functionName={this.props.testData.functionName}
+            functionParams={this.props.testData.functionParams}
+            testCases={this.props.testData.testCases} />
+        </div>
+      </Collapse>
+
       </div>
 
     )
   }
 }
+
 
 //props:{formHandler:Function, testIndex:Int, fullScore:String}
 class FormFullScore extends React.Component {
@@ -281,5 +305,6 @@ class FormTestCaseInner extends React.Component {
     )
   }
 }
+
 
 export default FormTestCase
