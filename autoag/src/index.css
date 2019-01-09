@@ -12,7 +12,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
+body {
+  font-family: 'Open Sans', sans-serif;
+  /* font-family: 'Mukta', sans-serif; */
+}
+.codeInput {
+  font-family: 'PT Mono', 'Source Code Pro', Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-weight: 500;
+}
 .forPlaceHolder::placeholder { color: #BBB; }
 
 .navbar {
@@ -117,12 +124,28 @@ code {
 label {
   color:black;
 }
+
 .testHeader {
   width:100%;
   display:block;
   text-align: left;
   padding-left: 20px !important;
   border-top-left-radius: 25px;
+  /* border-top-right-radius: 10px; */
+  border-bottom-left-radius: 0;
+  font-size: 20px;
+  /* border-bottom-right-radius: 10px; */
+}
+
+.pointsEnabled {
+  width:100%;
+  display:block;
+  text-align: left;
+  padding-left: 20px !important;
+  border-top-left-radius: 25px;
+  /* border-top-right-radius: 10px; */
+  border-bottom-left-radius: 0;
+  font-size: 20px;
 }
 /* .testHeader:focus {
   outline: none !important;
@@ -134,8 +157,11 @@ label {
 }
 
 .topNav {
-  border-top: 3px solid #409A56;
-  border-bottom: 1px solid #F1F1F1;
+  /* border-top: 3px solid #409A56; */
+  border-top: 5px solid #E5F4E9;
+  border-image: linear-gradient(to right, #48AC60 , #48AC92, #4894AC, #4862AC,#6048AC,#9248AC,#AC4893,#AC4861,#AC6048,#AC9248,#93AC48,#62AC48);
+  border-image-slice: 1;
+
   background-color: #F8F8F8 !important;
 }
 .btn-secondary {
@@ -149,14 +175,15 @@ label {
 .btn-secondary:hover {
   color: #409A56;
   background-color: #E5F4E9;
-  border: 2px solid #7AC78C;
+  border: 2px solid #E5F4E9;
+  /* #E5F4E9 */
 }
 .btn-secondary:active,
 .btn-secondary:target,
 .btn-secondary.active {
   color: #409A56 !important;
   background-color: #E5F4E9 !important;
-  border: 2px solid #7AC78C !important;
+  border: 2px solid #E5F4E9 !important;
 }
 
 .formTestCase {
@@ -165,10 +192,107 @@ label {
   margin-bottom: 15px;
 }
 .testCaseBody {
-  padding: 15px;
-  border-left: 4px solid #E5F4E9;
+  padding: 5px;
+  padding-left: 10px;
+  border-left: 5px solid #E5F4E9;
+  border-image: linear-gradient(to bottom, #E5F4E9 , #D4ECE6, #D4E7EC, #D4DAEC,#D9D4EC,#E6D4EC,#ECD4E6,#ECD4DA,#ECDAD4,#ECE6D4,#E6ECD4,#DAECD4);
+  border-image-slice: 1;
   /* padding-top: 0; */
 }
-form {
+label {
+  margin-bottom: 2px;
+}
+.form-group {
+  margin-bottom: 8px;
+  padding-bottom:8px;
+  /* border-bottom: 3px solid #E5F4E9;
+  border-image: linear-gradient(to right, #48AC60 , #48AC92, #4894AC, #4862AC,#6048AC,#9248AC,#AC4893,#AC4861,#AC6048,#AC9248,#93AC48,#62AC48);
+  border-image-slice: 1; */
+}
+.formTestCase input, .input-group-text{
+  height: 30px;
+}
+select {
+  height: 30px !important;
+}
+
+.pointsEnabledGroup {
+  margin-top: 15px;
+  width:100%;
+  display:block;
+  text-align: left;
+  padding: 10px 0 0 20px !important;
+  /* border: 1px solid #409A56; */
+  background-color: attr(data-color);
+  /* font-size: 20px; */
+}
+.pointsEnabledButtonGroup::after {
+  position: absolute;
+  margin-left: 68px;
+  margin-top: -30px;
+  font-size: 20px;
+  color: #409A56;
+  content: attr(data-content);
+}
+
+/* form {
   margin-left: 15px;
+} */
+
+
+/* CSS For Button created by Mauricio Allende */
+.tgl {
+  display: none;
+}
+.tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
+  box-sizing: border-box;
+}
+.tgl::-moz-selection, .tgl:after::-moz-selection, .tgl:before::-moz-selection, .tgl *::-moz-selection, .tgl *:after::-moz-selection, .tgl *:before::-moz-selection, .tgl + .tgl-btn::-moz-selection {
+  background: none;
+}
+.tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
+  background: none;
+}
+.tgl + .tgl-btn {
+  outline: 0;
+  display: block;
+  width: 3.5em;
+  height: 1.75em;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+}
+.tgl + .tgl-btn:after {
+  left: 0;
+}
+.tgl + .tgl-btn:before {
+  display: none;
+}
+.tgl:checked + .tgl-btn:after {
+  left: 50%;
+}
+
+.tgl-light + .tgl-btn {
+  background: #DDD;
+  border-radius: 2em;
+  padding: 2px;
+  transition: all .4s ease;
+}
+.tgl-light + .tgl-btn:after {
+  border-radius: 50%;
+  background: #fff;
+  transition: all .2s ease;
+}
+.tgl-light:checked + .tgl-btn {
+  background: #70C286;
 }

@@ -143,7 +143,7 @@ class FormFunctionName extends React.Component {
         <Label for="functionName">Function Name:</Label>
         <Input type="text" name="functionName"
           // onFocus={e => e.target.select()}
-          className="forPlaceHolder"
+          className="forPlaceHolder codeInput"
           placeholder="Fibonacci"
           onChange={this.props.formHandler}
           data-testid={this.props.testIndex}
@@ -172,7 +172,7 @@ class FormFunctionParams extends React.Component {
         <Label for="functionParams">Function Parameters:</Label>
         <Input type="text" name="functionParams"
           // onFocus={e => e.target.select()}
-          className="forPlaceHolder"
+          className="forPlaceHolder codeInput"
           placeholder="arg1, arg2"
           onChange={this.props.formHandler}
           data-testid={this.props.testIndex}
@@ -190,7 +190,7 @@ class FormDescription extends React.Component {
           <Input type="textarea" name="formDescription" id="formDescription"
           onChange={this.props.formHandler}
           // onFocus={e => e.target.select()}
-          className="forPlaceHolder"
+          className="forPlaceHolder codeInput"
           data-testid={this.props.testIndex}
           placeholder="Return the Nth fibonacci number."
           value={this.props.description} />
@@ -271,7 +271,7 @@ class FormTestCaseInner extends React.Component {
             <Col sm="7">
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
-                  <InputGroupText>{this.props.functionName+" ("}</InputGroupText>
+                  <InputGroupText >{this.props.functionName+" ("}</InputGroupText>
                 </InputGroupAddon>
                 <Input placeholder={this.props.functionParams}
                        className="forPlaceHolder"
@@ -281,7 +281,7 @@ class FormTestCaseInner extends React.Component {
                        onChange={this.props.formHandler}
                        value={this.props.testCaseData[0]}/>
                 <InputGroupAddon addonType="append">
-                  <InputGroupText>)</InputGroupText>
+                  <InputGroupText >)</InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
             </Col>

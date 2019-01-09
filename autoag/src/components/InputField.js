@@ -30,12 +30,29 @@ class InputField extends React.Component {
 class FormPointsEnabled extends React.Component {
   render() {
     return (
-      <FormGroup check>
+      <FormGroup className="pointsEnabledGroup" check
+        data-color={
+          this.props.pointsEnabled ?
+          "#E5F4E9"
+          :
+          "#F1F1F1"
+        }>
         <Label check>
-          <Input type="checkbox" name="pointsEnabled"
-              onChange={this.props.formHandler} checked={this.props.pointsEnabled}/>{' '}
-          Points enabled
+            <span class="pointsEnabledButtonGroup"
+              data-content= {
+                this.props.pointsEnabled ?
+                "Scored"
+                :
+                "Unscored"
+              }>
+              <input class="tgl tgl-light pointsEnabled" id="cb1"
+                   type="checkbox" name="pointsEnabled"
+                   onChange={this.props.formHandler}
+                   checked={this.props.pointsEnabled}/>
+              <label class="tgl-btn" for="cb1"></label>
+            </span>
         </Label>
+
       </FormGroup>
     )
   }
