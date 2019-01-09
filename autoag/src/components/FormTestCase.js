@@ -80,8 +80,6 @@ class FormTestCase extends React.Component {
     )
   }
 }
-
-
 //props:{formHandler:Function, testIndex:Int, fullScore:String}
 class FormFullScore extends React.Component {
   render() {
@@ -201,6 +199,16 @@ class FormDescription extends React.Component {
 //props:{formHandler:Function, testIndex:Int, functionName:String,
 //        functionParams:String, testCases:[["", ""],["", ""]]}
 class FormTestCases extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.state = {
+      collapse: false
+    };
+  }
+  handleToggle(e) {
+    this.setState({ collapse: !this.state.collapse });
+  }
   render() {
     var testCases = [];
     for (var i = 0; i < this.props.testCases.length; i++) {
@@ -215,12 +223,19 @@ class FormTestCases extends React.Component {
     }
     return (
       <ListGroup>
-        {testCases}
-        <Button name="addTestCase"
-                data-testid={this.props.testIndex}
-                onClick={this.props.formHandler}
-                color="secondary"
-                size="sm">Add Test Case</Button>
+        <Button className="testHeader" onClick={this.handleToggle}>
+          Test Cases
+        </Button>
+        <Collapse  isOpen={!this.state.collapse}>
+          <div>
+            {testCases}
+            <Button name="addTestCase"
+                    data-testid={this.props.testIndex}
+                    onClick={this.props.formHandler}
+                    color="secondary"
+                    size="sm">Add Test Case</Button>
+          </div>
+        </Collapse>
       </ListGroup>
     )
   }
@@ -286,7 +301,7 @@ class FormTestCaseInner extends React.Component {
               </InputGroup>
             </Col>
             <Col sm="1">
-              <svg id="rightArrowSVG" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 408 408">
+              <svg id="rightArrowSVG" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 408 408">
                 <polygon id="rightArrowPath" points="204,102 204,0 408,204 204,408 204,306 0,306 0,102   "/>
               </svg>
             </Col>

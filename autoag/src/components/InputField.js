@@ -30,13 +30,7 @@ class InputField extends React.Component {
 class FormPointsEnabled extends React.Component {
   render() {
     return (
-      <FormGroup className="pointsEnabledGroup" check
-        data-color={
-          this.props.pointsEnabled ?
-          "#E5F4E9"
-          :
-          "#F1F1F1"
-        }>
+      <FormGroup className="pointsEnabledGroup" check>
         <Label check>
             <span class="pointsEnabledButtonGroup"
               data-content= {
