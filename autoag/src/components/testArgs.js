@@ -9,7 +9,7 @@ function isValidArgList(functionParams, args) {
   for (var param of functionParamsList) {
     param = param.replace(/^\s*/, "");
     param = param.replace(/\s*$/, "");
-    if (param.match(/\=/)) {
+    if (param.match(/=/)) {
       numEqSigns += 1;
     } else if (param.match(/\*/)) {
       starPresents = true;
@@ -44,13 +44,13 @@ function isValidArgList(functionParams, args) {
     (realCount >= minNumOfArgs
       && realCount <= maxNumOfArgs && !numArgs.error);
 
-  console.log({result: Boolean(result),
-    numRegular: numRegular,
-    numEqSigns: numEqSigns,
-    starPresents:starPresents,
-    error:numArgs.error,
-    count:numArgs.count
-    });
+  // console.log({result: Boolean(result),
+  //   numRegular: numRegular,
+  //   numEqSigns: numEqSigns,
+  //   starPresents:starPresents,
+  //   error:numArgs.error,
+  //   count:numArgs.count
+  //   });
   return {result: Boolean(result),
     numRegular: numRegular,
     numEqSigns: numEqSigns,
@@ -81,7 +81,7 @@ function check(f) {
     } else if (!quoteOpen) {
       if (c === "," && stack.length == 0) {
         count += 1;
-      } else if (c === "(" || c === "[") {
+      } else if (c === "(" || c === "[" || c === "{") {
         stack.push(c);
       } else if (c === ")") {
         if (stack.length!=0 && stack[stack.length-1]==="(") {
@@ -90,16 +90,22 @@ function check(f) {
           return {count:count, error:true};
         }
       } else if (c === "]") {
-        if (stack.length!=0 && stack[stack.length-1]==="[") {
-          console.log("before splice");
-          console.log(stack);
-          stack.pop();
-          console.log("spliced, stack now:");
-          console.log(stack);
-        } else {
-          console.log("error here");
-          return {count:count, error:true};
-        }
+          if (stack.length!=0 && stack[stack.length-1]==="[") {
+            // console.log("before splice");
+            // console.log(stack);
+            stack.pop();
+            // console.log("spliced, stack now:");
+            // console.log(stack);
+          } else {
+            // console.log("error here");
+            return {count:count, error:true};
+          }
+      } else if (c === "}") {
+          if (stack.length!=0 && stack[stack.length-1]==="{") {
+            stack.pop();
+          } else {
+            return {count:count, error:true};
+          }
       }
     }
   }

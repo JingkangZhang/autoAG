@@ -6,17 +6,18 @@ import FormTestCase from "./FormTestCase.js"
 //props:{
 //  formState:{
 //    pointsEnabled: Bool,
+//    starterCode:String,
 //    tests:[{},{}]
 //  },
-//  formHandler:Function,
-//  starterCode:String
+//  formHandler:Function
 //}
 class InputField extends React.Component {
   render() {
     var testList = [];
     for (var i = 0; i < this.props.formState.tests.length; i++) {
       testList.push(
-        <FormTestCase testData={this.props.formState.tests[i]} testIndex={i}
+        <FormTestCase testData={this.props.formState.tests[i]}
+          testIndex={i}
           className="formTestCase"
           pointsEnabled={this.props.formState.pointsEnabled}
           formHandler={this.props.formHandler}/>

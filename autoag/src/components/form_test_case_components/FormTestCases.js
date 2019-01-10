@@ -1,0 +1,150 @@
+import React from 'react';
+import {
+  FormGroup, Input, Button, Label, Alert,
+  ListGroup, ListGroupItem,InputGroupText,InputGroupAddon,InputGroup,
+  Container, Row, Col,
+  Badge,
+  Collapse,
+  UncontrolledTooltip
+} from 'reactstrap';
+import {isValidArgList} from "../testArgs.js";
+//props:{formHandler:Function, testIndex:Int, functionName:String,
+//        functionParams:String, testCases:[["", ""],["", ""]]}
+class FormTestCases extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.state = {
+      collapse: false
+    };
+  }
+  handleToggle(e) {
+    this.setState({ collapse: !this.state.collapse });
+  }
+  render() {
+    var testCases = [];
+    for (var i = 0; i < this.props.testCases.length; i++) {
+      testCases.push(
+        <FormTestCaseInner testCaseData={this.props.testCases[i]}
+          testCaseIndex={i}
+          testIndex={this.props.testIndex}
+          functionName={this.props.functionName}
+          functionParams={this.props.functionParams}
+          formHandler={this.props.formHandler}/>
+      )
+    }
+    return (
+      <ListGroup>
+        <Button className="testCaseHeader"
+              color="dark"
+              onClick={this.handleToggle}>
+          Test Cases
+        </Button>
+        <Collapse  isOpen={!this.state.collapse}>
+          <div class="testCasesGroup">
+            {testCases}
+            <Button name="addTestCase"
+              className="addTestCaseButton"
+              data-testid={this.props.testIndex}
+              onClick={this.props.formHandler}
+              color="secondary"
+              size="sm">Add Test Case</Button>
+            <div class="testCaseBottomBorder"></div>
+          </div>
+        </Collapse>
+      </ListGroup>
+    )
+  }
+}
+//props:{testCaseData:["",""], testIndex:Int, testCaseIndex:Int, functionName:scoreString,
+//        functionParams:String, formHandler:Function}
+class FormTestCaseInner extends React.Component {
+  render() {
+    var alertClassName="";
+    var alertbox="";
+    var validationResult = isValidArgList(this.props.functionParams,
+      this.props.testCaseData[0]);
+    if (!validationResult.result) {
+      var alertContent="";
+      if (validationResult.error) {
+        alertContent = "You have an unmatched symbol error in your No."+
+          validationResult.count + " argument.";
+      } else {
+        if (validationResult.starPresents === true) {
+          alertContent = "You are supposed to pass in at least " +
+            validationResult.numRegular +" arguments. Found " +
+            validationResult.realCount + ".";
+        } else {
+          if (validationResult.numEqSigns === 0) {
+            alertContent = "You are supposed to pass in " +
+            validationResult.numRegular + " arguments. Found " +
+            validationResult.realCount + ".";
+          } else {
+            alertContent = "You are supposed to pass in " +
+            validationResult.numRegular + " required arguments, " +
+            validationResult.numEqSigns +" optional arguments. Found " +
+            validationResult.realCount + ".";
+          }
+        }
+      }
+      alertbox =
+        <span class="testCaseAlert"
+          id={"testCaseAlert" +
+          this.props.testIndex + "_" +
+          this.props.testCaseIndex} >
+          <UncontrolledTooltip
+            placement="right"
+            target={"testCaseAlert" +
+                    this.props.testIndex + "_" +
+                    this.props.testCaseIndex}
+            arrowClassName="AlertTooltipArrow"
+            className="AlertTooltip">
+            {alertContent}
+          </UncontrolledTooltip>
+        </span>;
+      alertClassName="alertTestCaseBorder";
+    }
+    var shouldDisableInput = validationResult.starPresents === false &&
+        validationResult.numEqSigns === 0 && validationResult.numRegular === 0;
+    return(
+      <ListGroupItem className={alertClassName}>
+        <div class="tg">
+          <span class="tgAlert">{alertbox}</span>
+          <span class="tgInput">
+            <InputGroup>
+              <InputGroupAddon addonType="prepend">
+                <InputGroupText >{this.props.functionName+" ("}</InputGroupText>
+              </InputGroupAddon>
+              <Input placeholder={this.props.functionParams} spellcheck="false"
+                     className="forPlaceHolder"
+                     name="testCaseInput"
+                     data-testid={this.props.testIndex}
+                     data-testcaseid={this.props.testCaseIndex}
+                     onChange={this.props.formHandler}
+                     value={this.props.testCaseData[0]}/>
+              <InputGroupAddon addonType="append">
+                <InputGroupText >)</InputGroupText>
+              </InputGroupAddon>
+            </InputGroup>
+          </span>
+          <span class="tgArrow">
+            <svg id="rightArrowSVG" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 408 408">
+              <polygon id="rightArrowPath" points="204,102 204,0 408,204 204,408 204,306 0,306 0,102   "/>
+            </svg>
+          </span>
+          <span class="tgOutput">
+            <Input placeholder="expected output"
+                   spellcheck="false"
+                   className="forPlaceHolder"
+                   name="testCaseOutput"
+                   data-testid={this.props.testIndex}
+                   data-testcaseid={this.props.testCaseIndex}
+                   onChange={this.props.formHandler}
+                   value={this.props.testCaseData[1]}/>
+          </span>
+        </div>
+      </ListGroupItem>
+    )
+  }
+}
+export default FormTestCases;

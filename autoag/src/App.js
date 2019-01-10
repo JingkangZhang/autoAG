@@ -1,9 +1,9 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import TopNav from './components/TopNav'
-import InputField from './components/InputField'
-import OutputField from './components/OutputField'
+import TopNav from './components/TopNav';
+import InputField from './components/InputField';
+import OutputField from './components/OutputField';
 
 import {
   Container, Row, Col,
@@ -22,12 +22,11 @@ class App extends React.Component {
     this.state = {
       formState:{
         pointsEnabled: false,
+        starterCode: "",
         tests: [
           createInitialTestData()
         ]
       },
-      formHandler: this.handleInputChange,
-      starterCode: ""
     };
   }
 
@@ -44,11 +43,11 @@ class App extends React.Component {
         newFormState["tests"].push(createInitialTestData());
         break;
       case "testType":
-        newFormState["tests"][e.target.dataset.testid]
+        newFormState["tests"][e.target.dataset.testid].advancedSetting
             .testType = e.target.value;
         break;
       case "fullScore":
-        newFormState["tests"][e.target.dataset.testid]
+        newFormState["tests"][e.target.dataset.testid].advancedSetting
             .fullScore = e.target.value;
         break;
       case "functionName":
@@ -93,7 +92,7 @@ class App extends React.Component {
         <Row>
           <Col sm="7">
             <InputField formState={this.state.formState}
-                formHandler={this.state.formHandler}/>
+                formHandler={this.handleInputChange}/>
           </Col>
           <Col sm="5">
             <OutputField formState={this.state.formState}/>
@@ -105,16 +104,18 @@ class App extends React.Component {
 }
 function createInitialTestData() {
   return {
-    testType: "simple",
-    functionName: "Fibonacci",
-    testName: "",
-    functionParams: "arg1, arg2",
+    functionName: "",
+    functionParams: "",
     description: "",
     testCases: [["", ""]],
-    testForDisallowedUse: [],
-    fullScore: "1",
-    partialCredits: "none",
-    skeletonCode: ""
+    advancedSetting: {
+      fullScore: "1",
+      testType: "simple",
+      testName: "",
+      partialCredits: "none",
+      skeletonCode: "\"*** YOUR CODE HERE ***\"",
+      testForDisallowedUse: [],
+    }
   };
 }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 class OutputField extends React.Component {
   render() {
     return (
-      <textarea value={this.props.formState.pointsEnabled}></textarea>
+      <textarea value={JSON.stringify(this.props.formState)}></textarea>
     )
   }
 }
