@@ -479,3 +479,21 @@ select {
 .tgl-light:checked + .tgl-btn {
   background: #70C286;
 }
+/* split */
+.split {
+  display: flex;
+  flex-direction: row;
+}
+.gutter {
+    background-color: #eee;
+    /* background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII='); */
+    background-image: linear-gradient(to bottom, #FFF,#FCFCFC, #EEE,#FCFCFC, #FFF);
+    /* border-image-slice: 1; */
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+    /* background-image: url('grips/vertical.png'); */
+    cursor: col-resize;
+}

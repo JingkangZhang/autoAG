@@ -84,22 +84,22 @@ class App extends React.Component {
   render() {
     // const topNav = <TopNav />;
     return (
-      <Container fluid="true">
-        <Row >
-          <Col className="NavCol">
-            <TopNav />
-          </Col>
-        </Row>
-        <Row>
-          <Col sm="7">
+      <div>
+        <TopNav />
+        <Split
+          className="split"
+          sizes={[60, 40]}
+          minSize={[480, 300]}
+          >
+          <div >
             <InputField formState={this.state.formState}
                 formHandler={this.handleInputChange}/>
-          </Col>
-          <Col sm="5">
+          </div>
+          <div>
             <OutputField formState={this.state.formState}/>
-          </Col>
-        </Row>
-      </Container>
+          </div>
+        </Split>
+      </div>
     );
   }
 }
