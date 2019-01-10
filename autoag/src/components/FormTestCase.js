@@ -4,7 +4,8 @@ import {
   ListGroup, ListGroupItem,InputGroupText,InputGroupAddon,InputGroup,
   Container, Row, Col,
   Badge,
-  Collapse
+  Collapse,
+  UncontrolledTooltip
 } from 'reactstrap';
 import {isValidArgList} from "./testArgs.js";
 {
@@ -84,24 +85,36 @@ class FormTestCase extends React.Component {
 class FormFullScore extends React.Component {
   render() {
     var scoreString = this.props.fullScore;
-    var alert="";
+    var alertClassName="";
+    var alertbox="";
     if (scoreString==="" || isNaN(scoreString)) {
-      alert =
-        <Alert color="warning">
-          Please enter a valid number for full score for current test.
-        </Alert>
+      alertbox =
+        <span class="labelAlert" id={"fullScoreAlert" + this.props.testIndex}>
+          <UncontrolledTooltip
+            placement="right"
+            target={"fullScoreAlert" + this.props.testIndex}
+            arrowClassName="AlertTooltipArrow"
+            className="AlertTooltip">
+            Please enter a valid number.
+          </UncontrolledTooltip>
+        </span>;
+      alertClassName="alertBorder";
     }
     return (
       <FormGroup>
-        {alert}
-        <Label for="fullScore">Full Score:</Label>
-        <Input type="text" name="fullScore"
-          // onFocus={e => e.target.select()}
-          className="forPlaceHolder"
-          placeholder="1"
-          onChange={this.props.formHandler}
-          data-testid={this.props.testIndex}
-          value={scoreString} />
+        <div className={alertClassName}>
+          <Label for="fullScore">
+            <span>Full Score:</span>
+            {alertbox}
+          </Label>
+          <Input type="text" name="fullScore"
+            // onFocus={e => e.target.select()}
+            className="forPlaceHolder"
+            placeholder="1"
+            onChange={this.props.formHandler}
+            data-testid={this.props.testIndex}
+            value={scoreString} />
+        </div>
       </FormGroup>
     )
   }
@@ -127,25 +140,36 @@ class FormTestCaseTestType extends React.Component {
 class FormFunctionName extends React.Component {
   render() {
     var functionName = this.props.functionName;
-    var alert="";
+    var alertClassName="";
+    var alertbox="";
     if (!functionName.match(/^[a-zA-Z_][a-zA-Z0-9_]*$/)) {
-      alert =
-        <Alert color="warning">
-          Please enter a valid Python function name.
-          Also, avoid using Python keywords (not checked here).
-        </Alert>
+      alertbox =
+        <span class="labelAlert" id={"functionNameAlert"+ this.props.testIndex}>
+          <UncontrolledTooltip
+            placement="right"
+            target={"functionNameAlert"+ this.props.testIndex}
+            arrowClassName="AlertTooltipArrow"
+            className="AlertTooltip">
+            Please enter a valid Python function name.
+          </UncontrolledTooltip>
+        </span>;
+      alertClassName="alertBorder";
     }
     return (
       <FormGroup>
-        {alert}
-        <Label for="functionName">Function Name:</Label>
-        <Input type="text" name="functionName"
-          // onFocus={e => e.target.select()}
-          className="forPlaceHolder codeInput"
-          placeholder="Fibonacci"
-          onChange={this.props.formHandler}
-          data-testid={this.props.testIndex}
-          value={functionName} />
+        <div className={alertClassName}>
+          <Label for="functionName" >
+            <span>Function Name:</span>
+            {alertbox}
+          </Label>
+          <Input type="text" name="functionName" spellcheck="false"
+            // onFocus={e => e.target.select()}
+            className="forPlaceHolder codeInput"
+            placeholder="Fibonacci"
+            onChange={this.props.formHandler}
+            data-testid={this.props.testIndex}
+            value={functionName} />
+        </div>
       </FormGroup>
     )
   }
@@ -156,25 +180,38 @@ class FormFunctionParams extends React.Component {
   render() {
     var functionName = this.props.functionName;
     var functionParams = this.props.functionParams;
-    var alert="";
+    var alertClassName="";
+    var alertbox="";
     if (!functionParams.match(
         /^\s*((\*)?(\*)?[a-zA-Z_][a-zA-Z0-9_]*(\s*\=\s*[^ ]+?)?\s*,\s*)*((\*)?(\*)?[a-zA-Z_][a-zA-Z0-9_]*(\s*\=\s*[^ ]+?)?\s*,?\s*)?$/)) {
-      alert =
-        <Alert color="warning">
-          Please enter a valid Python function parameter list.<br /> e.g., "arg1, arg2=None, *args, **kwargs".
-        </Alert>
+      alertbox =
+        <span class="labelAlert" id={"functionNameAlert" + this.props.testIndex}>
+          <UncontrolledTooltip
+            placement="right"
+            target={"functionNameAlert" + this.props.testIndex}
+            arrowClassName="AlertTooltipArrow"
+            className="AlertTooltip">
+            Please enter a valid Python function parameter list.<br /> e.g., "arg1, arg2=None, *args, **kwargs".
+          </UncontrolledTooltip>
+        </span>;
+      alertClassName="alertBorder";
     }
     return (
       <FormGroup>
-        {alert}
-        <Label for="functionParams">Function Parameters:</Label>
-        <Input type="text" name="functionParams"
-          // onFocus={e => e.target.select()}
-          className="forPlaceHolder codeInput"
-          placeholder="arg1, arg2"
-          onChange={this.props.formHandler}
-          data-testid={this.props.testIndex}
-          value={functionParams} />
+        <div className={alertClassName}>
+          {alert}
+          <Label for="functionParams">
+            <span>Function Parameters:</span>
+            {alertbox}
+          </Label>
+          <Input type="text" name="functionParams" spellcheck="false"
+            // onFocus={e => e.target.select()}
+            className="forPlaceHolder codeInput"
+            placeholder="arg1, arg2"
+            onChange={this.props.formHandler}
+            data-testid={this.props.testIndex}
+            value={functionParams} />
+        </div>
       </FormGroup>
     )
   }
@@ -185,7 +222,8 @@ class FormDescription extends React.Component {
     return (
       <FormGroup>
           <Label for="exampleText">Question Description:</Label>
-          <Input type="textarea" name="formDescription" id="formDescription"
+          <Input type="textarea" name="formDescription" spellcheck="false"
+          id="formDescription"
           onChange={this.props.formHandler}
           // onFocus={e => e.target.select()}
           className="forPlaceHolder codeInput"
@@ -223,17 +261,21 @@ class FormTestCases extends React.Component {
     }
     return (
       <ListGroup>
-        <Button className="testHeader" onClick={this.handleToggle}>
+        <Button className="testCaseHeader"
+              color="dark"
+              onClick={this.handleToggle}>
           Test Cases
         </Button>
         <Collapse  isOpen={!this.state.collapse}>
-          <div>
+          <div class="testCasesGroup">
             {testCases}
             <Button name="addTestCase"
-                    data-testid={this.props.testIndex}
-                    onClick={this.props.formHandler}
-                    color="secondary"
-                    size="sm">Add Test Case</Button>
+              className="addTestCaseButton"
+              data-testid={this.props.testIndex}
+              onClick={this.props.formHandler}
+              color="secondary"
+              size="sm">Add Test Case</Button>
+            <div class="testCaseBottomBorder"></div>
           </div>
         </Collapse>
       </ListGroup>
@@ -244,78 +286,89 @@ class FormTestCases extends React.Component {
 //        functionParams:String, formHandler:Function}
 class FormTestCaseInner extends React.Component {
   render() {
-    var alert="";
+    var alertClassName="";
+    var alertbox="";
     var validationResult = isValidArgList(this.props.functionParams,
       this.props.testCaseData[0]);
     if (!validationResult.result) {
+      var alertContent="";
       if (validationResult.error) {
-        alert =
-          <Alert color="warning">
-            You have an unmatched symbol error in your No.{validationResult.count} argument.
-          </Alert>
+        alertContent = "You have an unmatched symbol error in your No."+
+          validationResult.count + " argument.";
       } else {
         if (validationResult.starPresents === true) {
-          alert =
-            <Alert color="warning">
-              You are supposed to pass in at least {validationResult.numRegular} arguments. Found {validationResult.realCount}.
-            </Alert>
+          alertContent = "You are supposed to pass in at least " +
+            validationResult.numRegular +" arguments. Found " +
+            validationResult.realCount + ".";
         } else {
           if (validationResult.numEqSigns === 0) {
-            alert =
-              <Alert color="warning">
-                You are supposed to pass in {validationResult.numRegular} arguments. Found {validationResult.realCount}.
-              </Alert>
+            alertContent = "You are supposed to pass in " +
+            validationResult.numRegular + " arguments. Found " +
+            validationResult.realCount + ".";
           } else {
-            alert =
-              <Alert color="warning">
-                You are supposed to pass in {validationResult.numRegular} required arguments, {validationResult.numEqSigns} optional arguments. Found {validationResult.realCount}.
-              </Alert>
+            alertContent = "You are supposed to pass in " +
+            validationResult.numRegular + " required arguments, " +
+            validationResult.numEqSigns +" optional arguments. Found " +
+            validationResult.realCount + ".";
           }
         }
       }
+      alertbox =
+        <span class="testCaseAlert"
+          id={"testCaseAlert" +
+          this.props.testIndex + "_" +
+          this.props.testCaseIndex} >
+          <UncontrolledTooltip
+            placement="right"
+            target={"testCaseAlert" +
+                    this.props.testIndex + "_" +
+                    this.props.testCaseIndex}
+            arrowClassName="AlertTooltipArrow"
+            className="AlertTooltip">
+            {alertContent}
+          </UncontrolledTooltip>
+        </span>;
+      alertClassName="alertTestCaseBorder";
     }
     var shouldDisableInput = validationResult.starPresents === false &&
         validationResult.numEqSigns === 0 && validationResult.numRegular === 0;
     return(
-      <ListGroupItem>
-        <Container fluid="true">
-          <Row>
-            {alert}
-          </Row>
-          <Row>
-            <Col sm="7">
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText >{this.props.functionName+" ("}</InputGroupText>
-                </InputGroupAddon>
-                <Input placeholder={this.props.functionParams}
-                       className="forPlaceHolder"
-                       name="testCaseInput"
-                       data-testid={this.props.testIndex}
-                       data-testcaseid={this.props.testCaseIndex}
-                       onChange={this.props.formHandler}
-                       value={this.props.testCaseData[0]}/>
-                <InputGroupAddon addonType="append">
-                  <InputGroupText >)</InputGroupText>
-                </InputGroupAddon>
-              </InputGroup>
-            </Col>
-            <Col sm="1">
-              <svg id="rightArrowSVG" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 408 408">
-                <polygon id="rightArrowPath" points="204,102 204,0 408,204 204,408 204,306 0,306 0,102   "/>
-              </svg>
-            </Col>
-            <Col sm="4">
-              <Input placeholder="expected output"
+      <ListGroupItem className={alertClassName}>
+        <div class="tg">
+          <span class="tgAlert">{alertbox}</span>
+          <span class="tgInput">
+            <InputGroup>
+              <InputGroupAddon addonType="prepend">
+                <InputGroupText >{this.props.functionName+" ("}</InputGroupText>
+              </InputGroupAddon>
+              <Input placeholder={this.props.functionParams} spellcheck="false"
                      className="forPlaceHolder"
-                     name="testCaseOutput"
+                     name="testCaseInput"
                      data-testid={this.props.testIndex}
                      data-testcaseid={this.props.testCaseIndex}
                      onChange={this.props.formHandler}
-                     value={this.props.testCaseData[1]}/>
-            </Col>
-          </Row>
-        </Container>
+                     value={this.props.testCaseData[0]}/>
+              <InputGroupAddon addonType="append">
+                <InputGroupText >)</InputGroupText>
+              </InputGroupAddon>
+            </InputGroup>
+          </span>
+          <span class="tgArrow">
+            <svg id="rightArrowSVG" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 408 408">
+              <polygon id="rightArrowPath" points="204,102 204,0 408,204 204,408 204,306 0,306 0,102   "/>
+            </svg>
+          </span>
+          <span class="tgOutput">
+            <Input placeholder="expected output"
+                   spellcheck="false"
+                   className="forPlaceHolder"
+                   name="testCaseOutput"
+                   data-testid={this.props.testIndex}
+                   data-testcaseid={this.props.testCaseIndex}
+                   onChange={this.props.formHandler}
+                   value={this.props.testCaseData[1]}/>
+          </span>
+        </div>
       </ListGroupItem>
     )
   }

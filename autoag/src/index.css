@@ -120,20 +120,15 @@ body {
   background-color: #FDB515;
   font-weight:700;
 }
-
+.CalTooltip > .arrow::before {
+  border-right-color: #FDB515;
+}
 /* .bs-tooltip-right .arrow::before {
   border-right-color: #FDB515;
 } */
 
-#rightArrowSVG {
-  margin-top: 1px;
-}
-#rightArrowPath{
-  fill:  #D4ECDA;
-}
-.CalTooltip > .arrow::before {
-  border-right-color: #FDB515;
-}
+
+
 
 .testHeader {
   width:100%;
@@ -147,6 +142,36 @@ body {
   /* border-bottom-right-radius: 10px; */
 }
 
+.testCaseHeader {
+  width:100%;
+  display:block;
+  text-align: left;
+  padding-left: 30px !important;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border:0 !important;
+  font-size: 17px;
+  color: #444 !important;
+  background-color: #F8F8F8 !important;
+  background-image: linear-gradient(to right, #F8F8F8, #EEE) !important;
+  /* border-bottom-right-radius: 10px; */
+}
+.testCasesGroup {
+  border-left: 8px solid #F8F8F8 !important;
+  border-right: 8px solid #EEE !important;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.testCaseBottomBorder {
+  border-bottom: 10px solid !important;
+  border-image: linear-gradient(to right, #F8F8F8, #EEE);
+  border-image-slice: 1;
+}
+.addTestCaseButton {
+  margin:10px;
+}
 .pointsEnabled {
   width:100%;
   display:block;
@@ -229,10 +254,14 @@ body {
   border-image-slice: 1; */
 }
 .list-group {
-  border: 1px solid  #E5F4E9 !important;
+  /* border: 1px solid  #E5F4E9 !important; */
 }
 .list-group-item {
-  border: 1px solid #E5F4E9 !important;
+  border: 1px solid #F8F8F8 !important;
+  margin-bottom: 1px;
+  /* border-bottom: 1px solid #F8F8F8 !important; */
+  /* border-left: 5px !important; */
+
 }
 .formTestCase input, .input-group-text{
   height: 30px;
@@ -278,16 +307,85 @@ select {
 .pointsEnabledButtonGroup::after {
   position: absolute;
   margin-left: 68px;
-  margin-top: -36px;
+  margin-top: -37px;
   font-size: 20px;
   color: #409A56;
   content: attr(data-content);
 }
+.labelAlert {
+  display: inline-block;
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background-color: #E56A75;
+  border: 1px solid #C62231;
+}
 
-/* form {
-  margin-left: 15px;
-} */
+.alertBorder {
+  border: 1px solid #C62231;
+  padding: 2px;
+  padding-bottom: 4px;
+  margin: -3px;
+  margin-bottom: -5px;
+}
+.testCaseAlert {
+  display: block;
+  position: absolute;
+  margin-left: -12px;
+  margin-top: 7px;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background-color: #E56A75;
+  border: 1px solid #C62231;
+}
 
+.alertTestCaseBorder {
+  border: 1px solid #C62231 !important;
+  /* padding: 5px; */
+  /* padding-left: -30px !important; */
+  /* padding-bottom: 4px; */
+  /* margin: -1px !important; */
+  /* margin-bottom: -5px; */
+}
+.tg {
+  display: flex;
+  flex-direction: right;
+}
+.tgAlert {
+  flex-basis: 2%;
+}
+.tgInput {
+  flex-basis: 58%;
+}
+.tgArrow {
+  flex-basis: 10%;
+}
+#rightArrowSVG {
+  margin-top: 1px;
+  display: block;
+  margin: 0 auto;
+}
+#rightArrowPath{
+  fill:  #D4ECDA;
+}
+.tgOutput {
+  flex-basis: 30%;
+}
+.testCaseFlex {
+  padding-left: 0;
+}
+.AlertTooltip > .tooltip-inner{
+  color: white;
+  background-color: #E56A75;
+  font-weight:400;
+}
+.AlertTooltip > .arrow::before {
+  border-right-color: #E56A75;
+}
 
 /* CSS For Button created by Mauricio Allende */
 .tgl {
