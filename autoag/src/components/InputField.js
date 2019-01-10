@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import {
-  Form, Label, FormGroup, Input, Button
+  Form, Label, FormGroup, Input, Button, Collapse
 } from 'reactstrap';
 import FormTestCase from "./FormTestCase.js"
-//props:{formState:{pointsEnabled: Bool, tests:[{},{}]}, formHandler:Function}
+//props:{
+//  formState:{
+//    pointsEnabled: Bool,
+//    tests:[{},{}]
+//  },
+//  formHandler:Function,
+//  starterCode:String
+//}
 class InputField extends React.Component {
   render() {
     var testList = [];
@@ -18,7 +25,9 @@ class InputField extends React.Component {
     return (
       <Form>
         <FormPointsEnabled formHandler={this.props.formHandler}
-              pointsEnabled={this.props.formState.pointsEnabled}/>
+              pointsEnabled={this.props.formState.pointsEnabled} />
+        <FormStarterCode formHandler={this.props.formHandler}
+          starterCode={this.props.starterCode} />
         {testList}
         <Button name="addTest" onClick={this.props.formHandler}
           color="secondary" size="sm">Add Test</Button>
@@ -51,5 +60,45 @@ class FormPointsEnabled extends React.Component {
     )
   }
 }
+//props:{starterCode:String, formHandler:Function}
+class FormStarterCode extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.state = {
+      collapse: false
+    };
+  }
+  handleToggle(e) {
+    this.setState({ collapse: !this.state.collapse });
+  }
+  render() {
+    return (
+      <div class="starterCodeForm">
+        <Button className="starterCodeHeader" onClick={this.handleToggle}>
+          Starter Code
+        </Button>
+        <Collapse  isOpen={!this.state.collapse}>
+          <div>
+            <Form >
+              <FormGroup id="starterFormGroup">
+                <Label for="starterCodeTextarea">To be placed at the beginning of the homework file. </Label>
+                <Input type="textarea"
+                  value={this.props.starterCode}
+                  onChange={this.props.formHandler}
+                  name="starterCode"
+                  id="starterCodeTextarea"
+                  className="codeInput forPlaceHolder"
+                  placeholder="from math import *">
+                </Input>
+              </FormGroup>
+            </Form>
+          </div>
+        </Collapse>
 
+      </div>
+
+    )
+  }
+}
 export default InputField

@@ -65,6 +65,13 @@ body {
   background-color: #E5F4E9;
   color:rgba(0, 0, 0, 0.8);
 } */
+/* .githubNav {
+  margin-top: -1px;
+} */
+.starterCodeForm label{
+  color: #409A56 !important;
+}
+
 .navbar .nav-item .nav-link:not(.githubNav):hover {
   /* border: 0;
   border-left: 3px solid;
@@ -171,6 +178,9 @@ body {
 }
 .addTestCaseButton {
   margin:10px;
+  background-color: #F1F1F1 !important;
+  color : #495057 !important;
+  border-color: #F1F1F1 !important;
 }
 .pointsEnabled {
   width:100%;
@@ -224,6 +234,24 @@ body {
   border: 2px solid #E5F4E9 !important;
 
 }
+.starterCodeHeader {
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 45px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  font-size: 18px;
+}
+#starterFormGroup {
+  margin-bottom: 0;
+  background-color: #E5F4E9;
+  padding: 20px;
+  padding-top: 8px;
+  padding-bottom: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
 
 .formTestCase {
   margin-top: 15px;
@@ -243,7 +271,7 @@ body {
   color: #409A56;
   /* border-bottom: 2px solid #E5F4E9; */
 }
-.form-group {
+.formTestCase .form-group {
   margin-bottom: 15px;
   padding-bottom: 8px;
   padding-left: 4px;
@@ -265,6 +293,10 @@ body {
 }
 .formTestCase input, .input-group-text{
   height: 30px;
+
+}
+.testCasesGroup .input-group-text {
+  background-color:  #F1F1F1 !important;
 }
 .input-group-text{
   background-color:  #E5F4E9 !important;
@@ -300,7 +332,9 @@ select {
   width:100%;
   display:block;
   text-align: left;
-  padding: 10px 0 0 20px !important;
+  padding: 10px 0 0 10px !important;
+  /* background-color: #E5F4E9; */
+  margin-bottom: 5px;
   /* border: 1px solid #409A56; */
   /* font-size: 20px; */
 }
@@ -370,7 +404,8 @@ select {
   margin: 0 auto;
 }
 #rightArrowPath{
-  fill:  #D4ECDA;
+  /* fill:  #D4ECDA; */
+  fill: #DDD;
 }
 .tgOutput {
   flex-basis: 30%;

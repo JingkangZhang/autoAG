@@ -26,7 +26,8 @@ class App extends React.Component {
           createInitialTestData()
         ]
       },
-      formHandler: this.handleInputChange
+      formHandler: this.handleInputChange,
+      starterCode: ""
     };
   }
 
@@ -35,6 +36,9 @@ class App extends React.Component {
     switch(e.target.name) {
       case "pointsEnabled":
         newFormState["pointsEnabled"] = e.target.checked;
+        break;
+      case "starterCode":
+        newFormState["starterCode"] = e.target.value;
         break;
       case "addTest":
         newFormState["tests"].push(createInitialTestData());
@@ -71,6 +75,7 @@ class App extends React.Component {
         newFormState["tests"][e.target.dataset.testid]
             .testCases[e.target.dataset.testcaseid][1] = e.target.value;
         break;
+
       default:
     }
     this.setState({formState: newFormState});

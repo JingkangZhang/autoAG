@@ -67,40 +67,45 @@ function check(f) {
   var count = 1;
   var symbols = ["(", "[", "'", '"'];
   var stack = [];
+  var quoteOpen = false;
   for (var i = 0; i < f.length; i++) {
     var c = f.charAt(i);
     if (c==="'" || c==='"') {
-      if (stack.length != 0 && stack[stack.length] === c) {
-        stack.splice(stack.length, 1);
-      }
-      else{
+      if (stack.length != 0 && stack[stack.length-1] === c) {
+        stack.pop();
+        quoteOpen = false;
+      } else {
         stack.push(c);
+        quoteOpen = true;
       }
-    }
-    else if (c === "," && stack.length == 0) {
-      count += 1;
-    }
-    else if (c === "(" || c === "[") {
-      stack.push(c);
-    }
-    else if (c === ")") {
-      if (stack.length!=0 && stack[stack.length]==="(") {
-        stack.splice(stack.length, 1);
-      }
-      else {
-        return {count:count, error:true};
-      }
-    }
-    else if (c === "]") {
-      if (stack.length!=0 && stack[stack.length]==="[") {
-        stack.splice(stack.length, 1);
-      }
-      else {
-        return {count:count, error:true};
+    } else if (!quoteOpen) {
+      if (c === "," && stack.length == 0) {
+        count += 1;
+      } else if (c === "(" || c === "[") {
+        stack.push(c);
+      } else if (c === ")") {
+        if (stack.length!=0 && stack[stack.length-1]==="(") {
+          stack.pop();
+        } else {
+          return {count:count, error:true};
+        }
+      } else if (c === "]") {
+        if (stack.length!=0 && stack[stack.length-1]==="[") {
+          console.log("before splice");
+          console.log(stack);
+          stack.pop();
+          console.log("spliced, stack now:");
+          console.log(stack);
+        } else {
+          console.log("error here");
+          return {count:count, error:true};
+        }
       }
     }
   }
   if (stack.length != 0) {
+    console.log("ended, returning error here");
+    console.log(stack);
     return {count:count, error:true};
   }
   return {count:count, error:false};
