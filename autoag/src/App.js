@@ -1,6 +1,7 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import Split from 'react-split'
 import TopNav from './components/TopNav';
 import InputField from './components/InputField';
 import OutputField from './components/OutputField';
