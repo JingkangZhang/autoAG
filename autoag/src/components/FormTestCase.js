@@ -52,10 +52,14 @@ class FormTestCase extends React.Component {
     return (
       <div className={this.props.className}>
       <Button className="testHeader" onClick={this.handleToggle}>
-        {this.props.testData.advancedSetting.testName==="" ?
-          this.props.testData.functionName
+        {"Q" + (this.props.testIndex + 1) + " : "}
+        {this.props.testData.advancedSetting.testName!=="" ?
+          this.props.testData.advancedSetting.testName
           :
-          this.props.testData.testName
+          this.props.testData.functionName==="" ?
+            "Untitled"
+            :
+            this.props.testData.functionName
         }
       </Button>
       <Collapse  isOpen={!this.state.collapse}>

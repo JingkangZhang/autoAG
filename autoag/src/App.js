@@ -89,15 +89,11 @@ class App extends React.Component {
         <Split
           className="split"
           sizes={[60, 40]}
-          minSize={[480, 300]}
+          minSize={[300, 200]}
           >
-          <div >
             <InputField formState={this.state.formState}
                 formHandler={this.handleInputChange}/>
-          </div>
-          <div>
             <OutputField formState={this.state.formState}/>
-          </div>
         </Split>
       </div>
     );

@@ -262,7 +262,7 @@ body {
   padding: 5px;
   padding-left: 10px;
   border: 0;
-  border-left: 5px solid #E5F4E9;
+  border-left: 20px solid #E5F4E9;
   border-image: linear-gradient(to bottom, #E5F4E9 , #D4ECE6, #D4E7EC, #D4DAEC,#D9D4EC,#E6D4EC,#ECD4E6,#ECD4DA,#ECDAD4,#ECE6D4,#E6ECD4,#DAECD4);
   border-image-slice: 1;
   /* padding-top: 0; */
@@ -481,6 +481,8 @@ select {
 }
 /* split */
 .split {
+  margin-left: 2%;
+  margin-right: 2%;
   display: flex;
   flex-direction: row;
 }
