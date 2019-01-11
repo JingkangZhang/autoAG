@@ -16,7 +16,6 @@ class FormDescription extends React.Component {
           <Input type="textarea" name="formDescription" spellcheck="false"
           id="formDescription"
           onChange={this.props.formHandler}
-          // onFocus={e => e.target.select()}
           className="forPlaceHolder codeInput"
           data-testid={this.props.testIndex}
           placeholder="Return the Nth fibonacci number."

@@ -8,10 +8,10 @@ import {
   UncontrolledTooltip
 } from 'reactstrap';
 //props:{formHandler:Function, testIndex:Int, testType:String}
-class FormTestCaseTestType extends React.Component {
+class FormTestType extends React.Component {
   render() {
     return (
-      <FormGroup>
+      <FormGroup className="advancedSettingItem">
         <Label for="testType">Test Type:</Label>
         <Input type="select" name="testType"
             onChange={this.props.formHandler}
@@ -24,4 +24,4 @@ class FormTestCaseTestType extends React.Component {
     )
   }
 }
-export default FormTestCaseTestType;
+export default FormTestType;

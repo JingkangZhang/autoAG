@@ -82,6 +82,7 @@ class FormTestCase extends React.Component {
           <FormAdvancedSetting formHandler={this.props.formHandler}
             testIndex={this.props.testIndex}
             pointsEnabled={this.props.pointsEnabled}
+            functionName={this.props.testData.functionName}
             advancedSetting={this.props.testData.advancedSetting} />
         </div>
       </Collapse>

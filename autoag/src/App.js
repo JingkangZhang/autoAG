@@ -75,7 +75,18 @@ class App extends React.Component {
         newFormState["tests"][e.target.dataset.testid]
             .testCases[e.target.dataset.testcaseid][1] = e.target.value;
         break;
-
+      case "testName":
+        newFormState["tests"][e.target.dataset.testid]
+            .advancedSetting.testName = e.target.value;
+        break;
+      case "partialCredits":
+        newFormState["tests"][e.target.dataset.testid]
+            .advancedSetting.partialCredits = e.target.value;
+        break;
+      case "skeletonCode":
+        newFormState["tests"][e.target.dataset.testid]
+            .advancedSetting.skeletonCode = e.target.value;
+        break;
       default:
     }
     this.setState({formState: newFormState});
@@ -110,7 +121,7 @@ function createInitialTestData() {
       testType: "simple",
       testName: "",
       partialCredits: "none",
-      skeletonCode: "\"*** YOUR CODE HERE ***\"",
+      skeletonCode: "'*** YOUR CODE HERE ***'",
       testForDisallowedUse: [],
     }
   };

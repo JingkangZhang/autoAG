@@ -34,7 +34,6 @@ class FormFunctionName extends React.Component {
             {alertbox}
           </Label>
           <Input type="text" name="functionName" spellcheck="false"
-            // onFocus={e => e.target.select()}
             className="forPlaceHolder codeInput"
             placeholder="Fibonacci"
             onChange={this.props.formHandler}

@@ -27,7 +27,7 @@ class FormFullScore extends React.Component {
       alertClassName="alertBorder";
     }
     return (
-      <FormGroup>
+      <FormGroup className="advancedSettingItem">
         <div className={alertClassName}>
           <Label for="fullScore">
             <span>Full Score:</span>
