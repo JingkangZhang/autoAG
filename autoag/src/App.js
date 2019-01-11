@@ -19,7 +19,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
-
     this.state = {
       formState:{
         pointsEnabled: false,
@@ -87,11 +86,14 @@ class App extends React.Component {
         newFormState["tests"][e.target.dataset.testid]
             .advancedSetting.skeletonCode = e.target.value;
         break;
+      case "disallowedUse":
+        newFormState["tests"][e.target.dataset.testid]
+            .advancedSetting.disallowedUse = e.target.value;
+        break;
       default:
     }
     this.setState({formState: newFormState});
   }
-
   render() {
     // const topNav = <TopNav />;
     return (
@@ -122,7 +124,7 @@ function createInitialTestData() {
       testName: "",
       partialCredits: "none",
       skeletonCode: "'*** YOUR CODE HERE ***'",
-      testForDisallowedUse: [],
+      disallowedUse: "",
     }
   };
 }

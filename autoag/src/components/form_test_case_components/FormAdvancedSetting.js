@@ -12,6 +12,7 @@ import FormTestType from './FormTestType';
 import FormTestName from './FormTestName';
 import FormPartialCredits from './FormPartialCredits';
 import FormSkeletonCode from './FormSkeletonCode';
+import FormDisallowedUse from './FormDisallowedUse';
 
 //props:{
 //  formHandler:Function,
@@ -24,7 +25,7 @@ import FormSkeletonCode from './FormSkeletonCode';
 //    testName: "",
 //    partialCredits: "none",
 //    skeletonCode: "",
-//    testForDisallowedUse: [],
+//    testForDisallowedUse: String,
 //  }
 //}
 class FormAdvancedSetting extends React.Component {
@@ -73,6 +74,10 @@ class FormAdvancedSetting extends React.Component {
               formHandler={this.props.formHandler}
               testIndex={this.props.testIndex}
               skeletonCode={this.props.advancedSetting.skeletonCode} />
+            <FormDisallowedUse
+              formHandler={this.props.formHandler}
+              testIndex={this.props.testIndex}
+              disallowedUse={this.props.advancedSetting.disallowedUse} />
             <div class="advancedSettingBottomBorder"></div>
           </div>
 

@@ -67,7 +67,7 @@ class FormStarterCode extends React.Component {
     super(props);
     this.handleToggle = this.handleToggle.bind(this);
     this.state = {
-      collapse: false
+      collapse: true
     };
   }
   handleToggle(e) {

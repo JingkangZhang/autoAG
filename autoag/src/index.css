@@ -254,7 +254,7 @@ body {
   border-image-slice: 1;
 }
 .advancedSettingItem {
-  padding: 10px;
+  padding: 4px;
   margin-left: 5px;
   border-left: 5px solid #DDD !important;
 
@@ -464,6 +464,20 @@ select {
   border-right-color: #E56A75;
 }
 
+.disallowedUseModalLauncher {
+  float: right;
+  margin-left: 30px;
+  margin-top: -1px;
+  width: 28px;
+  height: 28px;
+  color: #409A56;
+  text-align: center;
+  padding-bottom: 5px;
+  background-color: #E5F4E9;
+  border: 1px solid #409A56;
+  border-radius: 14px;
+  font-weight: bold;
+}
 /* CSS For Button created by Mauricio Allende */
 .tgl {
   display: none;
