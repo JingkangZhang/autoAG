@@ -53,10 +53,18 @@ class TopNav extends React.PureComponent {
       <div>
         <Navbar className="topNav" color="light" light expand="sm">
 
-          <NavbarBrand id="autoAGBrand">autoAG</NavbarBrand>
+          <NavbarBrand id="autoAGBrand">
+            autoAG
+          </NavbarBrand>
           <UncontrolledTooltip placement="right" trigger="hover"
             target="autoAGBrand" delay="{show:0, hide:0}" arrowClassName="CalTooltipArrow" className="CalTooltip">
             Much Love For Cal!
+          </UncontrolledTooltip>
+
+          <span id="navbarPython">Python</span>
+          <UncontrolledTooltip placement="bottom" trigger="hover"
+            target="navbarPython" >
+            Currently only available in Python. More languange support coming soon.
           </UncontrolledTooltip>
 
           <NavbarToggler onClick={this.toggleNav} />
@@ -75,7 +83,7 @@ class TopNav extends React.PureComponent {
                 </ModalFooter>
               </Modal>
               <NavItem>
-                <NavLink onClick={this.toggleImportPopover}>Import</NavLink>
+                <NavLink onClick={this.toggleImportPopover}>Open</NavLink>
               </NavItem>
 
               <Modal isOpen={this.state.importPopoverOpen} toggle={this.toggleImportPopover}>
