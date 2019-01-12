@@ -18,7 +18,6 @@ class InputField extends React.Component {
       testList.push(
         <FormTestCase testData={this.props.formState.tests[i]}
           testIndex={i}
-          className="formTestCase"
           pointsEnabled={this.props.formState.pointsEnabled}
           formHandler={this.props.formHandler}/>
       )

@@ -41,16 +41,38 @@ class FormTestCase extends React.Component {
   constructor(props) {
     super(props);
     this.handleToggle = this.handleToggle.bind(this);
+    this.onExiting = this.onExiting.bind(this);
+    this.onExited = this.onExited.bind(this);
     this.state = {
-      collapse: false
+      collapse: false,
+      numErrors: 0,
+      status: 'Closed'
     };
   }
   handleToggle(e) {
     this.setState({ collapse: !this.state.collapse });
   }
+  onExiting() {
+   this.setState({ status: 'Closing...' });
+  }
+  onExited() {
+    this.setState({ status: 'Closed' });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    var currNumErrors =
+      document.querySelectorAll(
+        "#" + "formTestCase"+ this.props.testIndex + ' .alertBorder').length +
+      document.querySelectorAll(
+        "#" + "formTestCase"+ this.props.testIndex + ' .alertTestCaseBorder').length;
+
+    if (prevState.numErrors !== currNumErrors) {
+      this.setState({numErrors: currNumErrors});
+    }
+  }
   render() {
     return (
-      <div className={this.props.className}>
+      <div class="formTestCase"
+        id={"formTestCase"+ this.props.testIndex}>
       <Button className="testHeader" onClick={this.handleToggle}>
         {"Q" + (this.props.testIndex + 1) + " : "}
         {this.props.testData.advancedSetting.testName!=="" ?
@@ -61,8 +83,17 @@ class FormTestCase extends React.Component {
             :
             this.props.testData.functionName
         }
+
+        {this.state.numErrors !== 0 && this.state.collapse && this.state.status === 'Closed'?
+          <Badge className="numErrorBadge" color="danger" pill>{this.state.numErrors}</Badge>
+          :
+          ""
+        }
+
       </Button>
-      <Collapse  isOpen={!this.state.collapse}>
+      <Collapse  isOpen={!this.state.collapse}
+        onExiting={this.onExiting}
+        onExited={this.onExited}>
         <div className="testCaseBody">
           <FormFunctionName formHandler={this.props.formHandler}
             testIndex={this.props.testIndex}

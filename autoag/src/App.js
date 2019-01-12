@@ -95,7 +95,6 @@ class App extends React.Component {
     this.setState({formState: newFormState});
   }
   render() {
-    // const topNav = <TopNav />;
     return (
       <div>
         <TopNav />
@@ -125,13 +124,6 @@ function createInitialTestData() {
       partialCredits: "none",
       skeletonCode: "'*** YOUR CODE HERE ***'",
       disallowedUse: "",
-    },
-    errorAlerts: {
-      functionName:"",
-      functionParams:"",
-      testCases: ["",""],
-      fullScore: "",
-      disallowedUse: ""
     }
   };
 }

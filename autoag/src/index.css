@@ -326,7 +326,11 @@ body {
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
 }
-
+.numErrorBadge {
+  margin-left: 10px;
+  background-color: #E56A75 !important;
+  top: -2px !important;
+}
 .list-group {
   /* border: 1px solid  #E5F4E9 !important; */
 }

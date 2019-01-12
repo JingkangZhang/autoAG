@@ -14,12 +14,31 @@ class FormTestCases extends React.Component {
   constructor(props) {
     super(props);
     this.handleToggle = this.handleToggle.bind(this);
+    this.onExiting = this.onExiting.bind(this);
+    this.onExited = this.onExited.bind(this);
     this.state = {
-      collapse: false
+      collapse: false,
+      numErrors: 0,
+      status: 'Opened'
     };
   }
   handleToggle(e) {
     this.setState({ collapse: !this.state.collapse });
+  }
+  onExiting() {
+   this.setState({ status: 'Closing...' });
+  }
+  onExited() {
+    this.setState({ status: 'Closed' });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    var currNumErrors =
+      document.querySelectorAll(
+        "#" + "formTestCase"+ this.props.testIndex + ' .alertTestCaseBorder').length;
+
+    if (prevState.numErrors !== currNumErrors) {
+      this.setState({numErrors: currNumErrors});
+    }
   }
   render() {
     var testCases = [];
@@ -39,8 +58,15 @@ class FormTestCases extends React.Component {
               color="dark"
               onClick={this.handleToggle}>
           Test Cases
+          {this.state.numErrors !== 0 && this.state.collapse && this.state.status === 'Closed'?
+            <Badge className="numErrorBadge" color="danger" pill>{this.state.numErrors}</Badge>
+            :
+            ""
+          }
         </Button>
-        <Collapse  isOpen={!this.state.collapse}>
+        <Collapse  isOpen={!this.state.collapse}
+          onExiting={this.onExiting}
+          onExited={this.onExited}>
           <div class="testCasesGroup">
             {testCases}
             <Button name="addTestCase"
