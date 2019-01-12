@@ -125,6 +125,13 @@ function createInitialTestData() {
       partialCredits: "none",
       skeletonCode: "'*** YOUR CODE HERE ***'",
       disallowedUse: "",
+    },
+    errorAlerts: {
+      functionName:"",
+      functionParams:"",
+      testCases: ["",""],
+      fullScore: "",
+      disallowedUse: ""
     }
   };
 }

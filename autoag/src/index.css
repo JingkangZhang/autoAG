@@ -353,7 +353,7 @@ body {
 }
 input {
   border: 0 !important;
-  color: black !important;
+  /* color: black !important; */
   border-radius: 0 !important;
   border-bottom: 1px solid !important;
   border-color: #E5F4E9 !important;
@@ -374,7 +374,7 @@ select {
   /* -webkit-appearance:none; */
 }
 .form-control {
-  color: black;
+  /* color: black; */
 }
 .pointsEnabledGroup {
   margin-top: 15px;
