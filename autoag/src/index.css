@@ -200,6 +200,7 @@ body {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
 .testCaseBottomBorder {
   border-bottom: 10px solid !important;
   border-image: linear-gradient(to right, #F8F8F8, #EEE);
@@ -335,7 +336,6 @@ body {
 }
 .formTestCase input, .input-group-text{
   height: 30px;
-
 }
 .testCasesGroup .input-group-text {
   background-color:  #F1F1F1 !important;
@@ -343,6 +343,10 @@ body {
 .input-group-text{
   background-color:  #E5F4E9 !important;
   border:0 !important;
+}
+.input-group-prepend {
+  border-left: 10px solid #F1F1F1;
+  border-radius: 15px;
 }
 input {
   border: 0 !important;
