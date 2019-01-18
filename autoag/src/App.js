@@ -90,6 +90,39 @@ class App extends React.Component {
         newFormState["tests"][e.target.dataset.testid]
             .advancedSetting.disallowedUse = e.target.value;
         break;
+      case "headerButtonUp":
+        e.stopPropagation();
+        if (e.target.dataset.testid != 0) {
+          var temp = newFormState["tests"][e.target.dataset.testid];
+          newFormState["tests"][e.target.dataset.testid] =
+            newFormState["tests"][e.target.dataset.testid - 1];
+          newFormState["tests"][e.target.dataset.testid - 1] = temp;
+        }
+        break;
+      case "headerButtonDown":
+        e.stopPropagation();
+        if (e.target.dataset.testid != (newFormState["tests"].length - 1)) {
+          var temp = newFormState["tests"][e.target.dataset.testid];
+          newFormState["tests"][e.target.dataset.testid] =
+            newFormState["tests"][parseInt(e.target.dataset.testid) + 1];
+          newFormState["tests"][parseInt(e.target.dataset.testid) + 1] = temp;
+        //   console.log(newFormState["tests"][e.target.dataset.testid + 1]);
+        }
+        break;
+      case "headerButtonDelete":
+        e.stopPropagation();
+        newFormState["tests"].splice([e.target.dataset.testid],1);
+        break;
+      case "headerButtonDuplicate":
+        e.stopPropagation();
+        newFormState["tests"].splice(
+          parseInt(e.target.dataset.testid) + 1,
+          0,
+          JSON.parse(JSON.stringify(
+            newFormState["tests"][e.target.dataset.testid]
+          ))
+        );
+        break;
       default:
     }
     this.setState({formState: newFormState});

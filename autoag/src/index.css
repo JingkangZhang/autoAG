@@ -141,6 +141,11 @@ body {
 .formTestCase {
   margin-top: 15px;
   margin-bottom: 15px;
+  opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 2s;
 }
 .testCaseBody {
   padding: 5px;
@@ -180,7 +185,10 @@ body {
   height: 38px;
   /* border-bottom-right-radius: 10px; */
 }
-
+.headerButtonGroup {
+  float: right;
+  z-index: 200;
+}
 .testCaseHeader {
   width:100%;
   display:block;
