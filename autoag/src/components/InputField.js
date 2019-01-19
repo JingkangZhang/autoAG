@@ -27,7 +27,7 @@ class InputField extends React.Component {
         <FormPointsEnabled formHandler={this.props.formHandler}
               pointsEnabled={this.props.formState.pointsEnabled} />
         <FormStarterCode formHandler={this.props.formHandler}
-          starterCode={this.props.starterCode} />
+          starterCode={this.props.formState.starterCode} />
         {testList}
         <Button name="addTest" onClick={this.props.formHandler}
           color="secondary" size="sm">Add Test</Button>
