@@ -28,11 +28,30 @@ class App extends React.Component {
         ]
       },
     };
+    // this.state = {"pointsEnabled":true,"starterCode":"from math import *","tests":[{"functionName":"multiply_loop","functionParams":"a, b","description":"Return `a` multiplied with `b`. Please use a loop with \"+\". Do not use \"*\" or recursion.","testCases":[["1, 1","1"],["1, 2","2"],["2, 2","4"],["2, 3 ","6"],["9,9 ","81"],["100, 100","10000"],["5, 6","30"],["8, 9","72"],["9, 8","72"],["3, 6","18"],["5, 8","40"]],"advancedSetting":{"fullScore":"1","testType":"simple","testName":"","partialCredits":"none","skeletonCode":"'*** YOUR CODE HERE ***'","disallowedUse":"\"Recursion\", \"Mult\""}},{"functionName":"multiply_recursion","functionParams":"a, b","description":"Return `a` multiplied with `b`. Please use recursion with \"+\". Do not use \"*\" or any form of loops.","testCases":[["1, 1","1"],["1, 2","2"],["2, 2","4"],["2, 3 ","6"],["9,9 ","81"],["100, 100","10000"],["5, 6","30"],["8, 9","72"],["9, 8","72"],["3, 6","18"],["5, 8","40"]],"advancedSetting":{"fullScore":"1","testType":"simple","testName":"","partialCredits":"none","skeletonCode":"'*** YOUR CODE HERE ***'","disallowedUse":"\"While\", \"For\""}},{"functionName":"","functionParams":"","description":"","testCases":[["",""]],"advancedSetting":{"fullScore":"1","testType":"simple","testName":"","partialCredits":"none","skeletonCode":"'*** YOUR CODE HERE ***'","disallowedUse":""}}]};
   }
 
   handleInputChange(e) {
     var newFormState = this.state.formState;
     switch(e.target.name) {
+      case "save":
+        download(
+          JSON.stringify(this.state.formState),
+          new Date().toLocaleString().
+            replace(", ", "_").replace(" ", "_")
+              + ".autoAG", 'text/plain'
+        );
+        // console.log(JSON.stringify(this.state.formState));
+        // console.log(JSON.parse(JSON.stringify(this.state.formState)));
+        break;
+      case "import":
+        const inputElement = document.getElementById("importFile");
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          this.setState({formState: JSON.parse(event.target.result)});
+        } // desired file content
+        reader.readAsText(inputElement.files[0]) // you could also read images and other binaries
+        break;
       case "pointsEnabled":
         newFormState["pointsEnabled"] = e.target.checked;
         break;
@@ -124,13 +143,17 @@ class App extends React.Component {
         );
         break;
       default:
+        console.log("Should go here, exiting...");
+        return;
     }
     this.setState({formState: newFormState});
   }
   render() {
     return (
       <div>
-        <TopNav />
+        <TopNav
+          formHandler={this.handleInputChange}
+          />
         <Split
           className="split"
           sizes={[60, 40]}
@@ -160,6 +183,23 @@ function createInitialTestData() {
     }
   };
 }
-
+// Function to download data to a file
+function download(data, filename, type) {
+    var file = new Blob([data], {type: type});
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
 
 export default App;
