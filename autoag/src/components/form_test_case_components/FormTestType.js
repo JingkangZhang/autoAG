@@ -18,7 +18,7 @@ class FormTestType extends React.Component {
             data-testid={this.props.testIndex}
             value={this.props.testType} >
           <option value="simple">simple function</option>
-          <option value="unit">unit test</option>
+          <option value="unit">unit test (coming soon)</option>
         </Input>
       </FormGroup>
     )

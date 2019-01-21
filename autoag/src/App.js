@@ -11,10 +11,9 @@ import {
 } from 'reactstrap';
 
 // if (process.env.NODE_ENV !== 'production') {
-  // const {whyDidYouUpdate} = require('why-did-you-update');
-  // whyDidYouUpdate(React);
+//   const {whyDidYouUpdate} = require('why-did-you-update');
+//   whyDidYouUpdate(React);
 // }
-
 class App extends React.Component {
   constructor(props) {
     super(props);

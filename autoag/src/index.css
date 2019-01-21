@@ -141,11 +141,13 @@ body {
 .formTestCase {
   margin-top: 15px;
   margin-bottom: 15px;
-  opacity: 1;
+  /* opacity: 1;
 	animation-name: fadeInOpacity;
 	animation-iteration-count: 1;
 	animation-timing-function: ease-in;
-	animation-duration: 2s;
+	animation-duration: 2s; */
+
+  transition: all 0.5s ease-out;
 }
 .testCaseBody {
   padding: 5px;
@@ -561,15 +563,37 @@ select {
   flex-direction: row;
 }
 .gutter {
-    background-color: #eee;
+    background-color: #E5F4E9 ;
+    margin-left: 10px;
+    margin-right: 10px;
     /* background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII='); */
-    background-image: linear-gradient(to bottom, #FFF,#FCFCFC, #EEE,#FCFCFC, #FFF);
-    /* border-image-slice: 1; */
+    /* background-image: linear-gradient(to bottom, #FFF,#FCFCFC, #EEE,#FCFCFC, #FFF);
     background-repeat: no-repeat;
-    background-position: 50%;
+    background-position: 50%; */
 }
 
 .gutter.gutter-horizontal {
     /* background-image: url('grips/vertical.png'); */
     cursor: col-resize;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  color: #409A56;
+  background-color: #E5F4E9;
+  border: 1px solid #E5F4E9;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.nav-tabs .nav-link {
+  color: #409A56 !important;
+  /* background-color: white; */
+}
+.nav-tabs .nav-link:hover {
+  border:1px solid #E5F4E9;
+  border-radius: 10px 10px 0 0;
+}
+.tab-content {
+  /* height: 100%; */
+  border: 10px solid #E5F4E9;
 }
