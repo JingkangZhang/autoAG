@@ -130,8 +130,8 @@ class FormTestCaseInner extends React.Component {
         </span>;
       alertClassName="alertTestCaseBorder";
     }
-    var shouldDisableInput = validationResult.starPresents === false &&
-        validationResult.numEqSigns === 0 && validationResult.numRegular === 0;
+    // var shouldDisableInput = validationResult.starPresents === false &&
+    //     validationResult.numEqSigns === 0 && validationResult.numRegular === 0;
     return(
       <ListGroupItem className={alertClassName}>
         <div class="tg">
@@ -147,7 +147,7 @@ class FormTestCaseInner extends React.Component {
                      data-testid={this.props.testIndex}
                      data-testcaseid={this.props.testCaseIndex}
                      onChange={this.props.formHandler}
-                     value={this.props.testCaseData[0]}/>
+                     value={this.props.testCaseData[0]} />
               <InputGroupAddon addonType="append">
                 <InputGroupText >)</InputGroupText>
               </InputGroupAddon>
@@ -168,6 +168,15 @@ class FormTestCaseInner extends React.Component {
                    onChange={this.props.formHandler}
                    value={this.props.testCaseData[1]}/>
           </span>
+          <button
+            class="testCaseDelete"
+            name="testCaseDelete"
+            data-testid={this.props.testIndex}
+            data-testcaseid={this.props.testCaseIndex}
+            onClick={this.props.formHandler}
+            >
+
+          </button>
         </div>
       </ListGroupItem>
     )

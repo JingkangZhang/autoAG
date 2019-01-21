@@ -129,7 +129,7 @@ class App extends React.Component {
         break;
       case "headerButtonDelete":
         e.stopPropagation();
-        newFormState["tests"].splice([e.target.dataset.testid],1);
+        newFormState["tests"].splice(e.target.dataset.testid,1);
         break;
       case "headerButtonDuplicate":
         e.stopPropagation();
@@ -139,6 +139,13 @@ class App extends React.Component {
           JSON.parse(JSON.stringify(
             newFormState["tests"][e.target.dataset.testid]
           ))
+        );
+        break;
+      case "testCaseDelete":
+      e.preventDefault();
+        newFormState["tests"][e.target.dataset.testid].testCases.splice(
+          e.target.dataset.testcaseid,
+          1
         );
         break;
       default:
