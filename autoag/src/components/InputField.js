@@ -30,7 +30,7 @@ class InputField extends React.Component {
           starterCode={this.props.formState.starterCode} />
         {testList}
         <Button name="addTest" onClick={this.props.formHandler}
-          color="secondary" size="sm">Add Test</Button>
+          color="secondary" size="sm">Add Question</Button>
       </Form>
     )
   }
