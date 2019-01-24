@@ -14,8 +14,8 @@ function generateHomeworkText(FORM_STATE) {
     //comments
     ret += "# Q" + (i + 1) + ": ";
     var testName =
-      currTest.advancedSetting.testName !== "" ?
-        currTest.advancedSetting.testName
+      currTest.advancedSetting.testName.replace(/\s/g, '') !== "" ?
+        currTest.advancedSetting.testName.replace(/\s/g, '')
         :
         currTest.functionName;
     ret += testName;

@@ -75,8 +75,8 @@ class FormTestCase extends React.Component {
         id={"formTestCase"+ this.props.testIndex}>
       <Button className="testHeader" onClick={this.handleToggle}>
         {"Q" + (this.props.testIndex + 1) + " : "}
-        {this.props.testData.advancedSetting.testName!=="" ?
-          this.props.testData.advancedSetting.testName
+        {this.props.testData.advancedSetting.testName.replace(/\s/g, '')!=="" ?
+          this.props.testData.advancedSetting.testName.replace(/\s/g, '')
           :
           this.props.testData.functionName==="" ?
             "Untitled"
