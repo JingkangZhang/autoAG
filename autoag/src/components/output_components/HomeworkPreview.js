@@ -26,7 +26,7 @@ class HomeworkPreview extends React.Component {
   render() {
     let text = generateHomeworkText(this.props.formState);
     return (
-      <Highlight className="python">
+      <Highlight className={"python " + this.props.className}>
         {text}
       </Highlight>
     )

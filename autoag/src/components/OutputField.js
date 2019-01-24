@@ -28,7 +28,8 @@ class OutputField extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div class="gcd">
+        <div class="outputField">
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -47,11 +48,13 @@ class OutputField extends React.Component {
             </NavLink>
           </NavItem>
         </Nav>
-        <TabContent activeTab={this.state.activeTab}>
+        <TabContent
+          activeTab={this.state.activeTab}>
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
                 <HomeworkPreview
+                  className="homeworkPreview"
                   formState={this.props.formState}
                   />
               </Col>
@@ -68,6 +71,7 @@ class OutputField extends React.Component {
             </Row>
           </TabPane>
         </TabContent>
+      </div>
       </div>
     );
   }

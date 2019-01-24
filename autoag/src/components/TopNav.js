@@ -51,8 +51,8 @@ class TopNav extends React.PureComponent {
   }
   render() {
     return (
-      <div>
-        <Navbar className="topNav" color="light" light expand="sm">
+
+      <Navbar className="topNav" color="light" light expand="sm">
 
           <NavbarBrand id="autoAGBrand">
             autoAG
@@ -119,7 +119,7 @@ class TopNav extends React.PureComponent {
             </Nav>
           </Collapse>
         </Navbar>
-      </div>
+
     );
   }
 }

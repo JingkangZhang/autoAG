@@ -19,7 +19,7 @@ class FormPartialCredits extends React.Component {
             data-testid={this.props.testIndex}
             value={this.props.partialCredits} >
           <option value="none">none</option>
-          <option value="linear">linear</option>
+          <option value="linear">linear (coming soon)</option>
         </Input>
       </FormGroup>
     )

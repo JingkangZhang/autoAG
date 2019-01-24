@@ -41,8 +41,8 @@ function generateHomeworkText(FORM_STATE) {
     for (var j = 0; j < currTest.testCases.length; j++) {
       if (j < MAX) {
         var currCase = currTest.testCases[j];
-        console.log(j);
-        console.log(currTest.testCases.length);
+        // console.log(j);
+        // console.log(currTest.testCases.length);
         lv1Indent += ">>> " + currTest.functionName + "(" + currCase[0] + ")" + "\n";
         lv1Indent += currCase[1] + "\n";
       }

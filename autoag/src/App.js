@@ -167,7 +167,9 @@ class App extends React.Component {
           >
             <InputField formState={this.state.formState}
                 formHandler={this.handleInputChange}/>
-            <OutputField formState={this.state.formState}/>
+            <OutputField
+              className="outputField"
+              formState={this.state.formState}/>
         </Split>
       </div>
     );

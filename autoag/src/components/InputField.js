@@ -23,7 +23,7 @@ class InputField extends React.Component {
       )
     }
     return (
-      <Form>
+      <Form className="InputField">
         <FormPointsEnabled formHandler={this.props.formHandler}
               pointsEnabled={this.props.formState.pointsEnabled} />
         <FormStarterCode formHandler={this.props.formHandler}
