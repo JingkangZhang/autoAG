@@ -5,6 +5,10 @@ import Split from 'react-split'
 import TopNav from './components/TopNav';
 import InputField from './components/InputField';
 import OutputField from './components/OutputField';
+import JSZip from 'jszip';
+import FileSaver from 'file-saver';
+import {generateHomeworkText} from './components/generateHomeworkText.js';
+import {generateTest} from './components/generateTest.js';
 
 import {
   Container, Row, Col,
@@ -36,7 +40,7 @@ class App extends React.Component {
       case "save":
         download(
           JSON.stringify(this.state.formState),
-          new Date().toLocaleString().
+          "MySession_at_" + new Date().toLocaleString().
             replace(", ", "_").replace(" ", "_")
               + ".autoAG", 'text/plain'
         );
@@ -50,6 +54,13 @@ class App extends React.Component {
           this.setState({formState: JSON.parse(event.target.result)});
         } // desired file content
         reader.readAsText(inputElement.files[0]) // you could also read images and other binaries
+        break;
+      case "export":
+        let zip = new JSZip();
+        zip.folder("homework").file("homework.py", generateHomeworkText(this.state.formState)).file("test", generateTest(this.state.formState));
+        zip.generateAsync({type: "blob"}).then(function(content) {
+          FileSaver.saveAs(content, "homework.zip");
+        });
         break;
       case "pointsEnabled":
         newFormState["pointsEnabled"] = e.target.checked;
@@ -209,5 +220,7 @@ function download(data, filename, type) {
         }, 0);
     }
 }
+
+
 
 export default App;

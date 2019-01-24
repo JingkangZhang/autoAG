@@ -171,10 +171,6 @@ class ExclusionChecker(NodeVisitor):
         self.visit(p)
         return self._errs == 0
 
-d = eval("{\"pointsEnabled\":true,\"starterCode\":\"#Just demo for what \\\"starter code\\\" section can do. \\n#Not really used in this homework.\\nfrom math import * \",\"tests\":[{\"functionName\":\"multiply_loop\",\"functionParams\":\"a, b\",\"description\":\"Return `a` multiplied with `b`. \\nPlease use a loop with the \\\"+\\\" \\noperator. Do not use \\\"recursion\\\".\",\"testCases\":[[\"1, 0\",\"0\"],[\"1, 2\",\"2\"],[\"2, 2\",\"4\"],[\"2, 3\",\"6\"],[\"9, 9 \",\"81\"],[\"100, 100\",\"10000\"],[\"5, 6\",\"30\"],[\"8, 9\",\"72\"],[\"9, 8\",\"72\"],[\"3, 6\",\"18\"],[\"5, 8\",\"40\"]],\"advancedSetting\":{\"fullScore\":\"1\",\"testType\":\"simple\",\"testName\":\"\",\"partialCredits\":\"none\",\"skeletonCode\":\"\'*** YOUR CODE HERE ***\'\",\"disallowedUse\":\"\\\"Recursion\\\", \\\"Mult\\\"\"}},{\"functionName\":\"multiply_recursion\",\"functionParams\":\"a, b\",\"description\":\"Return `a` multiplied with `b`. \\nPlease use recursion with the \\n\\\"+\\\" operator. Do not use \\\"*\\\" or\\n any form of loops.\",\"testCases\":[[\"1, 1\",\"1\"],[\"1, 2\",\"2\"],[\"2, 2\",\"4\"],[\"2, 3 \",\"6\"],[\"9,9 \",\"81\"],[\"100, 100\",\"10000\"],[\"5, 6\",\"30\"],[\"8, 9\",\"72\"],[\"9, 8\",\"72\"],[\"3, 6\",\"18\"],[\"5, 8\",\"40\"]],\"advancedSetting\":{\"fullScore\":\"1\",\"testType\":\"simple\",\"testName\":\"test2\",\"partialCredits\":\"none\",\"skeletonCode\":\"\'*** YOUR CODE HERE ***\'\",\"disallowedUse\":\"\\\"While\\\", \\\"For\\\"\"}}]}".replace("true", "True"))
-POINTS_ENABLED = d["pointsEnabled"]
-# STARTER_CODE = d["starterCode"]
-TESTS = d["tests"]
 
 from homework import *
 import sys
@@ -189,7 +185,7 @@ class Test:
 
     def test(self):
         print("---------------------------------------------------------------------\n")
-        print("Testing {}() :\n".format(self.question['functionName'] if self.question['advancedSetting']['testName'].strip() == "" else self.question['advancedSetting']['testName']))
+        print("Testing {}:\n".format(self.question['functionName'] if self.question['advancedSetting']['testName'].strip() == "" else self.question['advancedSetting']['testName']))
 
         for testCase in self.question['testCases']:
             if not self.test_one_pair(testCase):
@@ -241,8 +237,8 @@ questionD = {question['functionName']
     for question in d["tests"]
     }
 if len(sys.argv) > 1:
-    assert sys.argv[1] in questionD, "\nThe command line argument you passed in is not a valid function name; choose from {}\n".format(questionD.keys())
+    assert sys.argv[1] in questionD, "\nThe command line argument you passed in is not a valid function name; choose from {}\n".format(list(questionD.keys()).__repr__())
     questionD[sys.argv[1]].test()
-else:
+elif d["pointsEnabled"]:
     print("Total score: " + str(sum([t.test()[1] for t in questionD.values()])))
 print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
