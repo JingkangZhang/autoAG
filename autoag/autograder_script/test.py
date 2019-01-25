@@ -239,6 +239,8 @@ questionD = {question['functionName']
 if len(sys.argv) > 1:
     assert sys.argv[1] in questionD, "\nThe command line argument you passed in is not a valid function name; choose from {}\n".format(list(questionD.keys()).__repr__())
     questionD[sys.argv[1]].test()
-elif d["pointsEnabled"]:
-    print("Total score: " + str(sum([t.test()[1] for t in questionD.values()])))
+else:
+    score = str(sum([t.test()[1] for t in questionD.values()]))
+    if d["pointsEnabled"]:
+        print("Total score: " + score)
 print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
