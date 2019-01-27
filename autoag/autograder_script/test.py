@@ -1,4 +1,5 @@
 from ast import parse, NodeVisitor, Name
+import traceback
 _NAMES = {
     'Add': '+',
     'And': 'and',
@@ -216,8 +217,8 @@ class Test:
             answer = eval(self.question["functionName"] + "(" + testCase[0] + ")")
         except Exception as ex:
             print("Running {}:\n".format(funcCallRepr))
-            message = "{} occurred while executing your function. Current test terminated.\n".format(type(ex).__name__)
-            print(message)
+            print(traceback.format_exc())
+            print("Current test terminated.\n")
             return False
 
         if self.assertEqual(answer, expected):
@@ -225,7 +226,7 @@ class Test:
             return True
         else:
             print("Running {}:".format(funcCallRepr))
-            print("Expected: {}\nGot: {}\n".format(expected, answer))
+            print("Expected: {}\nGot: {}\n".format(expected.__repr__(), answer.__repr__()))
             return False
 
 # questionNames = [ question['functionName'] if question['advancedSetting']['testName'].strip() == "" else question['advancedSetting']['testName'] for question in d["tests"]]
