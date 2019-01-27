@@ -51,9 +51,13 @@ class App extends React.Component {
         const inputElement = document.getElementById("importFile");
         const reader = new FileReader();
         reader.onload = (event) => {
+
           this.setState({formState: JSON.parse(event.target.result)});
+
         } // desired file content
-        reader.readAsText(inputElement.files[0]) // you could also read images and other binaries
+        if (inputElement.files[0]) {
+          reader.readAsText(inputElement.files[0]) // you could also read images and other binaries
+        }
         break;
       case "export":
         let zip = new JSZip();

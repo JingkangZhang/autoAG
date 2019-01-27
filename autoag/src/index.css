@@ -190,8 +190,9 @@ body {
   /* border-bottom-right-radius: 10px; */
 }
 .headerButtonGroup {
+  margin-top: -35px;
   float: right;
-  z-index: 200;
+  display: inline-block;
 }
 .testCaseHeader {
   width:100%;

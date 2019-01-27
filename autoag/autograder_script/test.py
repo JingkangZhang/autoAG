@@ -242,5 +242,5 @@ if len(sys.argv) > 1:
 else:
     score = str(sum([t.test()[1] for t in questionD.values()]))
     if d["pointsEnabled"]:
-        print("Total score: " + score)
+        print("Total score: " + score + "/" + str(sum([int(t["advancedSetting"]["fullScore"]) for t in d["tests"]])))
 print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")

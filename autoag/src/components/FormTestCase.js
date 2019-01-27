@@ -89,41 +89,41 @@ class FormTestCase extends React.Component {
           :
           ""
         }
-        <span className="headerButtonGroup">
-          <Button
-            className="headerButton"
-            name="headerButtonUp"
-            data-testid={this.props.testIndex}
-            onClick={this.props.formHandler}
-            >
-            up
-          </Button>
-          <Button
-            className="headerButton"
-            name="headerButtonDown"
-            data-testid={this.props.testIndex}
-            onClick={this.props.formHandler}
-            >
-            down
-          </Button>
-          <Button
-            className="headerButton"
-            name="headerButtonDelete"
-            data-testid={this.props.testIndex}
-            onClick={this.props.formHandler}
-            >
-            delete
-          </Button>
-          <Button
-            className="headerButton"
-            name="headerButtonDuplicate"
-            data-testid={this.props.testIndex}
-            onClick={this.props.formHandler}
-            >
-            duplicate
-          </Button>
-        </span>
       </Button>
+      <span className="headerButtonGroup">
+        <Button
+          className="headerButton"
+          name="headerButtonUp"
+          data-testid={this.props.testIndex}
+          onClick={this.props.formHandler}
+          >
+          up
+        </Button>
+        <Button
+          className="headerButton"
+          name="headerButtonDown"
+          data-testid={this.props.testIndex}
+          onClick={this.props.formHandler}
+          >
+          down
+        </Button>
+        <Button
+          className="headerButton"
+          name="headerButtonDelete"
+          data-testid={this.props.testIndex}
+          onClick={this.props.formHandler}
+          >
+          delete
+        </Button>
+        <Button
+          className="headerButton"
+          name="headerButtonDuplicate"
+          data-testid={this.props.testIndex}
+          onClick={this.props.formHandler}
+          >
+          duplicate
+        </Button>
+      </span>
 
       <Collapse  isOpen={!this.state.collapse}
         onExiting={this.onExiting}
