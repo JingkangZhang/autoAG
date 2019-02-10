@@ -175,6 +175,7 @@ class ExclusionChecker(NodeVisitor):
 
 from homework import *
 import sys
+import io
 print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 class Test:
     def assertEqual(self, a, b):
@@ -184,7 +185,11 @@ class Test:
         self.question = question
         self.tests_passed = 0
 
-    def test(self):
+    def test(self, suppress=False):
+        if suppress:
+            # create a text trap and redirect stdout
+            text_trap = io.StringIO()
+            sys.stdout = text_trap
         print("---------------------------------------------------------------------\n")
         print("Testing {}:\n".format(self.question['functionName'] if self.question['advancedSetting']['testName'].strip() == "" else self.question['advancedSetting']['testName']))
 
@@ -192,16 +197,22 @@ class Test:
             if not self.test_one_pair(testCase):
                 print("{} test(s) passed before encountering the first failed case.".format(self.tests_passed))
                 print("\n---------------------------------------------------------------------")
+
+                sys.stdout = sys.__stdout__
                 return (False, 0)
 
-        disallowedUse = eval("(" + self.question['advancedSetting']['disallowedUse'] + ")")
+        disallowedUse = eval("(" + self.question['advancedSetting']['disallowedUse'] + "," + ")")
         if disallowedUse:
             if (not check("homework.py", self.question['functionName'], disallowedUse)):
                 print("Please revise your code and remove these usages.")
                 print("\n---------------------------------------------------------------------")
+
+                sys.stdout = sys.__stdout__
                 return (False, 0)
         print("All {} cases passed. No cases failed.".format(len(self.question['testCases'])))
         print("\n---------------------------------------------------------------------")
+
+        sys.stdout = sys.__stdout__
         return (True, int(self.question["advancedSetting"]["fullScore"]))
 
     def test_one_pair(self, testCase):
@@ -210,7 +221,7 @@ class Test:
         except:
             print("It's not you, it's the teacher! \n" +
                 "There's an error in the test case: cannot evaluate '" + testCase[1] + "'\n" +
-                "Please contact your teacher. \n(Don't laugh at them too hard though, sh!t happens :))\n")
+                "Please contact your teacher. \n")
             return False
         funcCallRepr = self.question["functionName"] + "(" + testCase[0] + ")"
         try:
@@ -235,13 +246,18 @@ questionD = {question['functionName']
     else question['advancedSetting']['testName']
     :
     Test(question)
-    for question in d["tests"]
+    for question in d["tests"]  #d is the autoAG file content (a dictionary). Open a file to see it's structure
     }
 if len(sys.argv) > 1:
     assert sys.argv[1] in questionD, "\nThe command line argument you passed in is not a valid function name; choose from {}\n".format(list(questionD.keys()).__repr__())
     questionD[sys.argv[1]].test()
 else:
-    score = str(sum([t.test()[1] for t in questionD.values()]))
+    result = [t.test(suppress=True) for t in questionD.values()]
+
+    passed = str(sum([1 for x in result if x[0]]))
+    score = str(sum([x[1] for x in result]))
+    print("Ran:", len(result), "tests")
+    print("Passed:", passed)
     if d["pointsEnabled"]:
         print("Total score: " + score + "/" + str(sum([int(t["advancedSetting"]["fullScore"]) for t in d["tests"]])))
 print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")

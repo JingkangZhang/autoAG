@@ -31,6 +31,5 @@ class HomeworkPreview extends React.Component {
       </Highlight>
     )
   }
-
 }
 export default HomeworkPreview;
