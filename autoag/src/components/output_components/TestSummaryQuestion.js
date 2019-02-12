@@ -20,9 +20,13 @@ class TestSummaryQuestion extends React.Component {
     var pointsEnabled = this.props.pointsEnabled;
 
     var testCasesList = [];
-    for (var i = 0; i < this.props.testCases.length; i++) {
+    var length = this.props.testCases.length;
+    // var colorSeed = Math.floor(Math.random() * 360);
+    for (var i = 0; i < length; i++) {
+      var hue = 360 / length * i ;
+      var style = {backgroundColor: "hsl(" + hue + ", 40%, 93%)"};
       testCasesList.push(
-        <li class="testSummaryTestCase">
+        <li class="testSummaryTestCase" style={style}>
           <span class="testSummaryInput">{testCases[i][0]}</span>
           <span>{"=>"}</span>
           <span class="testSummaryOutput">{testCases[i][1]}</span>
@@ -31,19 +35,18 @@ class TestSummaryQuestion extends React.Component {
     }
     return (
       <ul class="testSummaryQuestion">
-        <li class="testSummaryTestName"> {testName} </li>
+        <li class="testSummaryTestName">
+         {testName + (pointsEnabled ? ("  (" + fullScore + " Pts)") : "") }
+        </li>
+
+
         {disallowedUse.replace(/\s/g, '') !== "" ?
           <li class="testSummaryDisallowedUse"> {"Disallowed Usages: " + disallowedUse} </li>
           :
           ""
         }
-        {pointsEnabled ?
-          <li class="testSummaryFullScore"> {"Full Score: " + fullScore}</li>
-          :
-          ""
-        }
+        <span class="TSTestCases">Test Cases: </span>
         <ul class="testSummaryTestCases">
-          <li>Test Cases: </li>
           {testCasesList}
         </ul>
       </ul>

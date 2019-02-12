@@ -611,6 +611,7 @@ select {
 .tab-content {
   /* height: 100%; */
   border: 10px solid #E5F4E9;
+  width: 100%;
 }
 
 .testCasesGroup .testCaseDelete{
@@ -634,10 +635,55 @@ pre{
   height: 83vh;
 }
 .testSummary {
+  padding: 5px;
+  padding-left: 8px;
   overflow-y: auto;
   height: 83vh;
+  background-color: #EDEDED;
+  font-size: 13px;
+  line-height: 16px;
+
+}
+#TSTotalScore {
+  color: #444;
+  font-size: 19px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: block;
 }
 
+.testSummaryQuestion {
+  list-style-type: none;
+  padding-left: 4px;
+  border-left: 5px solid #AFDDBB;
+  border-radius: 10px;
+}
+
+.testSummaryTestName {
+  font-size: 15px;
+  line-height: 20px;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+
+}
+.testSummaryTestCases {
+  list-style-type: none;
+  padding-left: 4px;
+  /* border-left: 3px solid #AAA;
+  border-radius: 5px; */
+  margin-left: 10px;
+  font-family: monospace;
+}
+.testSummaryTestCase {
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: space-around;
+}
+.TSTestCases {
+  /* font-size: 15px;
+  line-height: 20px; */
+}
 .outputField {
   /* position: fixed; */
 

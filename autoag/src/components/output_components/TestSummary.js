@@ -32,10 +32,13 @@ class TestSummary extends React.Component {
       questionList.push(
         <TestSummaryQuestion
           testName={
-            tests[i].advancedSetting.testName.replace(/\s/g, '') !== "" ?
-            tests[i].advancedSetting.testName
-            :
-            tests[i].functionName
+            "Q" + (i + 1) + ": " +
+            (
+              tests[i].advancedSetting.testName.replace(/\s/g, '') !== "" ?
+              tests[i].advancedSetting.testName
+              :
+              tests[i].functionName
+            )
           }
           disallowedUse={tests[i].advancedSetting.disallowedUse}
           fullScore={tests[i].advancedSetting.fullScore}
