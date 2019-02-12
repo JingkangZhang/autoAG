@@ -633,6 +633,11 @@ pre{
   overflow-y: auto;
   height: 83vh;
 }
+.testSummary {
+  overflow-y: auto;
+  height: 83vh;
+}
+
 .outputField {
   /* position: fixed; */
 

@@ -63,14 +63,10 @@ class OutputField extends React.Component {
           </TabPane>
           <TabPane tabId="2">
             <Row>
-              <Col sm="6">
+              <Col>
                 <TestSummary
-                 className="TestSummary"
                  formState={this.props.formState}
                   />
-              </Col>
-              <Col sm="6">
-
               </Col>
             </Row>
           </TabPane>

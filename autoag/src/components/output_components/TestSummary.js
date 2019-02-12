@@ -1,5 +1,7 @@
 import React from 'react';
 import Highlight from 'react-highlight';
+import TestSummaryQuestion from './TestSummaryQuestion';
+
 //props: formState
 // formState:{
 //   pointsEnabled: false,
@@ -24,10 +26,33 @@ import Highlight from 'react-highlight';
 class TestSummary extends React.Component {
   render() {
     var formState = this.props.formState;
+    var questionList = [];
+    var tests = formState.tests;
+    for (var i = 0; i < tests.length; i++) {
+      questionList.push(
+        <TestSummaryQuestion
+          testName={
+            tests[i].advancedSetting.testName.replace(/\s/g, '') !== "" ?
+            tests[i].advancedSetting.testName
+            :
+            tests[i].functionName
+          }
+          disallowedUse={tests[i].advancedSetting.disallowedUse}
+          fullScore={tests[i].advancedSetting.fullScore}
+          testCases={tests[i].testCases}
+          pointsEnabled={formState.pointsEnabled}
+          />
+      );
+    }
     return (
-      <ul>
-        {<li>Total Score: {totalPoints(formState.tests)}</li>}
-      </ul>
+      <div class="testSummary">
+        {formState.pointsEnabled ?
+          <span id="TSTotalScore">Total Score: {totalPoints(formState.tests)}</span>
+          :
+          <span id="TSTotalScore">Score Disabled.</span>
+        }
+        {questionList}
+     </div>
     )
   }
 }
