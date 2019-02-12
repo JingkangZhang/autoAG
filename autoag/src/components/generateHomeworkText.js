@@ -43,7 +43,7 @@ function generateHomeworkText(FORM_STATE) {
         var currCase = currTest.testCases[j];
         // console.log(j);
         // console.log(currTest.testCases.length);
-        lv1Indent += ">>> " + currTest.functionName + "(" + currCase[0] + ")" + "\n";
+        lv1Indent += ">>> " + currTest.functionName + "(" + currCase[0] + ")\n";
         lv1Indent += currCase[1] + "\n";
       }
     }

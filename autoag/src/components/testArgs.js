@@ -71,7 +71,7 @@ function check(f) {
   for (var i = 0; i < f.length; i++) {
     var c = f.charAt(i);
     if (c==="'" || c==='"') {
-      if (stack.length != 0 && stack[stack.length-1] === c) {
+      if (stack.length !== 0 && stack[stack.length-1] === c) {
         stack.pop();
         quoteOpen = false;
       } else {
@@ -79,18 +79,18 @@ function check(f) {
         quoteOpen = true;
       }
     } else if (!quoteOpen) {
-      if (c === "," && stack.length == 0) {
+      if (c === "," && stack.length === 0) {
         count += 1;
       } else if (c === "(" || c === "[" || c === "{") {
         stack.push(c);
       } else if (c === ")") {
-        if (stack.length!=0 && stack[stack.length-1]==="(") {
+        if (stack.length !== 0 && stack[stack.length-1]==="(") {
           stack.pop();
         } else {
           return {count:count, error:true};
         }
       } else if (c === "]") {
-          if (stack.length!=0 && stack[stack.length-1]==="[") {
+          if (stack.length !== 0 && stack[stack.length-1]==="[") {
             // console.log("before splice");
             // console.log(stack);
             stack.pop();
@@ -101,7 +101,7 @@ function check(f) {
             return {count:count, error:true};
           }
       } else if (c === "}") {
-          if (stack.length!=0 && stack[stack.length-1]==="{") {
+          if (stack.length !== 0 && stack[stack.length-1]==="{") {
             stack.pop();
           } else {
             return {count:count, error:true};
@@ -109,7 +109,7 @@ function check(f) {
       }
     }
   }
-  if (stack.length != 0) {
+  if (stack.length !== 0) {
     console.log("ended, returning error here");
     console.log(stack);
     return {count:count, error:true};

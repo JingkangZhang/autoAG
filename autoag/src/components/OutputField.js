@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import HomeworkPreview from './output_components/HomeworkPreview';
+import TestSummary from './output_components/TestSummary';
 //props: formState
 class OutputField extends React.Component {
   // render() {
@@ -63,7 +64,10 @@ class OutputField extends React.Component {
           <TabPane tabId="2">
             <Row>
               <Col sm="6">
-                <h1>Coming Soon...</h1>
+                <TestSummary
+                 className="TestSummary"
+                 formState={this.props.formState}
+                  />
               </Col>
               <Col sm="6">
 
