@@ -140,7 +140,7 @@ body {
   font-size: 18px;
   color: #222;
 }
-.formTestCase {
+.formTestCase, .formUnitTestCase{
   margin-top: 15px;
   margin-bottom: 15px;
   /* opacity: 1;
@@ -160,11 +160,27 @@ body {
   border-image-slice: 1;
   /* padding-top: 0; */
 }
+
+.unitTestCaseBody {
+  padding: 5px;
+  padding-left: 10px;
+  border: 0;
+  border-left: 20px solid  hsla(59, 65%, 84%, 1);
+  /* border-image: linear-gradient(to bottom, #E5F4E9 , #D4ECE6, #D4E7EC, #D4DAEC,#D9D4EC,#E6D4EC,#ECD4E6,#ECD4DA,#ECDAD4,#ECE6D4,#E6ECD4,#DAECD4);
+  border-image-slice: 1; */
+  /* padding-top: 0; */
+}
+
 .formTestCase label {
   margin-bottom: 10px;
   color: #409A56;
   /* border-bottom: 2px solid #E5F4E9; */
 }
+.formUnitTestCase label {
+  margin-bottom: 10px;
+  color:  hsla(59, 65%, 84%, 1);
+}
+
 .formTestCase .form-group {
   margin-bottom: 15px;
   padding-bottom: 8px;
@@ -176,6 +192,16 @@ body {
   border-image-slice: 1; */
 }
 
+.formUnitTestCase .form-group {
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  padding-left: 4px;
+  border-left: 5px solid #E5F4E9;
+  border-radius: 8px;
+  /* border-bottom: 3px solid #E5F4E9;
+  border-image: linear-gradient(to right, #48AC60 , #48AC92, #4894AC, #4862AC,#6048AC,#9248AC,#AC4893,#AC4861,#AC6048,#AC9248,#93AC48,#62AC48);
+  border-image-slice: 1; */
+}
 
 .testHeader {
   width:100%;
@@ -189,11 +215,26 @@ body {
   height: 38px;
   /* border-bottom-right-radius: 10px; */
 }
-.headerButtonGroup {
+
+.unitTestHeader {
+  width:100%;
+  display:block;
+  text-align: left;
+  padding-left: 20px !important;
+  border-top-left-radius: 25px;
+  /* border-top-right-radius: 10px; */
+  border-bottom-left-radius: 0;
+  font-size: 20px;
+  height: 38px;
+  /* border-bottom-right-radius: 10px; */
+}
+
+.headerButtonGroup, .headerButtonGroupUnit{
   margin-top: -35px;
   float: right;
   display: inline-block;
 }
+
 .testCaseHeader {
   width:100%;
   display:block;
@@ -210,6 +251,7 @@ body {
   background-image: linear-gradient(to right, #F8F8F8, #EEE) !important;
   /* border-bottom-right-radius: 10px; */
 }
+
 .testCasesGroup {
   border-left: 8px solid #F8F8F8 !important;
   border-right: 8px solid #EEE !important;
@@ -690,6 +732,35 @@ pre{
 
   width: 100%;
 }
+.addUnitTestButton {
+  margin-left: 2px;
+  background-color: hsla(73, 41%, 93%, 1);
+  color:
+}
+
+.btn-warning {
+  color: #7A7919;
+  padding: 2px;
+  background-color: hsla(59, 65%, 84%, 1);
+  border: 2px solid hsla(59, 65%, 84%, 1);
+}
+
+.btn-warning:hover {
+  color: #7A7919;
+  background-color: hsla(59, 65%, 84%, 1);
+  border: 2px solid hsla(59, 65%, 84%, 1);
+  /* #E5F4E9 */
+}
+
+.btn-warning:active,
+.btn-warning:target,
+.btn-warning.active {
+  color: #7A7919 !important;
+  background-color: hsla(59, 65%, 84%, 1) !important;
+  border: 2px solid hsla(59, 65%, 84%, 1) !important;
+
+}
+
 .gcd {
   position: sticky;
   top: 61px;

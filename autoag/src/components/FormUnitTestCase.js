@@ -18,27 +18,23 @@ import FormAdvancedSetting from './form_test_case_components/FormAdvancedSetting
 {
 //  props:{
 //     testData: {
-//       functionName: "",
-//       functionParams: "",
-//       description: "",
-//       testCases: [["", ""]],
-//       advancedSetting: {
-//         fullScore: "1",
-//         testType: "simple",
-//         testName: "",
-//         partialCredits: "none",
-//         skeletonCode: "",
-//         testForDisallowedUse: [],
-//       }
+//       functionName: "list_pop_test",
+      // functionParams: "setup, inputs, expected",
+      // description: "Unit test for list_pop. \n1. Creates a list object lst from setup['originalList']\n 2. Calls pop_list on the lst object (pop_list(lst, *inputs))\n 3.Checks if the resulting list is desired. (lst == expected)",
+      // testCases: ["{'originalList': [1,2,3,4]}, [0], [2,3,4]"],
+      // advancedSetting: {
+      //   fullScore: "1",
+      //   testType: "unit_test",
+      //   skeletonCode: "",
+      // }
 //     },
 //     testIndex: Int,
-//     questionIndex: Int,
 //     className: String,
 //     pointsEnabled: Boolean,
 //     formHandler: Function
 // }
 }
-class FormTestCase extends React.Component {
+class FormUnitTestCase extends React.Component {
   constructor(props) {
     super(props);
     this.handleToggle = this.handleToggle.bind(this);
@@ -62,9 +58,9 @@ class FormTestCase extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     var currNumErrors =
       document.querySelectorAll(
-        "#" + "formTestCase"+ this.props.testIndex + ' .alertBorder').length +
+        "#" + "formUnitTestCase"+ this.props.testIndex + ' .alertBorder').length +
       document.querySelectorAll(
-        "#" + "formTestCase"+ this.props.testIndex + ' .alertTestCaseBorder').length;
+        "#" + "formUnitTestCase"+ this.props.testIndex + ' .alertTestCaseBorder').length;
 
     if (prevState.numErrors !== currNumErrors) {
       this.setState({numErrors: currNumErrors});
@@ -72,18 +68,10 @@ class FormTestCase extends React.Component {
   }
   render() {
     return (
-      <div class="formTestCase"
-        id={"formTestCase"+ this.props.testIndex}>
-      <Button className="testHeader" onClick={this.handleToggle}>
-        {"Q" + (this.props.questionIndex + 1) + " : "}
-        {this.props.testData.advancedSetting.testName.replace(/\s/g, '')!=="" ?
-          this.props.testData.advancedSetting.testName.replace(/\s/g, '')
-          :
-          this.props.testData.functionName==="" ?
-            "Untitled"
-            :
-            this.props.testData.functionName
-        }
+      <div class="formUnitTestCase"
+        id={"formUnitTestCase"+ this.props.testIndex}>
+      <Button className="unitTestHeader" color="warning" onClick={this.handleToggle}>
+        {"Unit Test: " + this.props.testData.functionName}
 
         {this.state.numErrors !== 0 && this.state.collapse && this.state.status === 'Closed'?
           <Badge className="numErrorBadge" color="danger" pill>{this.state.numErrors}</Badge>
@@ -91,9 +79,10 @@ class FormTestCase extends React.Component {
           ""
         }
       </Button>
-      <span className="headerButtonGroup">
+      <span className="headerButtonGroupUnit">
         <Button
-          className="headerButton"
+          className="headerButtonUnit"
+          color="warning"
           name="headerButtonUp"
           data-testid={this.props.testIndex}
           onClick={this.props.formHandler}
@@ -101,7 +90,8 @@ class FormTestCase extends React.Component {
           up
         </Button>
         <Button
-          className="headerButton"
+          className="headerButtonUnit"
+          color="warning"
           name="headerButtonDown"
           data-testid={this.props.testIndex}
           onClick={this.props.formHandler}
@@ -109,7 +99,8 @@ class FormTestCase extends React.Component {
           down
         </Button>
         <Button
-          className="headerButton"
+          className="headerButtonUnit"
+          color="warning"
           name="headerButtonDelete"
           data-testid={this.props.testIndex}
           onClick={this.props.formHandler}
@@ -117,7 +108,8 @@ class FormTestCase extends React.Component {
           delete
         </Button>
         <Button
-          className="headerButton"
+          className="headerButtonUnit"
+          color="warning"
           name="headerButtonDuplicate"
           data-testid={this.props.testIndex}
           onClick={this.props.formHandler}
@@ -129,27 +121,8 @@ class FormTestCase extends React.Component {
       <Collapse  isOpen={!this.state.collapse}
         onExiting={this.onExiting}
         onExited={this.onExited}>
-        <div className="testCaseBody">
-          <FormFunctionName formHandler={this.props.formHandler}
-            testIndex={this.props.testIndex}
-            functionName={this.props.testData.functionName} />
-          <FormFunctionParams formHandler={this.props.formHandler}
-            testIndex={this.props.testIndex}
-            functionName={this.props.testData.functionName}
-            functionParams={this.props.testData.functionParams} />
-          <FormDescription formHandler={this.props.formHandler}
-            testIndex={this.props.testIndex}
-            description={this.props.testData.description} />
-          <FormTestCases formHandler={this.props.formHandler}
-            testIndex={this.props.testIndex}
-            functionName={this.props.testData.functionName}
-            functionParams={this.props.testData.functionParams}
-            testCases={this.props.testData.testCases} />
-          <FormAdvancedSetting formHandler={this.props.formHandler}
-            testIndex={this.props.testIndex}
-            pointsEnabled={this.props.pointsEnabled}
-            functionName={this.props.testData.functionName}
-            advancedSetting={this.props.testData.advancedSetting} />
+        <div className="unitTestCaseBody">
+
         </div>
       </Collapse>
       </div>
@@ -157,4 +130,4 @@ class FormTestCase extends React.Component {
   }
 }
 
-export default FormTestCase;
+export default FormUnitTestCase;

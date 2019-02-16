@@ -7,12 +7,19 @@ function generateHomeworkText(FORM_STATE) {
   if (ret !== "") {
     ret += '\n\n';
   }
-
+  var questionIndex = -1;
   for (var i = 0; i < FORM_STATE.tests.length; i++) {
     var currTest = FORM_STATE.tests[i];
+    var isUnit = currTest.advancedSetting.testType === "unit_test";
+    if (!isUnit) {
+      questionIndex++;
+    }
 
-    //comments
-    ret += "# Q" + (i + 1) + ": ";
+    if (isUnit) {
+      continue;
+    }
+
+    ret += "# Q" + (questionIndex + 1) + ": ";
     var testName =
       currTest.advancedSetting.testName.replace(/\s/g, '') !== "" ?
         currTest.advancedSetting.testName.replace(/\s/g, '')

@@ -3,6 +3,8 @@ import {
   Form, Label, FormGroup, Input, Button, Collapse
 } from 'reactstrap';
 import FormTestCase from "./FormTestCase.js"
+import FormUnitTestCase from "./FormUnitTestCase.js"
+
 //props:{
 //  formState:{
 //    pointsEnabled: Bool,
@@ -14,13 +16,27 @@ import FormTestCase from "./FormTestCase.js"
 class InputField extends React.Component {
   render() {
     var testList = [];
+    var questionIndex = 0;
     for (var i = 0; i < this.props.formState.tests.length; i++) {
-      testList.push(
-        <FormTestCase testData={this.props.formState.tests[i]}
-          testIndex={i}
-          pointsEnabled={this.props.formState.pointsEnabled}
-          formHandler={this.props.formHandler}/>
-      )
+      var test = this.props.formState.tests[i];
+      if (test.advancedSetting.testType === "unit_test") {
+        testList.push(
+          <FormUnitTestCase testData={test}
+            testIndex={i}
+            pointsEnabled={this.props.formState.pointsEnabled}
+            formHandler={this.props.formHandler}/>
+        )
+      } else {
+        testList.push(
+          <FormTestCase testData={test}
+            testIndex={i}
+            questionIndex={questionIndex}
+            pointsEnabled={this.props.formState.pointsEnabled}
+            formHandler={this.props.formHandler}/>
+        )
+        questionIndex++;
+      }
+
     }
     return (
       <Form className="InputField">
@@ -31,6 +47,8 @@ class InputField extends React.Component {
         {testList}
         <Button name="addTest" onClick={this.props.formHandler}
           color="secondary" size="sm">Add Question</Button>
+        <Button name="addUnitTest" onClick={this.props.formHandler}
+          className="addUnitTestButton" color="warning" size="sm">Add Unit Test</Button>
       </Form>
     )
   }

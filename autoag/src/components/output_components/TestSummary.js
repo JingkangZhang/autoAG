@@ -29,20 +29,25 @@ class TestSummary extends React.Component {
     var questionList = [];
     var tests = formState.tests;
     for (var i = 0; i < tests.length; i++) {
+      var currTest = tests[i];
+      var isUnit = currTest.advancedSetting.testType === "unit_test";
+      if (isUnit) {
+        continue;
+      }
       questionList.push(
         <TestSummaryQuestion
           testName={
             "Q" + (i + 1) + ": " +
             (
-              tests[i].advancedSetting.testName.replace(/\s/g, '') !== "" ?
-              tests[i].advancedSetting.testName
+              currTest.advancedSetting.testName.replace(/\s/g, '') !== "" ?
+              currTest.advancedSetting.testName
               :
-              tests[i].functionName
+              currTest.functionName
             )
           }
-          disallowedUse={tests[i].advancedSetting.disallowedUse}
-          fullScore={tests[i].advancedSetting.fullScore}
-          testCases={tests[i].testCases}
+          disallowedUse={currTest.advancedSetting.disallowedUse}
+          fullScore={currTest.advancedSetting.fullScore}
+          testCases={currTest.testCases}
           pointsEnabled={formState.pointsEnabled}
           />
       );

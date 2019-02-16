@@ -75,6 +75,9 @@ class App extends React.Component {
       case "addTest":
         newFormState["tests"].push(createInitialTestData());
         break;
+      case "addUnitTest":
+        newFormState["tests"].push(createUnitTestTest());
+        break;
       case "testType":
         newFormState["tests"][e.target.dataset.testid].advancedSetting
             .testType = e.target.value;
@@ -205,6 +208,20 @@ function createInitialTestData() {
       disallowedUse: "",
     }
   };
+}
+
+function createUnitTestTest() {
+  return {
+    functionName: "list_pop_test",
+    functionParams: "setup, inputs, expected",
+    description: "Unit test for list_pop. \n1. Creates a list object lst from setup['originalList']\n 2. Calls pop_list on the lst object (pop_list(lst, *inputs))\n 3.Checks if the resulting list is desired. (lst == expected)",
+    testCases: ["{'originalList': [1,2,3,4]}, [0], [2,3,4]"],
+    advancedSetting: {
+      fullScore: "1",
+      testType: "unit_test",
+      skeletonCode: "",
+    }
+  }
 }
 // Function to download data to a file
 function download(data, filename, type) {
