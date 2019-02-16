@@ -39,7 +39,7 @@ class App extends React.Component {
     switch(e.target.name) {
       case "save":
         download(
-          JSON.stringify(this.state.formState),
+          JSON.stringify(this.state.formState, null, 2),
           "MySession_at_" + new Date().toLocaleString().
             replace(", ", "_").replace(" ", "_")
               + ".autoAG", 'text/plain'
