@@ -201,7 +201,8 @@ class Test:
                 sys.stdout = sys.__stdout__
                 return (False, 0)
 
-        disallowedUse = eval("(" + self.question['advancedSetting']['disallowedUse'] + "," + ")")
+        comma = "," if self.question['advancedSetting']['disallowedUse'] else ""
+        disallowedUse = eval("(" + self.question['advancedSetting']['disallowedUse'] + comma + ")")
         if disallowedUse:
             if (not check("homework.py", self.question['functionName'], disallowedUse)):
                 print("Please revise your code and remove these usages.")
