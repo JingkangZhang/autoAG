@@ -49,6 +49,7 @@ class TestSummary extends React.Component {
           fullScore={currTest.advancedSetting.fullScore}
           testCases={currTest.testCases}
           pointsEnabled={formState.pointsEnabled}
+          functionParams={tests[i].functionParams}
           />
       );
     }
