@@ -99,7 +99,9 @@ class FormAdvancedSetting extends React.Component {
             <FormSkeletonCode
               formHandler={this.props.formHandler}
               testIndex={this.props.testIndex}
-              skeletonCode={this.props.advancedSetting.skeletonCode} />
+              skeletonCode={this.props.advancedSetting.skeletonCode}
+              placeholder="'*** YOUR CODE HERE ***'"
+              type="simple"/>
             <FormDisallowedUse
               formHandler={this.props.formHandler}
               testIndex={this.props.testIndex}

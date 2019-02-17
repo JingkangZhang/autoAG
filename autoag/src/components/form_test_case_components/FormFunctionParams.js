@@ -8,7 +8,8 @@ import {
   UncontrolledTooltip
 } from 'reactstrap';
 //props:{formHandler:Function, testIndex:Int,
-//      functionName:String, functionParams:String}
+//      functionName:String, functionParams:String,
+//      placeholder:String}
 class FormFunctionParams extends React.Component {
   render() {
     var functionName = this.props.functionName;
@@ -40,7 +41,7 @@ class FormFunctionParams extends React.Component {
           <Input type="text" name="functionParams" spellcheck="false"
             // onFocus={e => e.target.select()}
             className="forPlaceHolder codeInput"
-            placeholder="arg1, arg2"
+            placeholder={this.props.placeholder}
             onChange={this.props.formHandler}
             data-testid={this.props.testIndex}
             value={functionParams} />

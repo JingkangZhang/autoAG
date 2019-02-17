@@ -10,11 +10,9 @@ import {
 import FormFunctionName from './form_test_case_components/FormFunctionName';
 import FormFunctionParams from './form_test_case_components/FormFunctionParams';
 import FormDescription from './form_test_case_components/FormDescription';
-import FormTestCases from './form_test_case_components/FormTestCases';
+import FormSkeletonCode from './form_test_case_components/FormSkeletonCode';
 import FormAdvancedSetting from './form_test_case_components/FormAdvancedSetting';
-// import FormFunctionName from './form_test_case_components/FormFunctionName';
-// import FormFunctionName from './form_test_case_components/FormFunctionName';
-// import FormFunctionName from './form_test_case_components/FormFunctionName';
+import FormUnitTestCases from './form_unit_test_components/FormUnitTestCases';
 {
 //  props:{
 //     testData: {
@@ -122,7 +120,30 @@ class FormUnitTestCase extends React.Component {
         onExiting={this.onExiting}
         onExited={this.onExited}>
         <div className="unitTestCaseBody">
-
+          <FormFunctionName formHandler={this.props.formHandler}
+            testIndex={this.props.testIndex}
+            functionName={this.props.testData.functionName}
+            placeholder="list_pop_test"/>
+          <FormFunctionParams formHandler={this.props.formHandler}
+            testIndex={this.props.testIndex}
+            functionName={this.props.testData.functionName}
+            functionParams={this.props.testData.functionParams}
+            placeholder="setup, input, expected" />
+          <FormDescription formHandler={this.props.formHandler}
+            testIndex={this.props.testIndex}
+            description={this.props.testData.description}
+            placeholder="Unit test for list_pop."
+            type="unit"/>
+          <FormSkeletonCode
+            formHandler={this.props.formHandler}
+            testIndex={this.props.testIndex}
+            skeletonCode={this.props.testData.advancedSetting.skeletonCode}
+            placeholder="return True #test passed, False otherwise"
+            type="unit"/>
+          <FormUnitTestCases formHandler={this.props.formHandler}
+            testIndex={this.props.testIndex}
+            functionParams={this.props.testData.functionParams}
+            testCases={this.props.testData.testCases} />
         </div>
       </Collapse>
       </div>

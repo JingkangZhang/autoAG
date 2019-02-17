@@ -102,9 +102,17 @@ class App extends React.Component {
         newFormState["tests"][e.target.dataset.testid]
             .testCases.push(["",""]);
         break;
+      case "addUnitTestCase":
+        newFormState["tests"][e.target.dataset.testid]
+            .testCases.push("");
+        break;
       case "testCaseInput":
         newFormState["tests"][e.target.dataset.testid]
             .testCases[e.target.dataset.testcaseid][0] = e.target.value;
+        break;
+      case "unitTestCaseInput":
+        newFormState["tests"][e.target.dataset.testid]
+            .testCases[e.target.dataset.testcaseid] = e.target.value;
         break;
       case "testCaseOutput":
         newFormState["tests"][e.target.dataset.testid]
@@ -215,7 +223,7 @@ function createUnitTestTest() {
     functionName: "list_pop_test",
     functionParams: "setup, inputs, expected",
     description: "Unit test for list_pop. \n1. Creates a list object lst from setup['originalList']\n 2. Calls pop_list on the lst object (pop_list(lst, *inputs))\n 3.Checks if the resulting list is desired. (lst == expected)",
-    testCases: ["{'originalList': [1,2,3,4]}, [0], [2,3,4]"],
+    testCases: ["{'originalList': [1,2,3,4]}, [0], [2,3,4]}"],
     advancedSetting: {
       fullScore: "1",
       testType: "unit_test",

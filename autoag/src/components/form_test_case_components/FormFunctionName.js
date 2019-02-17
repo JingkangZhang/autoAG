@@ -7,7 +7,7 @@ import {
   Collapse,
   UncontrolledTooltip
 } from 'reactstrap';
-//props:{formHandler:Function, testIndex:Int, functionName:String}
+//props:{formHandler:Function, testIndex:Int, functionName:String, placeholder:String}
 class FormFunctionName extends React.Component {
   render() {
     var functionName = this.props.functionName;
@@ -35,7 +35,7 @@ class FormFunctionName extends React.Component {
           </Label>
           <Input type="text" name="functionName" spellcheck="false"
             className="forPlaceHolder codeInput"
-            placeholder="Fibonacci"
+            placeholder={this.props.placeholder}
             onChange={this.props.formHandler}
             data-testid={this.props.testIndex}
             value={functionName} />

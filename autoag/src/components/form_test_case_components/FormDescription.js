@@ -7,18 +7,24 @@ import {
   Collapse,
   UncontrolledTooltip
 } from 'reactstrap';
-//props:{formHandler:Function, testIndex:Int, description:String}
+//props:{formHandler:Function, testIndex:Int, description:String, placeholder: String}
 class FormDescription extends React.Component {
   render() {
     return (
       <FormGroup>
-          <Label for="exampleText">Question Description:</Label>
+          <Label for="exampleText">
+            {this.props.type == "simple" ?
+              "Question Description:"
+              :
+              "Test Description:"
+            }
+          </Label>
           <Input type="textarea" name="formDescription" spellcheck="false"
           id="formDescription"
           onChange={this.props.formHandler}
           className="forPlaceHolder codeInput"
           data-testid={this.props.testIndex}
-          placeholder="Return the Nth fibonacci number."
+          placeholder={this.props.placeholder}
           value={this.props.description} />
         </FormGroup>
     )

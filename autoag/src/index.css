@@ -176,9 +176,9 @@ body {
   color: #409A56;
   /* border-bottom: 2px solid #E5F4E9; */
 }
-.formUnitTestCase label {
+.formUnitTestCase label, .formUnitTestCase .advancedSettingItem label{
   margin-bottom: 10px;
-  color:  hsla(59, 65%, 84%, 1);
+  color: #7A7919 !important;
 }
 
 .formTestCase .form-group {
@@ -192,17 +192,20 @@ body {
   border-image-slice: 1; */
 }
 
-.formUnitTestCase .form-group {
+.formUnitTestCase .form-group{
   margin-bottom: 15px;
+  margin-left: 0;
   padding-bottom: 8px;
   padding-left: 4px;
-  border-left: 5px solid #E5F4E9;
+  border-left: 5px solid hsla(59, 65%, 84%, 1) !important;
   border-radius: 8px;
   /* border-bottom: 3px solid #E5F4E9;
   border-image: linear-gradient(to right, #48AC60 , #48AC92, #4894AC, #4862AC,#6048AC,#9248AC,#AC4893,#AC4861,#AC6048,#AC9248,#93AC48,#62AC48);
   border-image-slice: 1; */
 }
-
+.formUnitTestCase input, .formUnitTestCase textarea{
+  border-color: hsla(59, 65%, 84%, 1) !important;
+}
 .testHeader {
   width:100%;
   display:block;
@@ -403,6 +406,10 @@ body {
   /* border-left: 5px !important; */
 
 }
+.testCasesGroup input {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
 .formTestCase input, .input-group-text{
   height: 30px;
 }
@@ -504,11 +511,23 @@ select {
   display: flex;
   flex-direction: right;
 }
+.tgUnit {
+  display: flex;
+  flex-direction: right;
+}
 .tgAlert {
+  flex-basis: 2%;
+}
+.tgAlertUnit {
   flex-basis: 2%;
 }
 .tgInput {
   flex-basis: 58%;
+}
+.tgInputUnit {
+  flex-basis: 98%;
+  margin-top: -5px;
+  margin-right: 10px;
 }
 .tgArrow {
   flex-basis: 10%;

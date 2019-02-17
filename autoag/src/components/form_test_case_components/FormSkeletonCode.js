@@ -13,12 +13,19 @@ class FormSkeletonCode extends React.Component {
   render() {
     return (
       <FormGroup className="advancedSettingItem">
-        <Label for="skeletonCode">Skeleton Code:</Label>
+        <Label for="skeletonCode">
+          {this.props.type === "simple" ?
+            "Skeleton Code:"
+            :
+            "Test Code:"
+          }
+
+        </Label>
         <Input type="textarea" name="skeletonCode"
             onChange={this.props.formHandler}
             data-testid={this.props.testIndex}
             className="forPlaceHolder"
-            placeholder="'*** YOUR CODE HERE ***'"
+            placeholder={this.props.placeholder}
             value={this.props.skeletonCode} >
         </Input>
       </FormGroup>
