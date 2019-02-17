@@ -3,6 +3,7 @@ import Highlight from 'react-highlight';
 
 // props:{
 //   testName: "",
+//   functionParams:"",
 //   disallowedUse: "",
 //   fullScore: "",
 //   pointsEnabled: false,
@@ -45,8 +46,9 @@ class TestSummaryQuestion extends React.Component {
           :
           ""
         }
-        <span class="TSTestCases">Test Cases: </span>
+        <span class="TSTestCases">Test Cases: </span><br/>
         <ul class="testSummaryTestCases">
+          <span class="TSTestCaseParams">{"Params: ( " + this.props.functionParams + " )"}</span>
           {testCasesList}
         </ul>
       </ul>

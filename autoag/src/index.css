@@ -684,6 +684,14 @@ pre{
   /* font-size: 15px;
   line-height: 20px; */
 }
+.TSTestCaseParams {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+  display: block;
+  /* background-color: #777; */
+  color: #111;
+  background-image: linear-gradient(to right, #EEE, #BBB);
+}
 .outputField {
   /* position: fixed; */
 
