@@ -173,7 +173,7 @@ class ExclusionChecker(NodeVisitor):
         return self._errs == 0
 
 
-from homework import *
+import homework
 import sys
 import io
 print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
@@ -225,7 +225,7 @@ class Test:
             return False
         funcCallRepr = self.question["functionName"] + "(" + testCase[0] + ")"
         try:
-            answer = eval(self.question["functionName"] + "(" + testCase[0] + ")")
+            answer = eval("homework." + self.question["functionName"] + "(" + testCase[0] + ")")
         except Exception as ex:
             print("Running {}:\n".format(funcCallRepr))
             print(traceback.format_exc())
