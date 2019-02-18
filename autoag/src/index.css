@@ -490,6 +490,10 @@ select {
   margin: -3px;
   margin-bottom: -5px;
 }
+.advancedSetting .alertBorder {
+  padding-top: 1px;
+  padding-bottom: 5px;
+}
 .testCaseAlert {
   display: block;
   position: absolute;
