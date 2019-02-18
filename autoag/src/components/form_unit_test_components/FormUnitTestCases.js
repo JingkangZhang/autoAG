@@ -34,7 +34,7 @@ class FormUnitTestCases extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     var currNumErrors =
       document.querySelectorAll(
-        "#" + "formTestCase"+ this.props.testIndex + ' .alertTestCaseBorder').length;
+        "#" + "formUnitTestCase"+ this.props.testIndex + ' .alertTestCaseBorder').length;
 
     if (prevState.numErrors !== currNumErrors) {
       this.setState({numErrors: currNumErrors});

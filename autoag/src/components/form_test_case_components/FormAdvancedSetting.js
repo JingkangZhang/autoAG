@@ -75,13 +75,13 @@ class FormAdvancedSetting extends React.Component {
           onExiting={this.onExiting}
           onExited={this.onExited}>
           <div class="advancedSettingGroup">
-            {this.props.pointsEnabled &&
+            {this.props.pointsEnabled && this.props.testType === "simple" &&
               <FormFullScore
                 formHandler={this.props.formHandler}
                 testIndex={this.props.testIndex}
                 fullScore={this.props.advancedSetting.fullScore}/>
             }
-            {this.props.pointsEnabled &&
+            {this.props.pointsEnabled && this.props.testType === "simple" &&
               <FormPartialCredits
                 formHandler={this.props.formHandler}
                 testIndex={this.props.testIndex}

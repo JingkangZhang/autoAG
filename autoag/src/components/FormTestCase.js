@@ -144,16 +144,19 @@ class FormTestCase extends React.Component {
             description={this.props.testData.description}
             placeholder="Return the Nth fibonacci number."
             type="simple"/>
-          <FormTestCases formHandler={this.props.formHandler}
-            testIndex={this.props.testIndex}
-            functionName={this.props.testData.functionName}
-            functionParams={this.props.testData.functionParams}
-            testCases={this.props.testData.testCases} />
+          {this.props.testData.advancedSetting.testType === "simple" &&
+            <FormTestCases formHandler={this.props.formHandler}
+              testIndex={this.props.testIndex}
+              functionName={this.props.testData.functionName}
+              functionParams={this.props.testData.functionParams}
+              testCases={this.props.testData.testCases} />
+          }
           <FormAdvancedSetting formHandler={this.props.formHandler}
             testIndex={this.props.testIndex}
             pointsEnabled={this.props.pointsEnabled}
             functionName={this.props.testData.functionName}
-            advancedSetting={this.props.testData.advancedSetting} />
+            advancedSetting={this.props.testData.advancedSetting}
+            testType={this.props.testData.testType}/>
         </div>
       </Collapse>
       </div>

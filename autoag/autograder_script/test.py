@@ -220,7 +220,7 @@ class Test:
         try:
             expected = eval(testCase[1])
         except:
-            print("It's not you, it's the teacher! \n" +
+            print("It's not you; it's the teacher! \n" +
                 "There's an error in the test case: cannot evaluate '" + testCase[1] + "'\n" +
                 "Please contact your teacher. \n")
             return False

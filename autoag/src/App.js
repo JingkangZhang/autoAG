@@ -35,7 +35,7 @@ class App extends React.Component {
   }
 
   handleInputChange(e) {
-    var newFormState = this.state.formState;
+    var newFormState = JSON.parse(JSON.stringify(this.state.formState));;
     switch(e.target.name) {
       case "save":
         download(
@@ -81,6 +81,10 @@ class App extends React.Component {
       case "testType":
         newFormState["tests"][e.target.dataset.testid].advancedSetting
             .testType = e.target.value;
+        if (e.target.value === "unit") {
+          newFormState["tests"].splice(parseInt(e.target.dataset.testid) + 1, 0,
+            createUnitTestTest(newFormState["tests"][e.target.dataset.testid]));
+        }
         break;
       case "fullScore":
         newFormState["tests"][e.target.dataset.testid].advancedSetting
@@ -218,16 +222,31 @@ function createInitialTestData() {
   };
 }
 
-function createUnitTestTest() {
-  return {
-    functionName: "list_pop_test",
-    functionParams: "setup, inputs, expected",
-    description: "Unit test for list_pop. \n1. Creates a list object lst from setup['originalList']\n 2. Calls pop_list on the lst object (pop_list(lst, *inputs))\n 3.Checks if the resulting list is desired. (lst == expected)",
-    testCases: ["{'originalList': [1,2,3,4]}, [0], [2,3,4]}"],
-    advancedSetting: {
-      fullScore: "1",
-      testType: "unit_test",
-      skeletonCode: "",
+function createUnitTestTest(t) {
+  if (t === null) {
+    return {
+      functionName: "list_pop_test",
+      functionParams: "setup, inputs, expected",
+      description: "Unit test for list_pop. \n1. Creates a list object lst from setup['originalList']\n 2. Calls pop_list on the lst object (pop_list(lst, *inputs))\n 3.Checks if the resulting list is desired. (lst == expected)",
+      testCases: ["{'originalList': [1,2,3,4]}, [0], [2,3,4]}"],
+      advancedSetting: {
+        fullScore: "1",
+        testType: "unit_test",
+        skeletonCode: "",
+      }
+    }
+  } else {
+    return {
+      functionName: t.functionName + "_test",
+      functionParams: "inputs, expected",
+      description: "Unit test for " + t.functionName +". \n",
+      testCases: t.testCases.map(x => "(" + x[0] + "), " + x[1]),
+      advancedSetting: {
+        fullScore: "1",
+        testType: "unit_test",
+        skeletonCode: "assert " + t.functionName + "(*inputs) == expected, 'Output differ from expected. Current test failed.' \n" +
+          "return True",
+      }
     }
   }
 }
