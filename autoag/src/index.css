@@ -486,6 +486,7 @@ select {
   border: 1px solid #C62231;
   padding: 2px;
   padding-bottom: 4px;
+  padding-top: 1px;
   margin: -3px;
   margin-bottom: -5px;
 }

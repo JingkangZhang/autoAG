@@ -76,7 +76,7 @@ class App extends React.Component {
         newFormState["tests"].push(createInitialTestData());
         break;
       case "addUnitTest":
-        newFormState["tests"].push(createUnitTestTest());
+        newFormState["tests"].push(createUnitTestTest(null));
         break;
       case "testType":
         newFormState["tests"][e.target.dataset.testid].advancedSetting
@@ -225,12 +225,13 @@ function createInitialTestData() {
 function createUnitTestTest(t) {
   if (t === null) {
     return {
-      functionName: "list_pop_test",
-      functionParams: "setup, inputs, expected",
-      description: "Unit test for list_pop. \n1. Creates a list object lst from setup['originalList']\n 2. Calls pop_list on the lst object (pop_list(lst, *inputs))\n 3.Checks if the resulting list is desired. (lst == expected)",
-      testCases: ["{'originalList': [1,2,3,4]}, [0], [2,3,4]}"],
+      functionName: "",
+      functionParams: "",
+      description: "",
+      testCases: [""],
       advancedSetting: {
         fullScore: "1",
+        display: "show",
         testType: "unit_test",
         skeletonCode: "",
       }
@@ -240,9 +241,10 @@ function createUnitTestTest(t) {
       functionName: t.functionName + "_test",
       functionParams: "inputs, expected",
       description: "Unit test for " + t.functionName +". \n",
-      testCases: t.testCases.map(x => "(" + x[0] + "), " + x[1]),
+      testCases: t.testCases.map(x => "[" + x[0] + "], " + x[1]),
       advancedSetting: {
         fullScore: "1",
+        display: "show",
         testType: "unit_test",
         skeletonCode: "assert " + t.functionName + "(*inputs) == expected, 'Output differ from expected. Current test failed.' \n" +
           "return True",

@@ -21,7 +21,7 @@ class FormSkeletonCode extends React.Component {
           }
 
         </Label>
-        <Input type="textarea" name="skeletonCode"
+        <Input type="textarea" name="skeletonCode" spellCheck="false"
             onChange={this.props.formHandler}
             data-testid={this.props.testIndex}
             className="forPlaceHolder"
