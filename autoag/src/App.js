@@ -86,6 +86,10 @@ class App extends React.Component {
             createUnitTestTest(newFormState["tests"][e.target.dataset.testid]));
         }
         break;
+      case "unitDisplay":
+        newFormState["tests"][e.target.dataset.testid].advancedSetting
+            .display = e.target.value;
+        break;
       case "fullScore":
         newFormState["tests"][e.target.dataset.testid].advancedSetting
             .fullScore = e.target.value;
@@ -229,11 +233,12 @@ function createUnitTestTest(t) {
       functionParams: "",
       description: "",
       testCases: [""],
+      testCode: "",
       advancedSetting: {
         fullScore: "1",
         display: "show",
-        testType: "unit_test",
-        skeletonCode: "",
+        testType: "unit_test"
+
       }
     }
   } else {
@@ -242,12 +247,12 @@ function createUnitTestTest(t) {
       functionParams: "inputs, expected",
       description: "Unit test for " + t.functionName +". \n",
       testCases: t.testCases.map(x => "[" + x[0] + "], " + x[1]),
+      testCode: "assert " + t.functionName + "(*inputs) == expected, 'Output differ from expected. Current test failed.' \n" +
+        "return True",
       advancedSetting: {
         fullScore: "1",
         display: "show",
-        testType: "unit_test",
-        skeletonCode: "assert " + t.functionName + "(*inputs) == expected, 'Output differ from expected. Current test failed.' \n" +
-          "return True",
+        testType: "unit_test"
       }
     }
   }

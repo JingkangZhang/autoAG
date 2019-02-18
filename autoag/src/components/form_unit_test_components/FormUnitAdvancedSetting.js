@@ -7,28 +7,19 @@ import {
   Collapse,
   UncontrolledTooltip
 } from 'reactstrap';
-import FormFullScore from './FormFullScore';
-import FormTestType from './FormTestType';
-import FormTestName from './FormTestName';
-import FormPartialCredits from './FormPartialCredits';
-import FormSkeletonCode from './FormSkeletonCode';
-import FormDisallowedUse from './FormDisallowedUse';
-
+import FormFullScore from '../form_test_case_components/FormFullScore';
+import FormUnitDisplay from './FormUnitDisplay';
 //props:{
 //  formHandler:Function,
 //  testIndex:Int,
 //  pointsEnabled: Boolean,
-//  functionName: String,
 //  advancedSetting: {
 //    fullScore: "1",
-//    testType: "simple",
-//    testName: "",
-//    partialCredits: "none",
-//    skeletonCode: "",
-//    testForDisallowedUse: String,
+//    display: "show"
+//    testType: "unit_test",
 //  }
 //}
-class FormAdvancedSetting extends React.Component {
+class FormUnitAdvancedSetting extends React.Component {
   constructor(props) {
     super(props);
     this.handleToggle = this.handleToggle.bind(this);
@@ -52,7 +43,7 @@ class FormAdvancedSetting extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     var currNumErrors =
       document.querySelectorAll(
-        "#" + "formTestCase"+ this.props.testIndex + ' .advancedSetting .alertBorder').length;
+        "#" + "formUnitTestCase"+ this.props.testIndex + ' .advancedSetting .alertBorder').length;
 
     if (prevState.numErrors !== currNumErrors) {
       this.setState({numErrors: currNumErrors});
@@ -75,37 +66,17 @@ class FormAdvancedSetting extends React.Component {
           onExiting={this.onExiting}
           onExited={this.onExited}>
           <div class="advancedSettingGroup">
-            {this.props.pointsEnabled && this.props.advancedSetting.testType === "simple" &&
+            {this.props.pointsEnabled &&
               <FormFullScore
                 formHandler={this.props.formHandler}
                 testIndex={this.props.testIndex}
                 fullScore={this.props.advancedSetting.fullScore}/>
             }
-            {this.props.pointsEnabled && this.props.advancedSetting.testType === "simple" &&
-              <FormPartialCredits
-                formHandler={this.props.formHandler}
-                testIndex={this.props.testIndex}
-                partialCredits={this.props.advancedSetting.partialCredits}/>
-            }
-            <FormTestType
+
+            <FormUnitDisplay
               formHandler={this.props.formHandler}
               testIndex={this.props.testIndex}
-              testType={this.props.advancedSetting.testType} />
-            <FormTestName
-              formHandler={this.props.formHandler}
-              testIndex={this.props.testIndex}
-              functionName={this.props.functionName}
-              testName={this.props.advancedSetting.testName} />
-            <FormSkeletonCode
-              formHandler={this.props.formHandler}
-              testIndex={this.props.testIndex}
-              skeletonCode={this.props.advancedSetting.skeletonCode}
-              placeholder="'*** YOUR CODE HERE ***'"
-              type="simple"/>
-            <FormDisallowedUse
-              formHandler={this.props.formHandler}
-              testIndex={this.props.testIndex}
-              disallowedUse={this.props.advancedSetting.disallowedUse} />
+              display={this.props.advancedSetting.display} />
             <div class="advancedSettingBottomBorder"></div>
           </div>
 
@@ -114,4 +85,4 @@ class FormAdvancedSetting extends React.Component {
     )
   }
 }
-export default FormAdvancedSetting;
+export default FormUnitAdvancedSetting;

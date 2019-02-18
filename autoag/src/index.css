@@ -317,13 +317,13 @@ body {
   border-image: linear-gradient(to right, #CCC, #AAA);
   border-image-slice: 1;
 }
-.advancedSettingItem {
+.advancedSetting .advancedSettingItem{
   padding: 4px;
   margin-left: 5px;
   border-left: 5px solid #DDD !important;
 
 }
-.advancedSettingItem label {
+.advancedSetting .advancedSettingItem label{
   color: #555 !important;
 }
 /* .testHeader:focus {

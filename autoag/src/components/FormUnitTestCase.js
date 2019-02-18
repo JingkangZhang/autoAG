@@ -11,8 +11,9 @@ import FormFunctionName from './form_test_case_components/FormFunctionName';
 import FormFunctionParams from './form_test_case_components/FormFunctionParams';
 import FormDescription from './form_test_case_components/FormDescription';
 import FormSkeletonCode from './form_test_case_components/FormSkeletonCode';
-import FormAdvancedSetting from './form_test_case_components/FormAdvancedSetting';
 import FormUnitTestCases from './form_unit_test_components/FormUnitTestCases';
+import FormUnitAdvancedSetting from './form_unit_test_components/FormUnitAdvancedSetting';
+
 {
 //  props:{
 //     testData: {
@@ -20,10 +21,11 @@ import FormUnitTestCases from './form_unit_test_components/FormUnitTestCases';
       // functionParams: "setup, inputs, expected",
       // description: "Unit test for list_pop. \n1. Creates a list object lst from setup['originalList']\n 2. Calls pop_list on the lst object (pop_list(lst, *inputs))\n 3.Checks if the resulting list is desired. (lst == expected)",
       // testCases: ["{'originalList': [1,2,3,4]}, [0], [2,3,4]"],
+    //   testCode: "",
       // advancedSetting: {
       //   fullScore: "1",
+      //   display: "show",
       //   testType: "unit_test",
-      //   skeletonCode: "",
       // }
 //     },
 //     testIndex: Int,
@@ -137,13 +139,17 @@ class FormUnitTestCase extends React.Component {
           <FormSkeletonCode
             formHandler={this.props.formHandler}
             testIndex={this.props.testIndex}
-            skeletonCode={this.props.testData.advancedSetting.skeletonCode}
+            skeletonCode={this.props.testData.testCode}
             placeholder="return True #test passed, False otherwise"
             type="unit"/>
           <FormUnitTestCases formHandler={this.props.formHandler}
             testIndex={this.props.testIndex}
             functionParams={this.props.testData.functionParams}
             testCases={this.props.testData.testCases} />
+          <FormUnitAdvancedSetting formHandler={this.props.formHandler}
+            testIndex={this.props.testIndex}
+            pointsEnabled={this.props.pointsEnabled}
+            advancedSetting={this.props.testData.advancedSetting} />
         </div>
       </Collapse>
       </div>
