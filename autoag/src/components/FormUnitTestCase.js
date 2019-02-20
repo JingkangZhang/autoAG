@@ -10,7 +10,7 @@ import {
 import FormFunctionName from './form_test_case_components/FormFunctionName';
 import FormFunctionParams from './form_test_case_components/FormFunctionParams';
 import FormDescription from './form_test_case_components/FormDescription';
-import FormSkeletonCode from './form_test_case_components/FormSkeletonCode';
+import UnitTestCode from './form_unit_test_components/UnitTestCode';
 import FormUnitTestCases from './form_unit_test_components/FormUnitTestCases';
 import FormUnitAdvancedSetting from './form_unit_test_components/FormUnitAdvancedSetting';
 
@@ -136,10 +136,10 @@ class FormUnitTestCase extends React.Component {
             description={this.props.testData.description}
             placeholder="Unit test for list_pop."
             type="unit"/>
-          <FormSkeletonCode
+          <UnitTestCode
             formHandler={this.props.formHandler}
             testIndex={this.props.testIndex}
-            skeletonCode={this.props.testData.testCode}
+            unitTestCode={this.props.testData.testCode}
             placeholder="return True #test passed, False otherwise"
             type="unit"/>
           <FormUnitTestCases formHandler={this.props.formHandler}

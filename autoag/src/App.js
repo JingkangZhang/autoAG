@@ -138,6 +138,10 @@ class App extends React.Component {
         newFormState["tests"][e.target.dataset.testid]
             .advancedSetting.skeletonCode = e.target.value;
         break;
+      case "unitTestCode":
+        newFormState["tests"][e.target.dataset.testid]
+            .testCode = e.target.value;
+        break;
       case "disallowedUse":
         newFormState["tests"][e.target.dataset.testid]
             .advancedSetting.disallowedUse = e.target.value;
