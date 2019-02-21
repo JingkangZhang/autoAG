@@ -84,7 +84,7 @@ class TopNav extends React.PureComponent {
                 </ModalFooter>
               </Modal>
               <NavItem>
-                <NavLink onClick={this.toggleImportPopover}>Open</NavLink>
+                <NavLink onClick={this.toggleImportPopover}>Import</NavLink>
               </NavItem>
 
               <Modal isOpen={this.state.importPopoverOpen} toggle={this.toggleImportPopover}>
