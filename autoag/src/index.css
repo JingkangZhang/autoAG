@@ -728,6 +728,13 @@ pre{
   border-radius: 10px;
 }
 
+.testSummaryUnit {
+  list-style-type: none;
+  padding-left: 4px;
+  border-left: 5px solid hsla(60, 50%, 70%, 1);
+  border-radius: 10px;
+}
+
 .testSummaryTestName {
   font-size: 15px;
   line-height: 20px;

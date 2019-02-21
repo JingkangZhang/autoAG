@@ -41,7 +41,10 @@ class TestSummaryQuestion extends React.Component {
       );
     }
     return (
-      <ul class="testSummaryQuestion">
+      <ul class={this.props.testType === "unit_test" ?
+          "testSummaryUnit"
+          :
+          "testSummaryQuestion"}>
         <li class="testSummaryTestName">
          {testName + (pointsEnabled ? ("  (" + fullScore + " Pts)") : "") }
         </li>
