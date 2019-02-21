@@ -30,26 +30,29 @@ class TestSummary extends React.Component {
     var tests = formState.tests;
     for (var i = 0; i < tests.length; i++) {
       var currTest = tests[i];
-      var isUnit = currTest.advancedSetting.testType === "unit_test";
-      if (isUnit) {
-        continue;
-      }
+      var testType = currTest.advancedSetting.testType;
+
       questionList.push(
+        testType !== "unit" &&
         <TestSummaryQuestion
           testName={
-            "Q" + (i + 1) + ": " +
-            (
-              currTest.advancedSetting.testName.replace(/\s/g, '') !== "" ?
-              currTest.advancedSetting.testName
+            testType === "unit_test" ?
+              "Unit Test: " + currTest.functionName
               :
-              currTest.functionName
-            )
+              "Q" + (i + 1) + ": " +
+              (
+                currTest.advancedSetting.testName.replace(/\s/g, '') !== "" ?
+                currTest.advancedSetting.testName
+                :
+                currTest.functionName
+              )
           }
           disallowedUse={currTest.advancedSetting.disallowedUse}
           fullScore={currTest.advancedSetting.fullScore}
           testCases={currTest.testCases}
           pointsEnabled={formState.pointsEnabled}
           functionParams={tests[i].functionParams}
+          testType={testType}
           />
       );
     }
@@ -69,7 +72,9 @@ class TestSummary extends React.Component {
 function totalPoints(tests) {
   var sum = 0;
   for (var i = 0; i < tests.length; i++) {
-    sum += parseInt(tests[i].advancedSetting.fullScore);
+    if (tests[i].advancedSetting.testType !== "unit") {
+      sum += parseInt(tests[i].advancedSetting.fullScore);
+    }
   }
   return sum;
 }

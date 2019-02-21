@@ -1,0 +1,41 @@
+{
+  "pointsEnabled": false,
+  "starterCode": "",
+  "tests": [
+    {
+      "functionName": "pop_front",
+      "functionParams": "lst",
+      "description": "Remove and return the first element in LST.",
+      "testCases": [
+        [
+          "",
+          ""
+        ]
+      ],
+      "advancedSetting": {
+        "fullScore": "1",
+        "testType": "unit",
+        "testName": "",
+        "partialCredits": "none",
+        "skeletonCode": "'*** YOUR CODE HERE ***'",
+        "disallowedUse": ""
+      }
+    },
+    {
+      "functionName": "pop_front_test",
+      "functionParams": "lst, expected_lst, expected_ret",
+      "description": "Unit test for pop_front.\n1. tests if the return value is correct.\n2. tests if the list is modified correctly.",
+      "testCases": [
+        "[1, 2, 3, 4], [2, 3, 4], 1 ",
+        "[\"Hi\", \"y'all\"], [\"y'all\"], \"Hi\"",
+        "[[\"nested!\"]], [], [\"nested!\"]"
+      ],
+      "testCode": "\n#set up error message\nerror_msg = \"lst = \" + lst.__repr__()\nerror_msg += \"\\n Running pop_front on lst...\"\n\n#run test\nret = pop_front(lst)\n\n#check return value\nif ret != expected_ret:\n    print(error_msg)\n    print(\"Should return\", expected_ret)\n    print(\"Got:\", ret)\n    #Return False to report to autoAG failure of current test. \n    #You could also throw an error; autoAG will catch it.\n    return False \n\n#check original list\nif lst != expected_lst:\n    print(error_msg)\n    print(\"lst should be\", expected_lst)\n    print(\"Got:\", lst)\n    return False\n\n#Return True to report to autoAG success of current test.\nreturn True",
+      "advancedSetting": {
+        "fullScore": "1",
+        "display": "show",
+        "testType": "unit_test"
+      }
+    }
+  ]
+}
