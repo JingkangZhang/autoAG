@@ -66,6 +66,15 @@ class App extends React.Component {
           FileSaver.saveAs(content, "homework.zip");
         });
         break;
+      case "helpAddSimpleQuestions":
+        newFormState["tests"] = newFormState["tests"].concat(genSimpleQuestions());
+        break;
+      case "helpAddDisallowedUses":
+        newFormState["tests"] = newFormState["tests"].concat(genDisallowedUses());
+        break;
+      case "helpAddUnitTests":
+        newFormState["tests"] = newFormState["tests"].concat(genUnitTests());
+        break;
       case "pointsEnabled":
         newFormState["pointsEnabled"] = e.target.checked;
         break;
@@ -260,6 +269,257 @@ function createUnitTestTest(t) {
       }
     }
   }
+}
+
+function genSimpleQuestions() {
+  return [
+    {
+      "functionName": "twenty_nineteen",
+      "functionParams": "",
+      "description": "Come up with the most creative way of returning 2019.",
+      "testCases": [
+        [
+          "",
+          "2019"
+        ]
+      ],
+      "advancedSetting": {
+        "fullScore": "1",
+        "testType": "simple",
+        "testName": "",
+        "partialCredits": "none",
+        "skeletonCode": "return ________ #FIXME",
+        "disallowedUse": ""
+      }
+    },
+    {
+      "functionName": "add",
+      "functionParams": "a, b",
+      "description": "Return the sum of `a` and `b`.",
+      "testCases": [
+        [
+          "0, 0",
+          "0"
+        ],
+        [
+          "0, 1",
+          "1"
+        ],
+        [
+          "1, 0",
+          "1"
+        ],
+        [
+          "1, 1",
+          "2"
+        ],
+        [
+          "9, 8",
+          "17"
+        ],
+        [
+          "42, 42",
+          "84"
+        ],
+        [
+          "100, 1000",
+          "1100"
+        ]
+      ],
+      "advancedSetting": {
+        "fullScore": "1",
+        "testType": "simple",
+        "testName": "",
+        "partialCredits": "none",
+        "skeletonCode": "'*** YOUR CODE HERE ***'",
+        "disallowedUse": ""
+      }
+    },
+    {
+      "functionName": "two_sum",
+      "functionParams": "nums, target",
+      "description": "Given an array of integers, return indices of the two numbers such that \nthey add up to a specific target.\n\nYou may assume that each input would have exactly one solution, and you may \nnot use the same element twice.\n\n:type nums: List[int]\n:type target: int\n:rtype: List[int]\n\nFrom LeetCode.",
+      "testCases": [
+        [
+          "[1, 2, 3, 4], 3",
+          "[0, 1]"
+        ],
+        [
+          "[6, 3, 2, 4], 7",
+          "[1, 3]"
+        ],
+        [
+          "[2, 4, 5, 3, 10, 9, 6], 11",
+          "[3, 5]"
+        ],
+        [
+          "[12, 13, 19, 18, 15], 33",
+          "[3, 4]"
+        ]
+      ],
+      "advancedSetting": {
+        "fullScore": "1",
+        "testType": "simple",
+        "testName": "",
+        "partialCredits": "none",
+        "skeletonCode": "'*** YOUR CODE HERE ***'",
+        "disallowedUse": ""
+      }
+    }
+  ];
+}
+function genDisallowedUses() {
+  return [
+    {
+      "functionName": "gcd_recur",
+      "functionParams": "a, b",
+      "description": "Return the greatest common divisor of A and B. Consider using The \nEuclidean Algorithm: If a is greater than b and a is not divisible \nby b, then: gcd(a, b) = gcd(b, a % b).\n\nPlease use a recursive solution.",
+      "testCases": [
+        [
+          "34, 19",
+          "1"
+        ],
+        [
+          "25, 5",
+          "5"
+        ],
+        [
+          "20, 30",
+          "10"
+        ],
+        [
+          "40, 40",
+          "40"
+        ],
+        [
+          "17, 289",
+          "17"
+        ],
+        [
+          "60, 48",
+          "12"
+        ],
+        [
+          "59, 27",
+          "1"
+        ],
+        [
+          "684, 1767",
+          "57"
+        ],
+        [
+          "5, 0",
+          "5"
+        ],
+        [
+          "0, 5",
+          "5"
+        ]
+      ],
+      "advancedSetting": {
+        "fullScore": "1",
+        "testType": "simple",
+        "testName": "",
+        "partialCredits": "none",
+        "skeletonCode": "if ______: #FIXME\n    return a\nelse:\n    return ________ #FIXME",
+        "disallowedUse": "\"While\", \"For\""
+      }
+    },
+    {
+      "functionName": "gcd_iter",
+      "functionParams": "a, b",
+      "description": "Return the greatest common divisor of A and B. Consider using The \nEuclidean Algorithm: If a is greater than b and a is not divisible \nby b, then: gcd(a, b) = gcd(b, a % b).\n\nPlease use an iterative solution.",
+      "testCases": [
+        [
+          "34, 19",
+          "1"
+        ],
+        [
+          "25, 5",
+          "5"
+        ],
+        [
+          "20, 30",
+          "10"
+        ],
+        [
+          "40, 40",
+          "40"
+        ],
+        [
+          "17, 289",
+          "17"
+        ],
+        [
+          "60, 48",
+          "12"
+        ],
+        [
+          "59, 27",
+          "1"
+        ],
+        [
+          "684, 1767",
+          "57"
+        ],
+        [
+          "5, 0",
+          "5"
+        ],
+        [
+          "0, 5",
+          "5"
+        ]
+      ],
+      "advancedSetting": {
+        "fullScore": "1",
+        "testType": "simple",
+        "testName": "",
+        "partialCredits": "none",
+        "skeletonCode": "while ________: #FIXME\n    a, b = ________ #FIXME\nreturn ________ #FIXME",
+        "disallowedUse": "\"Recursion\""
+      }
+    }
+  ];
+}
+function genUnitTests() {
+  return [
+    {
+      "functionName": "pop_front",
+      "functionParams": "lst",
+      "description": "Remove and return the first element in LST.",
+      "testCases": [
+        [
+          "",
+          ""
+        ]
+      ],
+      "advancedSetting": {
+        "fullScore": "1",
+        "testType": "unit",
+        "testName": "",
+        "partialCredits": "none",
+        "skeletonCode": "'*** YOUR CODE HERE ***'",
+        "disallowedUse": ""
+      }
+    },
+    {
+      "functionName": "pop_front_test",
+      "functionParams": "lst, expected_lst, expected_ret",
+      "description": "Unit test for pop_front.",
+      "testCases": [
+        "[1, 2, 3, 4], [2, 3, 4], 1 ",
+        "[\"Hi\", \"y'all\"], [\"y'all\"], \"Hi\"",
+        "[[\"nested!\"]], [], [\"nested!\"]"
+      ],
+      "testCode": "\n#set up error message\nerror_msg = \"lst = \" + lst.__repr__()\nerror_msg += \"\\n Running pop_front on lst...\"\n\n#run test\nret = pop_front(lst)\n\n#check return value\nif ret != expected_ret:\n    print(error_msg)\n    print(\"Should return\", expected_ret)\n    print(\"Got:\", ret)\n    #Return False to report to autoAG failure of current test. \n    #You could also throw an error; autoAG will catch it.\n    return False \n\n#check original list\nif lst != expected_lst:\n    print(error_msg)\n    print(\"lst should be\", expected_lst)\n    print(\"Got:\", lst)\n    return False\n\n#Return True to report to autoAG success of current test.\nreturn True",
+      "advancedSetting": {
+        "fullScore": "1",
+        "display": "hide",
+        "testType": "unit_test"
+      }
+    }
+  ]
 }
 // Function to download data to a file
 function download(data, filename, type) {

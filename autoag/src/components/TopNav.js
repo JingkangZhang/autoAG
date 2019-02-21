@@ -49,6 +49,7 @@ class TopNav extends React.PureComponent {
       helpOpen: !this.state.helpOpen
     })
   }
+
   render() {
     return (
 
@@ -74,11 +75,34 @@ class TopNav extends React.PureComponent {
               <NavItem>
                 <NavLink onClick={this.toggleHelp}>Help and Usage</NavLink>
               </NavItem>
-              <Modal isOpen={this.state.helpOpen} toggle={this.toggleHelp}>
-                <ModalHeader toggle={this.toggleHelp}>Coming Soon...</ModalHeader>
+              <Modal isOpen={this.state.helpOpen} toggle={this.toggleHelp}
+                className="modal-lg">
+                <ModalHeader toggle={this.toggleHelp}>Welcome to Jingkang Zhang's auto-auto-grader!</ModalHeader>
                 <ModalBody>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </ModalBody>
+                  <p>{"This educational project was developed while I am teaching Python classes online. It's meant to make composing coding homework easy and fun for educators!"}</p>
+                  <h3>Overview</h3>
+                  <p>There are two types of tests you can created with autoAG: simple and unit.
+                    Simple questions are ones that ask students to write a pure function, i.e., the function is tested solely basing on input-output matchings. This should satisfy needs for most problems. When you click on "Add Question" button,
+                  the added question is "simple" by default. In this case, you specify the function signatures (name, parameters, skeleton code, etc) and tests in the same block.
+                  </p>
+                  <p>When writing a unit test, on the other hand, the question is separate from the tests. To make a question "unit", click on "Advanced Settings - Test Type - unit test". As you'll notice,
+                    this changes the current block, and adds a new test block (yellow). You may also add a unit test block using the yellow "Add Unit Test" button.
+                    The yellow test block is a unit test. It's not a question for students; it's a function for you to specify tests. Your unit test function, later, will be called on the arguments you put in the test cases.
+                    Returning True makes the current test "PASS", while False will be "FAIL". This way, you have full control over the unit tests. Print error logs along the way as a courtesy to your students.
+                    Instead of returning False, you may also throw an error; autoAG will catch it. Thus, it's sometimes convenient to just write assert statements.
+                  </p>
+                  <p>When finished, click on export on the navbar. A zip file will be downloaded. Unzipped, the folder contains 2 files: homework.py and test.
+                  As the students are progressing through homework.py, they may type "python3 test question_name" in terminal to run tests on the current question,
+                  or "python3 test" to run tests on all questions. </p>
+                  <p>Save your sessions often, so that you can import them back.</p>
+                  <h3>Examples</h3>
+                  <ul>
+                    <li>Simple Questions <button class="helpAddButton" name="helpAddSimpleQuestions" onClick={this.props.formHandler}>add</button></li>
+                    <li>Disallowed Uses <button class="helpAddButton" name="helpAddDisallowedUses" onClick={this.props.formHandler}>add</button></li>
+                    <li>Unit Tests <button class="helpAddButton" name="helpAddUnitTests" onClick={this.props.formHandler}>add</button></li>
+
+                  </ul>
+                  </ModalBody>
                 <ModalFooter>
                   <Button color="secondary" onClick={this.toggleHelp}>Close</Button>
                 </ModalFooter>
