@@ -88,12 +88,12 @@ class TopNav extends React.PureComponent {
                   <p>When writing a unit test, on the other hand, the question is separate from the tests. To make a question "unit", click on "Advanced Settings - Test Type - unit test". As you'll notice,
                     this changes the current block, and adds a new test block (yellow). You may also add a unit test block using the yellow "Add Unit Test" button.
                     The yellow test block is a unit test. It's not a question for students; it's a function for you to specify tests. Your unit test function, later, will be called on the arguments you put in the test cases.
-                    Returning True makes the current test "PASS", while False will be "FAIL". This way, you have full control over the unit tests. Print error logs along the way as a courtesy to your students.
+                    Returning <code>True</code> makes the current test "PASS", while <code>False</code> will be "FAIL". This way, you have full control over the unit tests. Print error logs along the way as a courtesy to your students.
                     Instead of returning False, you may also throw an error; autoAG will catch it. Thus, it's sometimes convenient to just write assert statements.
                   </p>
                   <p>When finished, click on export on the navbar. A zip file will be downloaded. Unzipped, the folder contains 2 files: homework.py and test.
-                  As the students are progressing through homework.py, they may type "python3 test question_name" in terminal to run tests on the current question,
-                  or "python3 test" to run tests on all questions. </p>
+                  As the students are progressing through homework.py, they may type <code>python3 test question_name</code> in terminal to run tests on the current question,
+                  or <code>python3 test</code> to run tests on all questions. </p>
                   <p>Save your sessions often, so that you can import them back.</p>
                   <h3>Examples</h3>
                   <ul>

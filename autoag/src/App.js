@@ -515,7 +515,7 @@ function genUnitTests() {
       "testCode": "\n#set up error message\nerror_msg = \"lst = \" + lst.__repr__()\nerror_msg += \"\\n Running pop_front on lst...\"\n\n#run test\nret = pop_front(lst)\n\n#check return value\nif ret != expected_ret:\n    print(error_msg)\n    print(\"Should return\", expected_ret)\n    print(\"Got:\", ret)\n    #Return False to report to autoAG failure of current test. \n    #You could also throw an error; autoAG will catch it.\n    return False \n\n#check original list\nif lst != expected_lst:\n    print(error_msg)\n    print(\"lst should be\", expected_lst)\n    print(\"Got:\", lst)\n    return False\n\n#Return True to report to autoAG success of current test.\nreturn True",
       "advancedSetting": {
         "fullScore": "1",
-        "display": "hide",
+        "display": "show",
         "testType": "unit_test"
       }
     }
