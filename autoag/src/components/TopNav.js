@@ -79,7 +79,7 @@ class TopNav extends React.PureComponent {
                 className="modal-lg">
                 <ModalHeader toggle={this.toggleHelp}>Welcome to Jingkang Zhang's auto-auto-grader!</ModalHeader>
                 <ModalBody>
-                  <p>{"This educational project was developed while I am teaching Python classes online. It's meant to make composing coding homework easy and fun for educators!"}</p>
+                  <p>{"This educational project was developed while I was teaching Python classes online. It's meant to make composing coding homework easy and fun for educators!"}</p>
                   <h3>Overview</h3>
                   <p>There are two types of tests you can created with autoAG: simple and unit.
                     Simple questions are ones that ask students to write a pure function, i.e., the function is tested solely basing on input-output matchings. This should satisfy needs for most problems. When you click on "Add Question" button,
