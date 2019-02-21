@@ -1,3 +1,7 @@
+#Below commented code will be inserted to file by JavaScript
+#d = eval(autoAG.json)
+#def unit_f_name_test():
+#  ...
 from ast import parse, NodeVisitor, Name
 import traceback
 _NAMES = {
@@ -177,6 +181,7 @@ import homework
 import sys
 import io
 print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+
 class Test:
     def assertEqual(self, a, b):
         return a==b
@@ -184,6 +189,7 @@ class Test:
     def __init__(self, question):
         self.question = question
         self.tests_passed = 0
+        self.test_type = question["advancedSetting"]["testType"]
 
     def test(self, suppress=False):
         if suppress:
@@ -191,7 +197,10 @@ class Test:
             text_trap = io.StringIO()
             sys.stdout = text_trap
         print("---------------------------------------------------------------------\n")
-        print("Testing {}:\n".format(self.question['functionName'] if self.question['advancedSetting']['testName'].strip() == "" else self.question['advancedSetting']['testName']))
+        if self.test_type == "simple":
+            print("Testing {}:\n".format(self.question['functionName'] if self.question['advancedSetting']['testName'].strip() == "" else self.question['advancedSetting']['testName']))
+        elif self.test_type == "unit_test":
+            print("Running Unit Test '{}'".format(self.question['functionName']))
 
         for testCase in self.question['testCases']:
             if not self.test_one_pair(testCase):
@@ -200,16 +209,16 @@ class Test:
 
                 sys.stdout = sys.__stdout__
                 return (False, 0)
+        if self.test_type == "simple":
+            comma = "," if self.question['advancedSetting']['disallowedUse'] else ""
+            disallowedUse = eval("(" + self.question['advancedSetting']['disallowedUse'] + comma + ")")
+            if disallowedUse:
+                if (not check("homework.py", self.question['functionName'], disallowedUse)):
+                    print("Please revise your code and remove these usages.")
+                    print("\n---------------------------------------------------------------------")
 
-        comma = "," if self.question['advancedSetting']['disallowedUse'] else ""
-        disallowedUse = eval("(" + self.question['advancedSetting']['disallowedUse'] + comma + ")")
-        if disallowedUse:
-            if (not check("homework.py", self.question['functionName'], disallowedUse)):
-                print("Please revise your code and remove these usages.")
-                print("\n---------------------------------------------------------------------")
-
-                sys.stdout = sys.__stdout__
-                return (False, 0)
+                    sys.stdout = sys.__stdout__
+                    return (False, 0)
         print("All {} cases passed. No cases failed.".format(len(self.question['testCases'])))
         print("\n---------------------------------------------------------------------")
 
@@ -217,37 +226,51 @@ class Test:
         return (True, int(self.question["advancedSetting"]["fullScore"]))
 
     def test_one_pair(self, testCase):
-        try:
-            expected = eval(testCase[1])
-        except:
-            print("It's not you; it's the teacher! \n" +
-                "There's an error in the test case: cannot evaluate '" + testCase[1] + "'\n" +
-                "Please contact your teacher. \n")
-            return False
-        funcCallRepr = self.question["functionName"] + "(" + testCase[0] + ")"
-        try:
-            answer = eval("homework." + self.question["functionName"] + "(" + testCase[0] + ")")
-        except Exception as ex:
-            print("Running {}:\n".format(funcCallRepr))
-            print(traceback.format_exc())
-            print("Current test terminated.\n")
-            return False
+        if self.test_type == "simple":
+            try:
+                expected = eval(testCase[1])
+            except:
+                print("It's not you, it's the teacher! \n" +
+                    "There's an error in the test case: cannot evaluate '" + testCase[1] + "'\n" +
+                    "Please contact your teacher. \n")
+                return False
+            funcCallRepr = self.question["functionName"] + "(" + testCase[0] + ")"
+            try:
+                answer = eval("homework." + self.question["functionName"] + "(" + testCase[0] + ")")
+            except Exception as ex:
+                print("Running {}:\n".format(funcCallRepr))
+                print(traceback.format_exc())
+                print("Current test terminated.\n")
+                return False
 
-        if self.assertEqual(answer, expected):
-            self.tests_passed += 1
-            return True
+            if self.assertEqual(answer, expected):
+                self.tests_passed += 1
+                return True
+            else:
+                print("Running {}:".format(funcCallRepr))
+                print("Expected: {}\nGot: {}\n".format(expected.__repr__(), answer.__repr__()))
+                return False
         else:
-            print("Running {}:".format(funcCallRepr))
-            print("Expected: {}\nGot: {}\n".format(expected.__repr__(), answer.__repr__()))
-            return False
+            if self.question["advancedSetting"]["display"] == "show":
+                f = "homework." + self.question["functionName"]
+            else:
+                f = "unit_" + self.question["functionName"]
+            try:
+                return eval(f + "("+ testCase + ")")
+            except:
+                print(traceback.format_exc())
+                print("Current test terminated.\n")
+                return False
+
 
 # questionNames = [ question['functionName'] if question['advancedSetting']['testName'].strip() == "" else question['advancedSetting']['testName'] for question in d["tests"]]
 questionD = {question['functionName']
-    if question['advancedSetting']['testName'].strip() == ""
+    if question["advancedSetting"]["testType"] == "unit_test" or question['advancedSetting']['testName'].strip() == ""
     else question['advancedSetting']['testName']
     :
     Test(question)
     for question in d["tests"]  #d is the autoAG file content (a dictionary). Open a file to see it's structure
+    if question["advancedSetting"]["testType"] != "unit"
     }
 if len(sys.argv) > 1:
     assert sys.argv[1] in questionD, "\nThe command line argument you passed in is not a valid function name; choose from {}\n".format(list(questionD.keys()).__repr__())
@@ -260,5 +283,5 @@ else:
     print("Ran:", len(result), "tests")
     print("Passed:", passed)
     if d["pointsEnabled"]:
-        print("Total score: " + score + "/" + str(sum([int(t["advancedSetting"]["fullScore"]) for t in d["tests"]])))
+        print("Total score: " + score + "/" + str(sum([int(t["advancedSetting"]["fullScore"]) for t in d["tests"] if t["advancedSetting"]["testType"] != "unit"])))
 print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")

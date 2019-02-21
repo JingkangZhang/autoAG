@@ -563,7 +563,7 @@ select {
   border-right-color: #E56A75;
 }
 
-.disallowedUseModalLauncher {
+.disallowedUseModalLauncher, .unitDisplayModalLauncher{
   float: right;
   margin-left: 30px;
   margin-top: -1px;
