@@ -74,7 +74,7 @@ function check(f) {
       if (stack.length !== 0 && stack[stack.length-1] === c) {
         stack.pop();
         quoteOpen = false;
-      } else {
+      } else if (stack[stack.length-1] !== "'" && stack[stack.length-1] !== '"') {
         stack.push(c);
         quoteOpen = true;
       }
@@ -110,8 +110,8 @@ function check(f) {
     }
   }
   if (stack.length !== 0) {
-    console.log("ended, returning error here");
-    console.log(stack);
+    // console.log("ended, returning error here");
+    // console.log(stack);
     return {count:count, error:true};
   }
   return {count:count, error:false};

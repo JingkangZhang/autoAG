@@ -249,7 +249,7 @@ function createUnitTestTest(t) {
     return {
       functionName: t.functionName + "_test",
       functionParams: "inputs, expected",
-      description: "Unit test for " + t.functionName +". \n",
+      description: "Unit test for " + t.functionName +".",
       testCases: t.testCases.map(x => "[" + x[0] + "], " + x[1]),
       testCode: "assert " + t.functionName + "(*inputs) == expected, 'Output differ from expected. Current test failed.' \n" +
         "return True",
