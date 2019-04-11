@@ -218,6 +218,8 @@ body {
   border-bottom-left-radius: 0;
   font-size: 20px;
   height: 38px;
+  z-index: 1;
+  position: relative;
   /* border-bottom-right-radius: 10px; */
 }
 
@@ -231,13 +233,16 @@ body {
   border-bottom-left-radius: 0;
   font-size: 20px;
   height: 38px;
+  z-index: 1;
   /* border-bottom-right-radius: 10px; */
 }
 
 .headerButtonGroup, .headerButtonGroupUnit{
   margin-top: -35px;
   float: right;
-  display: inline-block;
+  z-index: 2;
+  position: relative;
+  /* display: inline-block; */
 }
 
 .testCaseHeader {
