@@ -219,7 +219,7 @@ body {
   font-size: 20px;
   height: 38px;
   z-index: 1;
-  position: relative;
+  /* position: relative; */
   /* border-bottom-right-radius: 10px; */
 }
 

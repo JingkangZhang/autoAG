@@ -14,7 +14,7 @@ function generateTest(FORM_STATE) {
       unitTestFunctions = unitTestFunctions.slice(0, -1);
     }
   }
-  return unitTestFunctions + "\ntrue = True \nfalse = False\n" +
+  return "#!/usr/bin/env python3\n" + unitTestFunctions + "\ntrue = True \nfalse = False\n" +
     "d = eval(\"" +
     JSON.stringify(FORM_STATE).replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/"/g, '\\"') +
     "\")\n" + testPy;
