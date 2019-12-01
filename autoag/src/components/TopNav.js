@@ -25,6 +25,7 @@ class TopNav extends React.PureComponent {
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleImportPopover = this.toggleImportPopover.bind(this);
     this.toggleHelp = this.toggleHelp.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
     this.state = {
       navIsOpen: false,
       importPopoverOpen: false,
@@ -48,6 +49,15 @@ class TopNav extends React.PureComponent {
     this.setState({
       helpOpen: !this.state.helpOpen
     })
+  }
+
+  clickHandler(...args) {
+
+
+    this.props.formHandler(...args);
+    this.setState({
+        helpOpen: false
+    });
   }
 
   render() {
@@ -97,9 +107,9 @@ class TopNav extends React.PureComponent {
                   <p>Save your sessions often, so that you can import them back.</p>
                   <h3>Examples</h3>
                   <ul>
-                    <li>Simple Questions <button class="helpAddButton" name="helpAddSimpleQuestions" onClick={this.props.formHandler}>add</button></li>
-                    <li>Disallowed Uses <button class="helpAddButton" name="helpAddDisallowedUses" onClick={this.props.formHandler}>add</button></li>
-                    <li>Unit Tests <button class="helpAddButton" name="helpAddUnitTests" onClick={this.props.formHandler}>add</button></li>
+                    <li>Simple Questions <button class="helpAddButton" name="helpAddSimpleQuestions" onClick={this.clickHandler}>add</button></li>
+                    <li>Disallowed Uses <button class="helpAddButton" name="helpAddDisallowedUses" onClick={this.clickHandler}>add</button></li>
+                    <li>Unit Tests <button class="helpAddButton" name="helpAddUnitTests" onClick={this.clickHandler}>add</button></li>
 
                   </ul>
                   </ModalBody>
