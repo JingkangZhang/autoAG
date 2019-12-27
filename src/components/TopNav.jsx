@@ -1,5 +1,4 @@
 import React from 'react';
-// import githubMark from '../GitHub-Mark-64px.png'
 import {
   Collapse,
   Navbar,
@@ -17,6 +16,9 @@ import {
   Button,
   Modal, ModalBody, ModalFooter, ModalHeader,
 } from 'reactstrap';
+import { uploadAutograder, uploadSolution } from 'services/';
+
+// import githubMark from '../GitHub-Mark-64px.png'
 
 // props : {formHandler: Function}
 class TopNav extends React.PureComponent {
@@ -24,13 +26,24 @@ class TopNav extends React.PureComponent {
     super(props);
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleImportPopover = this.toggleImportPopover.bind(this);
+    this.togglePublishPopover = this.togglePublishPopover.bind(this);
+
     this.toggleHelp = this.toggleHelp.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
+    this.handlePublishChange = this.handlePublishChange.bind(this);
     this.state = {
       navIsOpen: false,
       importPopoverOpen: false,
+      publishPopoverOpen: false,
       helpOpen: false,
+      publishName: '',
     };
+  }
+
+  handlePublishChange(e) {
+    this.setState({
+      publishName: e.target.value,
+    });
   }
 
   toggleNav() {
@@ -42,6 +55,12 @@ class TopNav extends React.PureComponent {
   toggleImportPopover() {
     this.setState({
       importPopoverOpen: !this.state.importPopoverOpen,
+    });
+  }
+
+  togglePublishPopover() {
+    this.setState({
+      publishPopoverOpen: !this.state.publishPopoverOpen,
     });
   }
 
@@ -161,6 +180,28 @@ Unit Tests
                 <Button color="secondary" onClick={this.toggleHelp}>Close</Button>
               </ModalFooter>
             </Modal>
+
+            <NavItem>
+              <NavLink onClick={this.togglePublishPopover}>Publish</NavLink>
+            </NavItem>
+
+            <Modal isOpen={this.state.publishPopoverOpen} toggle={this.togglePublishPopover}>
+              <ModalHeader toggle={this.togglePublishPopover}>Publish Homework to Server (beta)</ModalHeader>
+              <ModalBody>
+                <div>Homework Name:</div>
+                <Input value={this.state.publishName} onChange={this.handlePublishChange} placeholder="MyHomework" id="publishName" />
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="primary"
+                  name="publish"
+                  onClick={(e) => { this.togglePublishPopover(); uploadAutograder(this.state.publishName, 'adsfgdafgs'); }}
+                >
+                publish
+                </Button>
+              </ModalFooter>
+            </Modal>
+
             <NavItem>
               <NavLink onClick={this.toggleImportPopover}>Import</NavLink>
             </NavItem>
