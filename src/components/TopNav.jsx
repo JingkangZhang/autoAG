@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Collapse,
   Navbar,
@@ -12,11 +12,17 @@ import {
   DropdownItem,
   UncontrolledTooltip,
   Input,
-  Popover, PopoverHeader, PopoverBody,
+  Popover,
+  PopoverHeader,
+  PopoverBody,
   Button,
-  Modal, ModalBody, ModalFooter, ModalHeader,
-} from 'reactstrap';
-import { uploadAutograder, uploadSolution } from 'services/';
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader
+} from "reactstrap";
+import { uploadAutograder, uploadSolution } from "services/";
+import Loader from "components/Loader";
 
 // import githubMark from '../GitHub-Mark-64px.png'
 
@@ -36,55 +42,87 @@ class TopNav extends React.PureComponent {
       importPopoverOpen: false,
       publishPopoverOpen: false,
       helpOpen: false,
-      publishName: '',
+      publishName: "",
+      emptyPublishNameWarning: "",
+      publishing: false
     };
   }
 
   handlePublishChange(e) {
     this.setState({
-      publishName: e.target.value,
+      publishName: e.target.value
     });
   }
 
   toggleNav() {
     this.setState({
-      navIsOpen: !this.state.navIsOpen,
+      navIsOpen: !this.state.navIsOpen
     });
   }
 
   toggleImportPopover() {
     this.setState({
-      importPopoverOpen: !this.state.importPopoverOpen,
+      importPopoverOpen: !this.state.importPopoverOpen
     });
   }
 
   togglePublishPopover() {
     this.setState({
       publishPopoverOpen: !this.state.publishPopoverOpen,
+      emptyPublishNameWarning: ""
     });
   }
 
   toggleHelp() {
     this.setState({
-      helpOpen: !this.state.helpOpen,
+      helpOpen: !this.state.helpOpen
     });
   }
 
   clickHandler(...args) {
     this.props.formHandler(...args);
     this.setState({
-      helpOpen: false,
+      helpOpen: false
     });
   }
 
+  handlePublishClick = () => {
+    const { publishName, publishing } = this.state;
+    if (publishName == false) {
+      this.setState({
+        emptyPublishNameWarning: " Please enter a valid homework name"
+      });
+    } else {
+      this.setState({
+        emptyPublishNameWarning: "",
+        publishing: true
+      });
+      let promise = uploadAutograder(this.state.publishName, "adsfgdafgs");
+      promise.then(result => {
+        console.log(result);
+        if (typeof result === "string") {
+          this.setState({
+            publishPopoverOpen: false,
+            publishName: "",
+            publishing: false
+          });
+          alert("ID:" + result);
+        } else {
+          if (result.response) {
+            alert(
+              `${result.response.status} Error: ${result.response.data.error}`
+            );
+          }
+        }
+      });
+    }
+  };
+
   render() {
+    const { publishing } = this.state;
     return (
-
       <Navbar className="topNav" color="light" light expand="sm">
-
-        <NavbarBrand id="autoAGBrand">
-            autoAG
-        </NavbarBrand>
+        <NavbarBrand id="autoAGBrand">autoAG</NavbarBrand>
         <UncontrolledTooltip
           placement="right"
           trigger="hover"
@@ -93,7 +131,7 @@ class TopNav extends React.PureComponent {
           arrowClassName="CalTooltipArrow"
           className="CalTooltip"
         >
-            Much Love For Cal!
+          Much Love For Cal!
         </UncontrolledTooltip>
 
         <span id="navbarPython">Python</span>
@@ -102,7 +140,8 @@ class TopNav extends React.PureComponent {
           trigger="hover"
           target="navbarPython"
         >
-            Currently only available in Python. More languange support coming soon.
+          Currently only available in Python. More languange support coming
+          soon.
         </UncontrolledTooltip>
 
         <NavbarToggler onClick={this.toggleNav} />
@@ -116,68 +155,93 @@ class TopNav extends React.PureComponent {
               toggle={this.toggleHelp}
               className="modal-lg"
             >
-              <ModalHeader toggle={this.toggleHelp}>Welcome to Jingkang Zhang's auto-auto-grader!</ModalHeader>
+              <ModalHeader toggle={this.toggleHelp}>
+                Welcome to Jingkang Zhang's auto-auto-grader!
+              </ModalHeader>
               <ModalBody>
-                <p>This educational project was developed while I was teaching Python classes online. It's meant to make composing coding homework easy and fun for educators!</p>
+                <p>
+                  This educational project was developed while I was teaching
+                  Python classes online. It's meant to make composing coding
+                  homework easy and fun for educators!
+                </p>
                 <h3>Overview</h3>
                 <p>
-There are two types of tests you can created with autoAG: simple and unit.
-                    Simple questions are ones that ask students to write a pure function, i.e., the function is tested solely basing on input-output matchings. This should satisfy needs for most problems. When you click on "Add Question" button,
-                  the added question is "simple" by default. In this case, you specify the function signatures (name, parameters, skeleton code, etc) and tests in the same block.
+                  There are two types of tests you can created with autoAG:
+                  simple and unit. Simple questions are ones that ask students
+                  to write a pure function, i.e., the function is tested solely
+                  basing on input-output matchings. This should satisfy needs
+                  for most problems. When you click on "Add Question" button,
+                  the added question is "simple" by default. In this case, you
+                  specify the function signatures (name, parameters, skeleton
+                  code, etc) and tests in the same block.
                 </p>
                 <p>
-When writing a unit test, on the other hand, the question is separate from the tests. To make a question "unit", click on "Advanced Settings - Test Type - unit test". As you'll notice,
-                    this changes the current block, and adds a new test block (yellow). You may also add a unit test block using the yellow "Add Unit Test" button.
-                    The yellow test block is a unit test. It's not a question for students; it's a function for you to specify tests. Your unit test function, later, will be called on the arguments you put in the test cases.
-                    Returning
-                  {' '}
-                  <code>True</code>
-                  {' '}
-makes the current test "PASS", while
-                  {' '}
-                  <code>False</code>
-                  {' '}
-will be "FAIL". This way, you have full control over the unit tests. Print error logs along the way as a courtesy to your students.
-                    Instead of returning False, you may also throw an error; autoAG will catch it. Thus, it's sometimes convenient to just write assert statements.
+                  When writing a unit test, on the other hand, the question is
+                  separate from the tests. To make a question "unit", click on
+                  "Advanced Settings - Test Type - unit test". As you'll notice,
+                  this changes the current block, and adds a new test block
+                  (yellow). You may also add a unit test block using the yellow
+                  "Add Unit Test" button. The yellow test block is a unit test.
+                  It's not a question for students; it's a function for you to
+                  specify tests. Your unit test function, later, will be called
+                  on the arguments you put in the test cases. Returning{" "}
+                  <code>True</code> makes the current test "PASS", while{" "}
+                  <code>False</code> will be "FAIL". This way, you have full
+                  control over the unit tests. Print error logs along the way as
+                  a courtesy to your students. Instead of returning False, you
+                  may also throw an error; autoAG will catch it. Thus, it's
+                  sometimes convenient to just write assert statements.
                 </p>
                 <p>
-When finished, click on export on the navbar. A zip file will be downloaded. Unzipped, the folder contains 2 files: homework.py and test.
-                  As the students are progressing through homework.py, they may type
-                  {' '}
-                  <code>python3 test question_name</code>
-                  {' '}
-in terminal to run tests on the current question,
-                  or
-                  {' '}
-                  <code>python3 test</code>
-                  {' '}
-to run tests on all questions.
-                  {' '}
-
+                  When finished, click on export on the navbar. A zip file will
+                  be downloaded. Unzipped, the folder contains 2 files:
+                  homework.py and test. As the students are progressing through
+                  homework.py, they may type{" "}
+                  <code>python3 test question_name</code> in terminal to run
+                  tests on the current question, or <code>python3 test</code> to
+                  run tests on all questions.{" "}
                 </p>
-                <p>Save your sessions often, so that you can import them back.</p>
+                <p>
+                  Save your sessions often, so that you can import them back.
+                </p>
                 <h3>Examples</h3>
                 <ul>
                   <li>
-                    Simple Questions
-                    {' '}
-                    <button className="helpAddButton" name="helpAddSimpleQuestions" onClick={this.clickHandler}>add</button>
+                    Simple Questions{" "}
+                    <button
+                      className="helpAddButton"
+                      name="helpAddSimpleQuestions"
+                      onClick={this.clickHandler}
+                    >
+                      add
+                    </button>
                   </li>
                   <li>
-Disallowed Uses
-                    {' '}
-                    <button className="helpAddButton" name="helpAddDisallowedUses" onClick={this.clickHandler}>add</button>
+                    Disallowed Uses{" "}
+                    <button
+                      className="helpAddButton"
+                      name="helpAddDisallowedUses"
+                      onClick={this.clickHandler}
+                    >
+                      add
+                    </button>
                   </li>
                   <li>
-Unit Tests
-                    {' '}
-                    <button className="helpAddButton" name="helpAddUnitTests" onClick={this.clickHandler}>add</button>
+                    Unit Tests{" "}
+                    <button
+                      className="helpAddButton"
+                      name="helpAddUnitTests"
+                      onClick={this.clickHandler}
+                    >
+                      add
+                    </button>
                   </li>
-
                 </ul>
               </ModalBody>
               <ModalFooter>
-                <Button color="secondary" onClick={this.toggleHelp}>Close</Button>
+                <Button color="secondary" onClick={this.toggleHelp}>
+                  Close
+                </Button>
               </ModalFooter>
             </Modal>
 
@@ -185,19 +249,41 @@ Unit Tests
               <NavLink onClick={this.togglePublishPopover}>Publish</NavLink>
             </NavItem>
 
-            <Modal isOpen={this.state.publishPopoverOpen} toggle={this.togglePublishPopover}>
-              <ModalHeader toggle={this.togglePublishPopover}>Publish Homework to Server (beta)</ModalHeader>
+            <Modal
+              isOpen={this.state.publishPopoverOpen}
+              toggle={this.togglePublishPopover}
+            >
+              <ModalHeader toggle={this.togglePublishPopover}>
+                Publish Homework to Server (beta)
+              </ModalHeader>
               <ModalBody>
-                <div>Homework Name:</div>
-                <Input value={this.state.publishName} onChange={this.handlePublishChange} placeholder="MyHomework" id="publishName" />
+                <div>
+                  <span>Homework Name:</span>
+                  <span style={{ color: "red", fontSize: "13px" }}>
+                    {this.state.emptyPublishNameWarning}
+                  </span>
+                </div>
+
+                <Input
+                  value={this.state.publishName}
+                  onChange={this.handlePublishChange}
+                  placeholder="MyHomework"
+                  id="publishName"
+                />
               </ModalBody>
               <ModalFooter>
+                <Loader
+                  color="#0275D8"
+                  size="25px"
+                  loading={publishing}
+                ></Loader>
                 <Button
                   color="primary"
-                  name="publish"
-                  onClick={(e) => { this.togglePublishPopover(); uploadAutograder(this.state.publishName, 'adsfgdafgs'); }}
+                  name="Publish"
+                  onClick={this.handlePublishClick}
+                  disabled={publishing}
                 >
-                publish
+                  Publish
                 </Button>
               </ModalFooter>
             </Modal>
@@ -206,50 +292,67 @@ Unit Tests
               <NavLink onClick={this.toggleImportPopover}>Import</NavLink>
             </NavItem>
 
-            <Modal isOpen={this.state.importPopoverOpen} toggle={this.toggleImportPopover}>
-              <ModalHeader toggle={this.toggleImportPopover}>Select .autoag file to import</ModalHeader>
+            <Modal
+              isOpen={this.state.importPopoverOpen}
+              toggle={this.toggleImportPopover}
+            >
+              <ModalHeader toggle={this.toggleImportPopover}>
+                Select .autoag file to import
+              </ModalHeader>
               <ModalBody>
                 <Input type="file" name="file" id="importFile" />
               </ModalBody>
               <ModalFooter>
-                <Button color="secondary" onClick={this.toggleImportPopover}>Cancel</Button>
-                {' '}
+                <Button color="secondary" onClick={this.toggleImportPopover}>
+                  Cancel
+                </Button>{" "}
                 <Button
                   color="primary"
                   name="import"
-                  onClick={(e) => { this.toggleImportPopover(); this.props.formHandler(e); }}
+                  onClick={e => {
+                    this.toggleImportPopover();
+                    this.props.formHandler(e);
+                  }}
                 >
-Import
-
+                  Import
                 </Button>
               </ModalFooter>
             </Modal>
 
             <NavItem>
-              <NavLink
-                name="save"
-                onClick={this.props.formHandler}
-              >
-Save Session
-
+              <NavLink name="save" onClick={this.props.formHandler}>
+                Save Session
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink name="export" onClick={this.props.formHandler}>
+                Export
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
-                name="export"
-                onClick={this.props.formHandler}
+                className="githubNav"
+                target="_blank"
+                href="https://github.com/JingkangZhang/autoAG"
               >
-Export
-
+                <svg
+                  height="24"
+                  className="octicon octicon-mark-github"
+                  viewBox="0 0 16 16"
+                  version="1.1"
+                  width="32"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                  />
+                </svg>
               </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink className="githubNav" target="_blank" href="https://github.com/JingkangZhang/autoAG"><svg height="24" className="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true"><path fillRule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" /></svg></NavLink>
             </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
-
     );
   }
 }
