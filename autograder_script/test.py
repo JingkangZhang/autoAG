@@ -1,6 +1,6 @@
-#Below commented code will be inserted to file by JavaScript
+#Below commented code will be inserted to the final autograder file by JavaScript
 #d = eval(autoAG.json)
-#def unit_f_name_test():
+#def unit_f_name_test(): # in case of unit tests.
 #  ...
 from ast import parse, NodeVisitor, Name
 import traceback
@@ -230,7 +230,7 @@ class Test:
             try:
                 expected = eval(testCase[1])
             except:
-                print("It's not you, it's the teacher! \n" +
+                print("It's not you; it's us! \n" +
                     "There's an error in the test case: cannot evaluate '" + testCase[1] + "'\n" +
                     "Please contact your teacher. \n")
                 return False
@@ -276,7 +276,7 @@ if len(sys.argv) > 1:
     assert sys.argv[1] in questionD, "\nThe command line argument you passed in is not a valid function name; choose from {}\n".format(list(questionD.keys()).__repr__())
     questionD[sys.argv[1]].test()
 else:
-    result = [t.test(suppress=True) for t in questionD.values()]
+    result = [t.test(suppress=False) for t in questionD.values()]
 
     passed = str(sum([1 for x in result if x[0]]))
     score = str(sum([x[1] for x in result]))
