@@ -23,6 +23,7 @@ import {
 } from "reactstrap";
 import { uploadAutograder, uploadSolution } from "services/";
 import Loader from "components/Loader";
+import { generateTest } from 'containers/generateTest';
 
 // import githubMark from '../GitHub-Mark-64px.png'
 
@@ -97,7 +98,7 @@ class TopNav extends React.PureComponent {
         emptyPublishNameWarning: "",
         publishing: true
       });
-      let promise = uploadAutograder(this.state.publishName, "adsfgdafgs");
+      let promise = uploadAutograder(this.state.publishName, generateTest(this.props.formState));
       promise.then(result => {
         console.log(result);
         if (typeof result === "string") {

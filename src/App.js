@@ -237,7 +237,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <TopNav formHandler={this.handleInputChange} />
+        <TopNav formHandler={this.handleInputChange} formState={this.state.formState} />
         <Split className="split" sizes={[60, 40]} minSize={[350, 200]}>
           <InputField
             formState={this.state.formState}
