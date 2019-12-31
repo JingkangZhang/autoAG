@@ -5,11 +5,11 @@ import Split from 'react-split';
 import JSZip from 'jszip';
 import FileSaver from 'file-saver';
 import { Container, Row, Col } from 'reactstrap';
-import TopNav from './components/TopNav';
-import InputField from './components/InputField';
-import OutputField from './components/OutputField';
-import { generateHomeworkText } from './components/generateHomeworkText.js';
-import { generateTest } from './components/generateTest.js';
+import TopNav from './containers/TopNav';
+import InputField from './containers/InputField';
+import OutputField from './containers/OutputField';
+import { generateHomeworkText } from './containers/generateHomeworkText.js';
+import { generateTest } from './containers/generateTest.js';
 
 
 // if (process.env.NODE_ENV !== 'production') {
@@ -240,13 +240,13 @@ class App extends React.Component {
         <TopNav formHandler={this.handleInputChange} />
         <Split className="split" sizes={[60, 40]} minSize={[350, 200]}>
           <InputField
-                formState={this.state.formState}
-                formHandler={this.handleInputChange}
-              />
+            formState={this.state.formState}
+            formHandler={this.handleInputChange}
+          />
           <OutputField
-                className="outputField"
-                formState={this.state.formState}
-              />
+            className="outputField"
+            formState={this.state.formState}
+          />
         </Split>
       </div>
     );
