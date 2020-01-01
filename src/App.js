@@ -30,9 +30,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const localFormaState = window.localStorage.getItem('formState');
-    if (localFormaState) {
-      this.setState({ formState: JSON.parse(localFormaState) });
+    const localFormState = window.localStorage.getItem('formState');
+    if (localFormState) {
+      this.setState({ formState: JSON.parse(localFormState) });
     }
   }
 
