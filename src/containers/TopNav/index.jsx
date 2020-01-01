@@ -22,8 +22,9 @@ import {
   ModalHeader
 } from "reactstrap";
 import { uploadAutograder, uploadSolution } from "services/";
-import Loader from "components/Loader";
-import { generateTest } from 'containers/generateTest';
+import Spinner from "components/Spinner";
+import { generateTest } from "containers/generateTest";
+import "./index.css";
 
 // import githubMark from '../GitHub-Mark-64px.png'
 
@@ -44,8 +45,10 @@ class TopNav extends React.PureComponent {
       publishPopoverOpen: false,
       helpOpen: false,
       publishName: "",
-      emptyPublishNameWarning: "",
-      publishing: false
+      emptyPublishNameWarning: " ",
+      publishing: false,
+      publishStatusText: "",
+      publishId: ""
     };
   }
 
@@ -70,7 +73,7 @@ class TopNav extends React.PureComponent {
   togglePublishPopover() {
     this.setState({
       publishPopoverOpen: !this.state.publishPopoverOpen,
-      emptyPublishNameWarning: ""
+      emptyPublishNameWarning: " "
     });
   }
 
@@ -88,31 +91,34 @@ class TopNav extends React.PureComponent {
   }
 
   handlePublishClick = () => {
-    const { publishName, publishing } = this.state;
+    this.setState({ publishStatusText: "" });
+    const { publishName } = this.state;
     if (publishName == false) {
       this.setState({
-        emptyPublishNameWarning: " Please enter a valid homework name"
+        emptyPublishNameWarning: "Please enter a valid homework name"
       });
     } else {
       this.setState({
-        emptyPublishNameWarning: "",
+        emptyPublishNameWarning: " ",
         publishing: true
       });
-      let promise = uploadAutograder(this.state.publishName, generateTest(this.props.formState));
+      let promise = uploadAutograder(
+        this.state.publishName,
+        generateTest(this.props.formState)
+      );
       promise.then(result => {
         console.log(result);
         if (typeof result === "string") {
           this.setState({
-            publishPopoverOpen: false,
             publishName: "",
-            publishing: false
+            publishing: false,
+            publishStatusText: "Your homework has been deployed.\nID:" + result
           });
-          alert("ID:" + result);
         } else {
           if (result.response) {
-            alert(
-              `${result.response.status} Error: ${result.response.data.error}`
-            );
+            this.setState({
+              publishStatusText: `${result.response.status} Error: /n ${result.response.data.error}`
+            });
           }
         }
       });
@@ -120,7 +126,7 @@ class TopNav extends React.PureComponent {
   };
 
   render() {
-    const { publishing } = this.state;
+    const { publishing, publishStatusText } = this.state;
     return (
       <Navbar className="topNav" color="light" light expand="sm">
         <NavbarBrand id="autoAGBrand">autoAG</NavbarBrand>
@@ -255,29 +261,35 @@ class TopNav extends React.PureComponent {
               toggle={this.togglePublishPopover}
             >
               <ModalHeader toggle={this.togglePublishPopover}>
-                Publish Homework to Server (beta)
+                <div>Publish Homework to Server (beta)</div>
+                <div className="disclaimer">
+                  This experimental feature allows you to publish the autograder
+                  to our server. Please do not include any sensitive
+                  information.
+                </div>
               </ModalHeader>
               <ModalBody>
-                <div>
-                  <span>Homework Name:</span>
-                  <span style={{ color: "red", fontSize: "13px" }}>
-                    {this.state.emptyPublishNameWarning}
-                  </span>
+                <div className="publishStatusText">
+                  {this.state.publishStatusText}
                 </div>
-
+                <hr className={publishStatusText ? "hrDisplay" : "hrHidden"} />
+                <div className="homeworkName">Homework Name:</div>
                 <Input
                   value={this.state.publishName}
                   onChange={this.handlePublishChange}
                   placeholder="MyHomework"
                   id="publishName"
                 />
+                <div className="publishNameWarning">
+                  {this.state.emptyPublishNameWarning}
+                </div>
               </ModalBody>
               <ModalFooter>
-                <Loader
+                <Spinner
                   color="#0275D8"
                   size="25px"
                   loading={publishing}
-                ></Loader>
+                ></Spinner>
                 <Button
                   color="primary"
                   name="Publish"
