@@ -4,8 +4,14 @@
   white-space: pre;
 }
 
-.publishStatusText {
+.publishStatusTextGreen {
   color: green;
+  font-size: 13px;
+  white-space: pre-wrap;
+}
+
+.publishStatusTextRed {
+  color: red;
   font-size: 13px;
   white-space: pre-wrap;
 }

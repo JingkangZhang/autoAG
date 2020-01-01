@@ -48,7 +48,8 @@ class TopNav extends React.PureComponent {
       emptyPublishNameWarning: " ",
       publishing: false,
       publishStatusText: "",
-      publishId: ""
+      publishId: "",
+      publishFailed: false
     };
   }
 
@@ -112,12 +113,16 @@ class TopNav extends React.PureComponent {
           this.setState({
             publishName: "",
             publishing: false,
+            publishFailed: false,
             publishStatusText: "Your homework has been deployed.\nID:" + result
           });
         } else {
           if (result.response) {
             this.setState({
-              publishStatusText: `${result.response.status} Error: /n ${result.response.data.error}`
+              publishing: false,
+              publishFailed: true,
+              publishStatusText:
+                result.response.status + "Error:\n" + result.response.data.error
             });
           }
         }
@@ -126,7 +131,7 @@ class TopNav extends React.PureComponent {
   };
 
   render() {
-    const { publishing, publishStatusText } = this.state;
+    const { publishing, publishStatusText, publishFailed } = this.state;
     return (
       <Navbar className="topNav" color="light" light expand="sm">
         <NavbarBrand id="autoAGBrand">autoAG</NavbarBrand>
@@ -269,7 +274,13 @@ class TopNav extends React.PureComponent {
                 </div>
               </ModalHeader>
               <ModalBody>
-                <div className="publishStatusText">
+                <div
+                  className={
+                    publishFailed
+                      ? "publishStatusTextRed"
+                      : "publishStatusTextGreen"
+                  }
+                >
                   {this.state.publishStatusText}
                 </div>
                 <hr className={publishStatusText ? "hrDisplay" : "hrHidden"} />
