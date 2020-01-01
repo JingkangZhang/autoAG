@@ -25,6 +25,7 @@ import { uploadAutograder, uploadSolution } from 'services/';
 import Spinner from 'components/Spinner';
 import { generateTest } from 'containers/generateTest';
 import './index.css';
+import { Link } from 'react-router-dom';
 
 // import githubMark from '../GitHub-Mark-64px.png'
 
@@ -286,6 +287,7 @@ to
                 to our server. Please do not include any sensitive
                 information.
                 </div>
+                <div><Link className="topnav-link" to="/submit" target="_blank">submit to a published homework</Link></div>
               </ModalHeader>
               <ModalBody>
                 <div
