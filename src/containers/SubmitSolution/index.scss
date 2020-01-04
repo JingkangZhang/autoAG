@@ -1,0 +1,67 @@
+$theme-color: #E5F4E9;
+$text-color: #444;
+// $sand-to-blue: linear-gradient(to right, #3E5151, #DECBA4);
+$wrong-right: linear-gradient(to right, #F8D7DA, #D4EDDA);
+$pun-yeta: linear-gradient(to right, #108dc7, #ef8e38);
+$green-text: #409A56;
+
+
+.submit{
+    &-bar {
+        background-color: $theme-color;
+        min-width: 1200px;
+        border-top: 5px solid;
+        // border-bottom: 2px solid;
+
+        border-image: $pun-yeta;
+        border-image-slice: 1;
+
+    }
+
+    &-brand {
+        margin-left: 10px;
+    }
+    &-publish {
+        margin-right: 10px;
+        &-link {
+            color: black !important;
+
+        }
+    }
+    &-main {
+        margin: 30px;
+    }
+    &-form {
+        color: $green-text;
+
+    }
+    &-table {
+        color: $text-color;
+        margin: auto;
+
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border: 10px solid $theme-color;
+        border-radius: 10px;
+        padding: 5px;
+        min-height: 500px;
+        width: 1200px;
+        &-table {
+            & td {
+                overflow: auto;
+                max-width: 200px;
+                border-top: 3px solid $theme-color;
+
+            }
+
+            & th {
+                color: $green-text;
+                border: none !important;
+            }
+            position: relative;
+            max-width: inherit;
+            overflow: hidden;
+        }
+    }
+}
+

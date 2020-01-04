@@ -35,7 +35,7 @@ body {
   margin-top: 10px;
 }
 
-#autoAGBrand {
+.autoAGBrand {
   margin-left: 10px;
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
