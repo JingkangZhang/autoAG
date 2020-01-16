@@ -24,6 +24,8 @@ import {
 import { uploadAutograder, uploadSolution } from 'services/';
 import Spinner from 'components/Spinner';
 import { generateTest } from 'containers/generateTest';
+import { generateHomeworkText } from 'containers/generateHomeworkText';
+
 import './index.css';
 import { Link } from 'react-router-dom';
 
@@ -106,7 +108,10 @@ class TopNav extends React.PureComponent {
       });
       uploadAutograder(
         this.state.publishName,
-        generateTest(this.props.formState),
+        {
+          agCode: generateTest(this.props.formState),
+          hwCode: generateHomeworkText(this.props.formState),
+        },
       ).then((result) => {
         this.setState({
           publishName: '',
