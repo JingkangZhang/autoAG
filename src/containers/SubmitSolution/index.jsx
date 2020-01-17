@@ -1,22 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Navbar, NavbarBrand, NavItem, NavLink, InputGroup, InputGroupAddon, Input, Button, Form, FormGroup, Label, Table, Alert,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './index.scss';
 import Pagination from 'react-js-pagination';
+import { uploadSolution, listHomeworks } from 'services/';
+import moment from 'moment';
+import HomeworkEntry from './HomeworkEntry';
 
-const PER_PAGE = 10;
 
 const SubmitSolution = () => {
-  const [page, setPage] = useState(1);
+  const [currPage, setCurrPage] = useState(1);
   const [content, setContent] = useState([]);
+  const [dateDescending] = useState(true);
+  const [perPage, setPerPage] = useState(10);
+  const [homeworkId, setHomeworkId] = useState('');
+  const [totalPages, setTotalPages] = useState(1);
 
-  // const handleChangePage = (newPageNumber) => {
-  //   const newContent = post(page=newPageNumber, perPage=PER_PAGE);
-  //   setContent(newContent);
-  //   setPage(page);
-  // }
+  const updateList = () => {
+    listHomeworks({
+      currPage, perPage, dateDescending, homeworkId,
+    }).then((data) => {
+      setTotalPages(data.total);
+      const convertedContent = data.content.map((hw) => {
+        hw.time = moment(hw.time).local().format('lll');
+        return hw;
+      });
+      setContent(convertedContent);
+    });
+  };
+
+  useEffect(updateList, [currPage, dateDescending, perPage]);
+
+  const handleChangePage = (newPageNumber) => {
+    setCurrPage(newPageNumber);
+  };
+
+  const handleInputChange = (e) => {
+    setHomeworkId(e.target.value);
+  };
 
   return (
     <div>
@@ -31,9 +54,9 @@ const SubmitSolution = () => {
         <div className="submit-form">
           <FormGroup>
             <Label>Homework ID:</Label>
-            <Input />
+            <Input onChange={handleInputChange} />
           </FormGroup>
-          <Button>Search</Button>
+          <Button onClick={updateList}>Search</Button>
         </div>
         <div className="submit-table">
           {/* <Table content={content}> */}
@@ -47,6 +70,7 @@ const SubmitSolution = () => {
                 <th>Submit</th>
               </tr>
             </thead>
+            {content.map((hw) => <HomeworkEntry homeworkId={hw.homeworkId} author={hw.author} name={hw.name} time={hw.time} />)}
             <tr>
               <td>asd</td>
 
@@ -69,11 +93,11 @@ const SubmitSolution = () => {
 
         </div>
         <Pagination
-          activePage={page}
-          itemsCountPerPage={10}
-          totalItemsCount={450}
-          pageRangeDisplayed={3}
-          onChange={() => {}}
+          activePage={currPage}
+          itemsCountPerPage={perPage}
+          totalItemsCount={totalPages}
+          pageRangeDisplayed={5}
+          onChange={handleChangePage}
         />
 
       </div>
