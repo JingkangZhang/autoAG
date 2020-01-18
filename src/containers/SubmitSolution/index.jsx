@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Navbar, NavbarBrand, NavItem, NavLink, InputGroup, InputGroupAddon, Input, Button, Form, FormGroup, Label, Table, Alert,
+  Navbar, NavbarBrand, NavItem, NavLink, InputGroup, InputGroupAddon, Input, Button, Form, FormGroup, Label, Table, Alert, Modal,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './index.scss';
@@ -8,6 +8,7 @@ import Pagination from 'react-js-pagination';
 import { uploadSolution, listHomeworks } from 'services/';
 import moment from 'moment';
 import HomeworkEntry from './HomeworkEntry';
+import SubmitModal from './SubmitModal';
 
 
 const SubmitSolution = () => {
@@ -17,6 +18,9 @@ const SubmitSolution = () => {
   const [perPage, setPerPage] = useState(10);
   const [homeworkId, setHomeworkId] = useState('');
   const [totalPages, setTotalPages] = useState(1);
+  const [submitModalHomeworkId, setSubmitModalHomeworkId] = useState('');
+  const [submitModalHomeworkName, setSubmitModalHomeworkName] = useState('');
+  const [submitModalOpen, setSubmitModalOpen] = useState(false);
 
   const updateList = () => {
     listHomeworks({
@@ -41,8 +45,34 @@ const SubmitSolution = () => {
     setHomeworkId(e.target.value);
   };
 
+  const handleOpenSubmitModal = (id, name) => {
+    setSubmitModalHomeworkId(id);
+    setSubmitModalHomeworkName(name);
+    setSubmitModalOpen(true);
+  };
+
+  const handleToggleSubmitModal = () => {
+    setSubmitModalOpen(!submitModalOpen);
+  };
+
+  const handleSubmit = (id, solutionString) => {
+    console.log('submitting...');
+    uploadSolution(id, solutionString).then((res) => {
+      console.log('done, ', res);
+    }).catch((msg) => {
+      console.log('failed, ', msg);
+    });
+  };
+
   return (
     <div>
+      <SubmitModal
+        isOpen={submitModalOpen}
+        toggle={handleToggleSubmitModal}
+        homeworkId={submitModalHomeworkId}
+        name={submitModalHomeworkName}
+        onSubmit={handleSubmit}
+      />
       <Navbar light className="submit-bar">
         <NavbarBrand className="submit-brand">autoAG</NavbarBrand>
         <NavLink className="submit-publish">
@@ -70,25 +100,19 @@ const SubmitSolution = () => {
                 <th>Submit</th>
               </tr>
             </thead>
-            {content.map((hw) => <HomeworkEntry homeworkId={hw.homeworkId} author={hw.author} name={hw.name} time={hw.time} />)}
-            <tr>
-              <td>asd</td>
-
-              <td>asdgasdgfhgoiuehrighjeriohgoisrhgoi</td>
-              <td>asdgasdgfhgoiuehrighjeriohgoisrhgoi</td>
-              <td>asdgasdgfhgoiuehrighjeriohgoisrhgoi</td>
-              <td>asdgasdgfhgoiuehrighjeriohgoisrhgoi</td>
-            </tr>
-            <tr>
-              <td>asd</td>
-
-              <td>asdgasdgfhgoiuehrighjeriohgoisrhgoi</td>
-              <td>asdgasdgfhgoiuehrighjeriohgoisrhgoi</td>
-              <td>asdgasdgfhgoiuehrighjeriohgoisrhgoi</td>
-              <td>asdgasdgfhgoiuehrighjeriohgoisrhgoi</td>
-
-            </tr>
-
+            {
+              content.map(
+                (hw) => (
+                  <HomeworkEntry
+                    onOpenSubmitModal={handleOpenSubmitModal}
+                    homeworkId={hw.homeworkId}
+                    author={hw.author}
+                    name={hw.name}
+                    time={hw.time}
+                  />
+                ),
+              )
+            }
           </Table>
 
         </div>
@@ -98,6 +122,9 @@ const SubmitSolution = () => {
           totalItemsCount={totalPages}
           pageRangeDisplayed={5}
           onChange={handleChangePage}
+          innerClass="pagination"
+          itemClass="page-item"
+          linkClass="page-link"
         />
 
       </div>

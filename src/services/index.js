@@ -7,6 +7,8 @@ const URL = {
   uploadSolution:
     'https://bdi091mwm2.execute-api.us-west-1.amazonaws.com/prod/uploadSolution',
   listHomeworks: 'https://bdi091mwm2.execute-api.us-west-1.amazonaws.com/prod/listHomeworks',
+  getSkeleton: 'https://bdi091mwm2.execute-api.us-west-1.amazonaws.com/prod/getSkeleton',
+
 };
 
 export const uploadAutograder = (name, body) => new Promise((resolve, reject) => {
@@ -48,14 +50,35 @@ export const listHomeworks = (data) => new Promise((resolve, reject) => {
   });
 });
 
-export const uploadSolution = (homeworkId) => {
-  axios
-    .post(URL.uploadSolution, {
+export const uploadSolution = (homeworkId, homework) => new Promise((resolve, reject) => {
+  axios({
+    method: 'post',
+    url: URL.uploadSolution,
+    params: {
       homeworkId,
-    })
-    .then((response) => {
-      console.log(response);
+    },
+    data: homework,
+  }).then((response) => resolve(response.data.data.result)).catch((error) => {
+    if (error.response) {
+      reject(`${error.response.status}: ${error.response.data.error}`);
+    } else {
+      reject(error.message);
+    }
+  });
+});
 
-      return response.data;
-    });
-};
+export const getSkeleton = (homeworkId) => new Promise((resolve, reject) => {
+  axios({
+    method: 'post',
+    url: URL.getSkeleton,
+    params: {
+      homeworkId,
+    },
+  }).then((response) => resolve(response.data.data.skeletonCode)).catch((error) => {
+    if (error.response) {
+      reject(`${error.response.status}: ${error.response.data.error}`);
+    } else {
+      reject(error.message);
+    }
+  });
+});

@@ -44,14 +44,16 @@ $green-text: #409A56;
         border: 10px solid $theme-color;
         border-radius: 10px;
         padding: 5px;
-        min-height: 500px;
+        height: 664px;
         width: 1200px;
+        overflow: auto;
+
         &-table {
+
             & td {
                 overflow: auto;
                 max-width: 200px;
                 border-top: 3px solid $theme-color;
-
             }
 
             & th {
@@ -63,5 +65,15 @@ $green-text: #409A56;
             overflow: hidden;
         }
     }
+    // &-pagination {
+    //     display: flex;
+    //     list-style: none;
+    //     border-collapse: collapse;
+
+    //     &-item {
+    //         padding: 5px 10px 5px 10px;
+    //         border-right: 1px solid black;
+    //     }
+    // }
 }
 
