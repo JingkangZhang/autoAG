@@ -7,6 +7,7 @@ import './index.scss';
 import Pagination from 'react-js-pagination';
 import { uploadSolution, listHomeworks } from 'services/';
 import moment from 'moment';
+import LoadingOverlay from 'react-loading-overlay';
 import HomeworkEntry from './HomeworkEntry';
 import SubmitModal from './SubmitModal';
 import SubmitStatus from './SubmitStatus';
@@ -24,8 +25,14 @@ const SubmitSolution = () => {
   const [submitModalOpen, setSubmitModalOpen] = useState(false);
   const [homeworkIdToPost, setHomeworkIdToPost] = useState('');
   const [submitted, setSubmitted] = useState({});
+  const [showLoadingOverlay, setShowLoadingOverlay] = useState(false);
+  const [overlayText, setOverlayText] = useState('Loading...');
+  const [overlaySpinner, setOverlaySpinner] = useState(true);
 
   const updateList = () => {
+    setOverlayText('Loading...');
+    setShowLoadingOverlay(true);
+    setOverlaySpinner(true);
     listHomeworks({
       currPage, perPage, dateDescending, homeworkId: homeworkIdToPost,
     }).then((data) => {
@@ -35,6 +42,15 @@ const SubmitSolution = () => {
         return hw;
       });
       setContent(convertedContent);
+      if (data.total === 0) {
+        setOverlaySpinner(false);
+        setOverlayText('No item found.');
+      } else {
+        setShowLoadingOverlay(false);
+      }
+    }).catch((msg) => {
+      setOverlayText(msg);
+      setOverlaySpinner(false);
     });
   };
 
@@ -101,6 +117,7 @@ const SubmitSolution = () => {
 
   const createContentList = () => {
     const ret = [];
+
     content.map((hw) => {
       ret.push(<HomeworkEntry
         onOpenSubmitModal={handleOpenSubmitModal}
@@ -146,25 +163,35 @@ const SubmitSolution = () => {
           </FormGroup>
           <Button onClick={handleSearch}>Search</Button>
         </div>
-        <div className="submit-table">
-          {/* <Table content={content}> */}
-          <Table className="submit-table-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Homework ID</th>
-                <th>Author</th>
-                <th>Date</th>
-                <th>Skeleton Code</th>
-                <th>Submit</th>
-              </tr>
-            </thead>
-            {
+        <LoadingOverlay
+          active={showLoadingOverlay}
+          fadeSpeed={200}
+          className="submit-overlay"
+          spinner={overlaySpinner}
+          text={overlayText}
+        >
+          <div className="submit-table">
+            {/* <Table content={content}> */}
+
+            <Table className="submit-table-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Homework ID</th>
+                  <th>Author</th>
+                  <th>Date</th>
+                  <th>Skeleton Code</th>
+                  <th>Submit</th>
+                </tr>
+              </thead>
+              {
               createContentList()
             }
-          </Table>
+            </Table>
 
-        </div>
+          </div>
+        </LoadingOverlay>
+
         <div className="submit-per-page">
           <div className="submit-per-page-label">Per page:</div>
           {' '}

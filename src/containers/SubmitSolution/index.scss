@@ -45,6 +45,8 @@ $green-text: #409A56;
         border: 10px solid $theme-color;
         border-radius: 10px;
         padding: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
         height: 669px;
         width: inherit;
         overflow: auto;
@@ -79,7 +81,10 @@ $green-text: #409A56;
             margin-right: 10px;
         }
     }
-
+    &-overlay {
+        height: 100%;
+        position: fixed;
+    }
 }
 
 .pagination {

@@ -52,4 +52,21 @@ $red-text: hsl(0, 41%, 30%);
         float: right;
         margin-right: 55px;
     }
+
+    &-modal {
+        & .modal-dialog {
+
+         max-width: 800px;
+        }
+    }
+    &-result {
+        background-color: #F3F3F3;
+        padding: 20px 30px 20px 30px;
+        color: black;
+        font-family: monospace;
+        line-height: 200%;
+        white-space: pre;
+        overflow: auto;
+        max-height: 80vh;
+    }
 }
