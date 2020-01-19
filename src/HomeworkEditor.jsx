@@ -1,6 +1,5 @@
 import React from 'react';
 // import logo from './logo.svg';
-import './App.css';
 import Split from 'react-split';
 import JSZip from 'jszip';
 import FileSaver from 'file-saver';
@@ -15,7 +14,7 @@ import { generateTest } from './containers/generateTest.js';
 //   const {whyDidYouUpdate} = require('why-did-you-update');
 //   whyDidYouUpdate(React);
 // }
-class App extends React.Component {
+class HomeworkEditor extends React.Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -450,4 +449,4 @@ function download(data, filename, type) {
   }
 }
 
-export default App;
+export default HomeworkEditor;

@@ -1,0 +1,92 @@
+$theme-color: #E5F4E9;
+$text-color: #444;
+// $sand-to-blue: linear-gradient(to right, #3E5151, #DECBA4);
+$wrong-right: linear-gradient(to right, #F8D7DA, #D4EDDA);
+$pun-yeta: linear-gradient(to right, #108dc7, #ef8e38);
+$green-text: #409A56;
+
+
+.submit{
+    &-bar {
+        background-color: $theme-color;
+        min-width: 1200px;
+        border-top: 5px solid;
+        // border-bottom: 2px solid;
+
+        border-image: $pun-yeta;
+        border-image-slice: 1;
+
+    }
+
+    &-brand {
+        margin-left: 10px;
+    }
+    &-publish {
+        margin-right: 10px;
+        &-link {
+            color: black !important;
+
+        }
+    }
+    &-main {
+        width: 1200px;
+        margin: auto;
+        margin-top: 15px;
+
+    }
+    &-form {
+        color: $green-text;
+        width: 400px;
+    }
+    &-table {
+        color: $text-color;
+        // margin: auto;
+
+        border: 10px solid $theme-color;
+        border-radius: 10px;
+        padding: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 669px;
+        width: inherit;
+        overflow: auto;
+        margin-bottom: 10px;
+        margin-top: 30px;
+
+        &-table {
+            margin: 0;
+            & td {
+                overflow: auto;
+                white-space: nowrap;
+                max-width: 200px;
+                border-top: 3px solid $theme-color;
+            }
+
+            & th {
+                color: $green-text;
+                border: none !important;
+            }
+            position: relative;
+            max-width: inherit;
+            overflow: hidden;
+        }
+
+    }
+    &-per-page {
+        display: inline-flex;
+        width: 150px;
+        white-space: nowrap;
+        align-items: center;
+        &-label {
+            margin-right: 10px;
+        }
+    }
+    &-overlay {
+        height: 100%;
+        position: fixed;
+    }
+}
+
+.pagination {
+    float: right;
+}

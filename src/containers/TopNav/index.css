@@ -18,9 +18,14 @@
 
 .homeworkName {
   padding-top: 1px;
+  margin-bottom: 10px;
 }
 
 
 .disclaimer {
+  font-size: 11.5px;
+}
+
+.topnav-link {
   font-size: 11.5px;
 }

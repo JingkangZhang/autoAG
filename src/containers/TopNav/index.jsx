@@ -27,6 +27,7 @@ import { generateTest } from 'containers/generateTest';
 import { generateHomeworkText } from 'containers/generateHomeworkText';
 
 import './index.css';
+import { Link } from 'react-router-dom';
 
 // import githubMark from '../GitHub-Mark-64px.png'
 
@@ -136,11 +137,11 @@ class TopNav extends React.PureComponent {
     } = this.state;
     return (
       <Navbar className="topNav" color="light" light expand="sm">
-        <NavbarBrand id="autoAGBrand">autoAG</NavbarBrand>
+        <NavbarBrand className="autoAGBrand" id="editorAutoAGBrand">autoAG</NavbarBrand>
         <UncontrolledTooltip
           placement="right"
           trigger="hover"
-          target="autoAGBrand"
+          target="editorAutoAGBrand"
           delay="{show:0, hide:0}"
           arrowClassName="CalTooltipArrow"
           className="CalTooltip"
@@ -291,6 +292,7 @@ to
                 to our server. Please do not include any sensitive
                 information.
                 </div>
+                <div><Link className="topnav-link" to="/submit" target="_blank">submit to a published homework</Link></div>
               </ModalHeader>
               <ModalBody>
                 <div

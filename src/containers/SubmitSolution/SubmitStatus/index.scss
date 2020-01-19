@@ -1,0 +1,72 @@
+$green-text: hsl(135, 41%, 30%);
+$theme-color: #E5F4E9;
+$alert-green: hsl(135, 70%, 88%);
+$alert-yellow: hsl(59, 70%, 88%);
+$yellow-text: hsl(59, 41%, 30%);
+$alert-red: hsl(0, 70%, 88%);
+$red-text: hsl(0, 41%, 30%);
+
+
+.submit-status {
+    &-td {
+        border-top: 0 !important;
+        height: 45px;
+        // position: relative;
+        z-index: 1;
+        &-div {
+            width: 100%;
+            position: absolute;
+            margin-top: -15px;
+            z-index: 3;
+            margin-left: -10px;
+            // padding: 5px;
+            padding-left: 10px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+
+            &-green {
+                background-color: $alert-green;
+                color: $green-text;
+                border: 8px solid $alert-green;
+
+            }
+            &-yellow {
+                background-color: $alert-yellow;
+                color: $yellow-text;
+                border: 8px solid $alert-yellow;
+
+            }
+            &-red {
+                background-color: $alert-red;
+                color: $red-text;
+                border: 8px solid $alert-red;
+
+            }
+        }
+    }
+    &-left {
+        display: inline-block;
+        margin-left: 30px;
+    }
+    &-right {
+        float: right;
+        margin-right: 55px;
+    }
+
+    &-modal {
+        & .modal-dialog {
+
+         max-width: 800px;
+        }
+    }
+    &-result {
+        background-color: #F3F3F3;
+        padding: 20px 30px 20px 30px;
+        color: black;
+        font-family: monospace;
+        line-height: 200%;
+        white-space: pre;
+        overflow: auto;
+        max-height: 80vh;
+    }
+}
