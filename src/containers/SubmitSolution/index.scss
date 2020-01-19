@@ -29,29 +29,33 @@ $green-text: #409A56;
         }
     }
     &-main {
-        margin: 30px;
+        width: 1200px;
+        margin: auto;
+        margin-top: 15px;
+
     }
     &-form {
         color: $green-text;
-
+        width: 400px;
     }
     &-table {
         color: $text-color;
-        margin: auto;
+        // margin: auto;
 
-        margin-top: 30px;
-        margin-bottom: 30px;
         border: 10px solid $theme-color;
         border-radius: 10px;
         padding: 5px;
-        height: 664px;
-        width: 1200px;
+        height: 669px;
+        width: inherit;
         overflow: auto;
+        margin-bottom: 10px;
+        margin-top: 30px;
 
         &-table {
-
+            margin: 0;
             & td {
                 overflow: auto;
+                white-space: nowrap;
                 max-width: 200px;
                 border-top: 3px solid $theme-color;
             }
@@ -64,16 +68,20 @@ $green-text: #409A56;
             max-width: inherit;
             overflow: hidden;
         }
-    }
-    // &-pagination {
-    //     display: flex;
-    //     list-style: none;
-    //     border-collapse: collapse;
 
-    //     &-item {
-    //         padding: 5px 10px 5px 10px;
-    //         border-right: 1px solid black;
-    //     }
-    // }
+    }
+    &-per-page {
+        display: inline-flex;
+        width: 150px;
+        white-space: nowrap;
+        align-items: center;
+        &-label {
+            margin-right: 10px;
+        }
+    }
+
 }
 
+.pagination {
+    float: right;
+}

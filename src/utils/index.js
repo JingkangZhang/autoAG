@@ -1,6 +1,12 @@
 // eslint-disable-next-line import/prefer-default-export
 export const save = (filename, data) => {
-  const blob = new Blob([data], { type: 'text/csv' });
+  const blob = new Blob([data], { type: 'text' });
+  //   const newWindow = window.open('/');
+  //   newWindow.onload = () => {
+  //     newWindow.location = URL.createObjectURL(blob);
+  //   };
+
+
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveBlob(blob, filename);
   } else {

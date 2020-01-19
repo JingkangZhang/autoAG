@@ -17,9 +17,10 @@ const HomeworkEntry = (props) => {
   return (
     <tr>
       <td>{name}</td>
+      <td>{homeworkId}</td>
       <td>{author}</td>
       <td>{time}</td>
-      <td><Button onClick={handleGetSkeleton}>Get Skeleton</Button></td>
+      <td><div><Button onClick={handleGetSkeleton}>Get Skeleton</Button></div></td>
       <td><Button onClick={() => { onOpenSubmitModal(homeworkId, name); }}>Submit</Button></td>
     </tr>
   );

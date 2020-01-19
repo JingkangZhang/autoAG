@@ -29,9 +29,10 @@ export const uploadAutograder = (name, body) => new Promise((resolve, reject) =>
 });
 
 export const listHomeworks = (data) => new Promise((resolve, reject) => {
-  const {
+  let {
     homeworkId, perPage, currPage, dateDescending,
   } = data;
+  homeworkId = homeworkId.trim();
   axios({
     method: 'post',
     url: URL.listHomeworks,
