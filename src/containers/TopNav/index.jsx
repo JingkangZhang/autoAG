@@ -188,7 +188,7 @@ class TopNav extends React.PureComponent {
                 for most problems. When you click on "Add Question" button,
                 the added question is "simple" by default. In this case, you
                 specify the function signatures (name, parameters, skeleton
-                code, etc) and tests in the same block.
+                code, etc) and tests in the same block. (cjy, lcm)
                 </p>
                 <p>
                 When writing a unit test, on the other hand, the question is
