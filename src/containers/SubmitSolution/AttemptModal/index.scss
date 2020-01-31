@@ -1,0 +1,18 @@
+.attempt {
+  &-modal {
+    min-width: 760px;
+    &-instruction {
+      font-size: 14px;
+    }
+    &-reset {
+      margin-left: 10px;
+    }
+    &-footer {
+      padding: 15px;
+      &-div {
+        position: absolute;
+        left: 30px;
+      }
+    }
+  }
+}

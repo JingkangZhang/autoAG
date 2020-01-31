@@ -5,13 +5,12 @@ import {
 import { Link } from 'react-router-dom';
 import './index.scss';
 import Pagination from 'react-js-pagination';
-import { uploadSolution, listHomeworks } from 'services/';
+import { uploadSolution, listHomeworks, getSkeleton } from 'services/';
 import moment from 'moment';
 import LoadingOverlay from 'react-loading-overlay';
 import HomeworkEntry from './HomeworkEntry';
-import SubmitModal from './SubmitModal';
+import AttemptModal from './AttemptModal';
 import SubmitStatus from './SubmitStatus';
-
 
 const SubmitSolution = () => {
   const [currPage, setCurrPage] = useState(1);
@@ -20,17 +19,21 @@ const SubmitSolution = () => {
   const [perPage, setPerPage] = useState(10);
   const [homeworkId, setHomeworkId] = useState('');
   const [totalPages, setTotalPages] = useState(1);
-  const [submitModalHomeworkId, setSubmitModalHomeworkId] = useState('');
-  const [submitModalHomeworkName, setSubmitModalHomeworkName] = useState('');
-  const [submitModalOpen, setSubmitModalOpen] = useState(false);
+  // const [submitModalHomeworkId, setSubmitModalHomeworkId] = useState('');
+  // const [submitModalHomeworkName, setSubmitModalHomeworkName] = useState('');
+  // const [submitModalOpen, setSubmitModalOpen] = useState(false);
+  const [attemptModalHomeworkId, setAttemptHomeworkId] = useState('');
+  const [attemptModalHomeworkName, setAttemptModalHomeworkName] = useState('');
+  const [attemptModalOpen, setAttemptModalOpen] = useState(false);
   const [homeworkIdToPost, setHomeworkIdToPost] = useState('');
   const [submitted, setSubmitted] = useState({});
   const [showLoadingOverlay, setShowLoadingOverlay] = useState(false);
-  const [overlayText, setOverlayText] = useState('Loading...');
+  const [overlayText, setOverlayText] = useState('LOADING...');
   const [overlaySpinner, setOverlaySpinner] = useState(true);
+  const [attemptedHomeworks, setAttemptedHomeworks] = useState({});
 
   const updateList = () => {
-    setOverlayText('Loading...');
+    setOverlayText('LOADING...');
     setShowLoadingOverlay(true);
     setOverlaySpinner(true);
     listHomeworks({
@@ -75,15 +78,33 @@ const SubmitSolution = () => {
     setHomeworkId(e.target.value);
   };
 
-  const handleOpenSubmitModal = (id, name) => {
-    setSubmitModalHomeworkId(id);
-    setSubmitModalHomeworkName(name);
-    setSubmitModalOpen(true);
+  // const handleOpenSubmitModal = (id, name) => {
+  //   setSubmitModalHomeworkId(id);
+  //   setSubmitModalHomeworkName(name);
+  //   setSubmitModalOpen(true);
+  // };
+  const handleSetEditorValue = (id, value) => {
+    setAttemptedHomeworks({
+      ...attemptedHomeworks, [id]: value,
+    });
+  };
+  const handleOpenAttemptModal = (id, name) => {
+    setAttemptHomeworkId(id);
+    setAttemptModalHomeworkName(name);
+    if (!attemptedHomeworks.hasOwnProperty(id)) {
+      handleSetEditorValue(id, '');
+    }
+    setAttemptModalOpen(true);
   };
 
-  const handleToggleSubmitModal = () => {
-    setSubmitModalOpen(!submitModalOpen);
+  // const handleToggleSubmitModal = () => {
+  //   setSubmitModalOpen(!submitModalOpen);
+  // };
+
+  const handleToggleAttemptModal = () => {
+    setAttemptModalOpen(!attemptModalOpen);
   };
+
 
   const handleSubmit = (id, solutionString) => {
     setSubmitted({
@@ -120,7 +141,8 @@ const SubmitSolution = () => {
 
     content.map((hw) => {
       ret.push(<HomeworkEntry
-        onOpenSubmitModal={handleOpenSubmitModal}
+        // onOpenSubmitModal={handleOpenSubmitModal}
+        onOpenAttemptModal={handleOpenAttemptModal}
         homeworkId={hw.homeworkId}
         author={hw.author}
         name={hw.name}
@@ -141,18 +163,20 @@ const SubmitSolution = () => {
 
   return (
     <div>
-      <SubmitModal
-        isOpen={submitModalOpen}
-        toggle={handleToggleSubmitModal}
-        homeworkId={submitModalHomeworkId}
-        name={submitModalHomeworkName}
+      <AttemptModal
+        isOpen={attemptModalOpen}
+        toggle={handleToggleAttemptModal}
+        homeworkId={attemptModalHomeworkId}
+        name={attemptModalHomeworkName}
         onSubmit={handleSubmit}
+        value={attemptedHomeworks[attemptModalHomeworkId]}
+        setValue={handleSetEditorValue}
       />
       <Navbar light className="submit-bar">
         <NavbarBrand className="submit-brand">autoAG</NavbarBrand>
         <NavLink className="submit-publish">
           {' '}
-          <Link to="/" className="submit-publish-link">Create and Publish My Homework</Link>
+          <Link to="/" className="submit-publish-link" target="_blank">Create and Publish My Homework</Link>
         </NavLink>
       </Navbar>
       <div className="submit-main">
@@ -181,12 +205,12 @@ const SubmitSolution = () => {
                   <th>Author</th>
                   <th>Date</th>
                   <th>Skeleton Code</th>
-                  <th>Submit</th>
+                  <th>Attempt</th>
                 </tr>
               </thead>
               {
-              createContentList()
-            }
+                createContentList()
+              }
             </Table>
 
           </div>
