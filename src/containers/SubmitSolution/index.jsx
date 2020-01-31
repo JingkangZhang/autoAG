@@ -31,7 +31,6 @@ const SubmitSolution = () => {
   const [overlayText, setOverlayText] = useState('LOADING...');
   const [overlaySpinner, setOverlaySpinner] = useState(true);
   const [attemptedHomeworks, setAttemptedHomeworks] = useState({});
-  const [newAttempt, setNewAttempt] = useState(true);
 
   const updateList = () => {
     setOverlayText('LOADING...');
@@ -84,14 +83,16 @@ const SubmitSolution = () => {
   //   setSubmitModalHomeworkName(name);
   //   setSubmitModalOpen(true);
   // };
-
+  const handleSetEditorValue = (id, value) => {
+    setAttemptedHomeworks({
+      ...attemptedHomeworks, [id]: value,
+    });
+  };
   const handleOpenAttemptModal = (id, name) => {
     setAttemptHomeworkId(id);
     setAttemptModalHomeworkName(name);
-    if (attemptedHomeworks.hasOwnProperty(id)) {
-      setNewAttempt(false);
-    } else {
-      setNewAttempt(true);
+    if (!attemptedHomeworks.hasOwnProperty(id)) {
+      handleSetEditorValue(id, '');
     }
     setAttemptModalOpen(true);
   };
@@ -104,11 +105,6 @@ const SubmitSolution = () => {
     setAttemptModalOpen(!attemptModalOpen);
   };
 
-  const handleSetEditorValue = (id, value) => {
-    setAttemptedHomeworks({
-      ...attemptedHomeworks, [id]: value,
-    });
-  };
 
   const handleSubmit = (id, solutionString) => {
     setSubmitted({
@@ -173,14 +169,14 @@ const SubmitSolution = () => {
         homeworkId={attemptModalHomeworkId}
         name={attemptModalHomeworkName}
         onSubmit={handleSubmit}
-        value={newAttempt ? '' : attemptedHomeworks[attemptModalHomeworkId]}
+        value={attemptedHomeworks[attemptModalHomeworkId]}
         setValue={handleSetEditorValue}
       />
       <Navbar light className="submit-bar">
         <NavbarBrand className="submit-brand">autoAG</NavbarBrand>
         <NavLink className="submit-publish">
           {' '}
-          <Link to="/" className="submit-publish-link">Create and Publish My Homework</Link>
+          <Link to="/" className="submit-publish-link" target="_blank">Create and Publish My Homework</Link>
         </NavLink>
       </Navbar>
       <div className="submit-main">

@@ -27,7 +27,6 @@ const AttemptModal = (props) => {
     setOverlaySpinner(true);
     getSkeleton(homeworkId).then((response) => {
       setShowLoadingOverlay(false);
-      setOverlaySpinner(false);
       setValue(homeworkId, response);
     }).catch((msg) => {
       setOverlaySpinner(false);
@@ -63,7 +62,7 @@ const AttemptModal = (props) => {
         <Button className="attempt-modal-reset" color="secondary" onClick={handleResetClick}>Reset</Button>
 
         <FormText className="attempt-modal-instruction">
-          You can either complete the homework online or upload the completed homework.py file.
+          You can either code in the editor or upload your completed homework.py file.
 
         </FormText>
 
@@ -105,9 +104,6 @@ const AttemptModal = (props) => {
       <ModalFooter className="attempt-modal-footer">
         <div className="attempt-modal-footer-div">
           <Input type="file" id="submit-file" />
-          <FormText className="attempt-modal-instruction" color="muted">
-            If you upload your homework.py file, you work in this editor will not be submitted.
-          </FormText>
         </div>
         <Button color="secondary" onClick={toggle}>Cancel</Button>
         <Button color="secondary" onClick={() => { toggle(); handleSubmit(); }}>Submit</Button>
