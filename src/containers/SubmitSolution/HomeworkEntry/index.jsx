@@ -5,7 +5,7 @@ import { save } from 'utils/';
 
 const HomeworkEntry = (props) => {
   const {
-    homeworkId, author, name, time, onOpenSubmitModal,
+    homeworkId, author, name, time, onOpenAttemptModal,
   } = props;
 
   const handleGetSkeleton = () => {
@@ -20,8 +20,10 @@ const HomeworkEntry = (props) => {
       <td>{homeworkId}</td>
       <td>{author}</td>
       <td>{time}</td>
-      <td><div><Button onClick={handleGetSkeleton}>Get Skeleton</Button></div></td>
-      <td><Button onClick={() => { onOpenSubmitModal(homeworkId, name); }}>Submit</Button></td>
+      <td><Button onClick={handleGetSkeleton}>Get Skeleton</Button></td>
+      <td><Button onClick={() => { onOpenAttemptModal(homeworkId, name); }}>Attempt</Button></td>
+      {/* <td><div><Button onClick={handleGetSkeleton}>Get Skeleton</Button></div></td>
+      <td><Button onClick={() => { onOpenSubmitModal(homeworkId, name); }}>Submit</Button></td> */}
     </tr>
   );
 };

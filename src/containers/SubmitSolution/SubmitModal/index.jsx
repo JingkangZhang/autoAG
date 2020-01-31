@@ -27,7 +27,7 @@ const SubmitModal = (props) => {
         <code>{name}</code>
       </ModalHeader>
       <ModalBody>
-          Please upload homework.py:
+        Please upload homework.py:
         <Input type="file" id="submit-file" />
 
       </ModalBody>
